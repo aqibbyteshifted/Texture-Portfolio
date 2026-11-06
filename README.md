@@ -62,6 +62,7 @@ public/images/         local copies of every image
 
 ## Editing content
 
+* **Price list**: `rate` (regular PKR/sq ft), `offerRate` (current offer: customers pay this, the regular price is shown struck through with an OFFER tag), `rateMax` (for finishes priced as a range, e.g. epoxy 250 to 750: shown as "from – to", estimates start from the lower figure) and `warrantyYears` (default 3; Rockwall is 15) are all in `src/data/textures.ts`. Remove `offerRate` when an offer ends.
 * **Finishes, rates, specs**: `src/data/textures.ts`. Adding an entry creates its page, catalog card, calculator option,
   compare column, quote option and sitemap entry automatically. Photos: put a file in `public/images/` and set `image`.
 * **Shades**: `src/data/shades.ts` (name, hex, code per finish). The code travels with the quote request.

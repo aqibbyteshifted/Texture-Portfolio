@@ -1,6 +1,7 @@
 import { ADDON_PRICES, UNIT_TO_SQFT } from "@/lib/pricing";
 import { formatNumber, formatPKR } from "@/lib/format";
 import { getTexture, priceRange } from "@/data/textures";
+import { effectiveRate, hasOffer } from "@/lib/rates";
 import { msg } from "@/i18n/config";
 
 export type Block =
@@ -52,7 +53,7 @@ export const posts: BlogPost[] = [
         "Travertine: a quieter, softer surface that reads as imported natural stone, with warm neutral tones that pair well with timber, glass and brass.",
       ] },
       { type: "h2", text: "Cost" },
-      { type: "p", text: `Our turnkey rates are ${formatPKR(rockwall.rate)} per sq ft for Rockwall and ${formatPKR(travertine.rate)} per sq ft for Italian Travertine, including material and master karigar labour. Across all our finishes the range is ${formatPKR(priceRange.min)} to ${formatPKR(priceRange.max)} per sq ft.` },
+      { type: "p", text: `Our turnkey rates are ${formatPKR(effectiveRate(rockwall))} per sq ft for Rockwall and ${formatPKR(effectiveRate(travertine))} per sq ft for Italian Travertine${hasOffer(travertine) ? " (current offer price)" : ""}, including material and master karigar labour. Across all our finishes the range is ${formatPKR(priceRange.min)} to ${formatPKR(priceRange.max)} per sq ft.` },
       { type: "h2", text: "Using both together" },
       { type: "p", text: "Many homes pair the two: a Rockwall base for weight and durability, with travertine bands or cantilevers for elegance. Our Villa 42 project in DHA Phase 6 combines a Rockwall charcoal finish with Italian travertine bands." },
       { type: "h2", text: "A simple rule of thumb" },
@@ -146,7 +147,7 @@ export const posts: BlogPost[] = [
         "Subtract very large openings (gates, big windows) if you want a closer number.",
       ] },
       { type: "h2", text: "A worked example" },
-      { type: "p", text: `A boundary wall that is 120 ft long and 5 ft high is ${formatNumber(boundaryArea)} sq ft. At our Rockwall rate of ${formatPKR(rockwall.rate)} per sq ft that is ${formatPKR(boundaryArea * rockwall.rate)} before any scaffolding or primer add-ons.` },
+      { type: "p", text: `A boundary wall that is 120 ft long and 5 ft high is ${formatNumber(boundaryArea)} sq ft. At our Rockwall rate of ${formatPKR(effectiveRate(rockwall))} per sq ft that is ${formatPKR(boundaryArea * effectiveRate(rockwall))} before any scaffolding or primer add-ons.` },
       { type: "callout", text: "Use the calculator's 'measure by walls' option to add each wall separately and get the total automatically. We confirm the exact area with a laser survey before you pay anything." },
     ],
   },

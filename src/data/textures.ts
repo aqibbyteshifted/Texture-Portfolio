@@ -1,11 +1,13 @@
+import { effectiveRate, maxRate } from "@/lib/rates";
 import type { Texture } from "@/types";
 
 /**
  * Source of truth for every finish. Calculators, catalog, quote wizard, footer, sitemap and the
  * /textures/[slug] pages are all generated from this list.
  *
- * Rates, specs and performance figures for Wash Terrazzo, Nugdi, Velvet Paint, Limewash and
- * Epoxy Flooring are PLACEHOLDERS: replace them with Zain & Co's real numbers.
+ * Rates (rate / offerRate / rateMax) are the company's price list. Specs and performance figures for Wash Terrazzo,
+ * Nugdi, Nova Paint, Limewash, Color Crete, Fair Face, Sand Texture and Epoxy Flooring are PLACEHOLDERS: replace them
+ * with Zain & Co's real numbers.
  * Where `image` is omitted a generated placeholder is shown; add a photo to /public/images and set the path.
  */
 export const textures: Texture[] = [
@@ -16,9 +18,10 @@ export const textures: Texture[] = [
     category: "Rockwall",
     system: "plaster",
     zones: ["exterior"],
-    rate: 260,
+    rate: 60,
+    warrantyYears: 15,
     coveragePerBag: 34,
-    badge: "10-Yr Durability",
+    badge: "15-Year Warranty",
     feature: "Weatherproof Shield",
     blurb:
       "Rugged stone aggregate texture built for boundary walls, porch columns, and durable exterior elevations that withstand direct rain.",
@@ -69,7 +72,7 @@ export const textures: Texture[] = [
     category: "Stucco",
     system: "plaster",
     zones: ["interior"],
-    rate: 240,
+    rate: 70,
     coveragePerBag: 42,
     badge: "Marble Gloss",
     feature: "Wax Polished Finish",
@@ -171,7 +174,7 @@ export const textures: Texture[] = [
     category: "Wash Terrazzo",
     system: "plaster",
     zones: ["exterior", "interior"],
-    rate: 380,
+    rate: 350,
     coveragePerBag: 30,
     badge: "Stone Chip Finish",
     feature: "Exposed Marble Chips",
@@ -218,7 +221,8 @@ export const textures: Texture[] = [
     category: "Travertine",
     system: "plaster",
     zones: ["interior", "exterior"],
-    rate: 320,
+    rate: 200,
+    offerRate: 180,
     coveragePerBag: 40,
     badge: "Luxury Choice",
     feature: "Natural Earth Sediments",
@@ -270,7 +274,7 @@ export const textures: Texture[] = [
     category: "Nugdi",
     system: "plaster",
     zones: ["exterior", "interior"],
-    rate: 230,
+    rate: 90,
     coveragePerBag: 38,
     badge: "Hand-Applied",
     feature: "Sculpted Relief Surface",
@@ -311,13 +315,14 @@ export const textures: Texture[] = [
     swatch: "#a8865f",
   },
   {
-    slug: "velvet-paint",
-    name: "Velvet Paint",
-    shortName: "Velvet Paint",
-    category: "Velvet Paint",
+    slug: "nova-paint",
+    name: "Nova Paint",
+    shortName: "Nova Paint",
+    category: "Nova Paint",
     system: "paint",
     zones: ["interior"],
-    rate: 150,
+    rate: 200,
+    offerRate: 170,
     coveragePerBag: 180,
     badge: "Suede Finish",
     feature: "Soft Velvet Sheen",
@@ -326,7 +331,7 @@ export const textures: Texture[] = [
     summary: "Suede-like decorative paint",
     tagline: "Interior Decorative Paint Specialist",
     description:
-      "A decorative interior paint applied in layered passes to create a soft, suede-like surface with gentle light play. Easier to apply and quicker than plaster finishes, it is a popular way to give bedrooms, lounges and feature walls a premium look.",
+      "A decorative interior paint applied in layered passes to create a soft, suede-like velvet surface with gentle light play. Easier to apply and quicker than plaster finishes, it is a popular way to give bedrooms, lounges and feature walls a premium look.",
     highlights: [
       "Soft velvety hand-feel with a subtle sheen that shifts with the light.",
       "Quicker application and lower cost than plaster-based finishes.",
@@ -341,14 +346,14 @@ export const textures: Texture[] = [
     },
     rating: 4.7,
     villas: 90,
-    specRef: "ZN-VP-2025-LHR",
+    specRef: "ZN-NP-2025-LHR",
     performance: [
       { icon: "sun", title: "Colour Consistency", description: "Pigmented base keeps a consistent tone across large walls.", label: "Colour Match", value: "Custom tinting" },
       { icon: "droplets", title: "Washable Surface", description: "Wipe away light marks with a soft damp cloth.", label: "Washability", value: "Gentle wipe" },
       { icon: "sliders", title: "Layered Depth", description: "Multiple passes build soft tonal depth.", label: "Application", value: "2–3 coats" },
       { icon: "sparkles", title: "Quick Turnaround", description: "Faster to apply than plaster finishes, so rooms are back in use sooner.", label: "Typical Room", value: "1–2 days" },
     ],
-    useAreasIntro: "Velvet Paint adds softness and a premium feel to interiors without the build-up of a plaster finish.",
+    useAreasIntro: "Nova Paint adds softness and a premium feel to interiors without the build-up of a plaster finish.",
     useAreas: [
       { tag: "Private", title: "Bedrooms", description: "A calm, soft backdrop for headboard walls.", cta: "View bedroom specs" },
       { tag: "Living", title: "Lounges & TV Walls", description: "Subtle sheen that complements accent lighting.", cta: "View lounge specs" },
@@ -364,7 +369,8 @@ export const textures: Texture[] = [
     category: "Limewash",
     system: "paint",
     zones: ["interior", "exterior"],
-    rate: 180,
+    rate: 200,
+    offerRate: 180,
     coveragePerBag: 160,
     badge: "Mineral Breathable",
     feature: "Soft Mottled Matte",
@@ -411,16 +417,17 @@ export const textures: Texture[] = [
     category: "Microcement",
     system: "plaster",
     zones: ["interior"],
-    rate: 290,
+    rate: 240,
+    offerRate: 220,
     coveragePerBag: 38,
     badge: "Seamless Earthy",
     feature: "Custom Chromatic Tone",
     blurb:
-      "Seamless micro-cement (color crete) surface with velvety smooth tactile texture, customized mineral pigments, and warm monolithic organic tone.",
+      "Seamless micro-cement surface with velvety smooth tactile texture, customized mineral pigments, and warm monolithic organic tone.",
     summary: "Seamless mineral microcement",
     tagline: "Interior Microcement Specialist",
     description:
-      "Monolithic seamless micro-cement, also known as color crete, with velvety tactile warmth and custom mineral pigments. Popular for modern minimalist lounges, patio accent walls and powder rooms where a joint-free, softly clouded surface is wanted.",
+      "Monolithic seamless micro-cement with velvety tactile warmth and custom mineral pigments. Popular for modern minimalist lounges, patio accent walls and powder rooms where a joint-free, softly clouded surface is wanted.",
     highlights: [
       "Joint-free surface with subtle cloud-like tonal movement.",
       "Custom pigment matching to your sample, paint chip or fabric.",
@@ -455,13 +462,158 @@ export const textures: Texture[] = [
     swatch: "#b8603a",
   },
   {
+    slug: "color-crete",
+    name: "Color Crete",
+    shortName: "Color Crete",
+    category: "Color Crete",
+    system: "plaster",
+    zones: ["interior", "exterior"],
+    rate: 240,
+    offerRate: 220,
+    coveragePerBag: 38,
+    badge: "Custom Colours",
+    feature: "Mineral Colour Coat",
+    blurb:
+      "Cement-based colour coat with a smooth, softly mottled concrete look in custom mineral colours, for walls inside and out.",
+    summary: "Cement-based colour coat",
+    tagline: "Colour Concrete Specialist",
+    description:
+      "A cement-based colour coat troweled onto the wall in thin passes and finished smooth, with a soft, naturally mottled concrete character. Mineral pigments are matched to your colour reference, and a protective sealer keeps the surface easy to maintain.",
+    highlights: [
+      "Soft, mottled concrete look in a colour matched to your reference.",
+      "Cement-based mineral coat that suits both interior and exterior walls.",
+      "Sealed for easy cleaning and long-lasting colour.",
+    ],
+    gallery: [],
+    specs: {
+      zone: "Interior & Exterior Walls",
+      thickness: "1.5 mm – 3.0 mm",
+      tactility: "Smooth, Softly Mottled",
+      curing: "24 Hours (Dry to Touch: 4h)",
+    },
+    rating: 4.8,
+    villas: 60,
+    specRef: "ZN-CR-2025-LHR",
+    performance: [
+      { icon: "sun", title: "Colour-Fast Pigments", description: "Mineral pigments keep their tone in sunlight.", label: "Fade Resistance", value: "High" },
+      { icon: "droplets", title: "Sealed Surface", description: "A protective sealer keeps moisture and stains out.", label: "Water Resistance", value: "Sealed" },
+      { icon: "sliders", title: "Flexible Cement Mix", description: "Polymer-modified mix tolerates normal wall movement.", label: "Crack Tolerance", value: "Good" },
+      { icon: "sparkles", title: "Easy Maintenance", description: "Wipe or rinse clean; no repainting cycle.", label: "Annual Maintenance", value: "PKR 0 / year" },
+    ],
+    useAreasIntro: "Color Crete is a practical way to get a clean, colour-matched concrete look on walls.",
+    useAreas: [
+      { tag: "Interior", title: "Living & Bedroom Walls", description: "A calm, colour-matched concrete backdrop for furniture and lighting.", cta: "View interior specs" },
+      { tag: "Exterior", title: "Facade Panels", description: "Colour-matched panels that add depth to plain elevations.", cta: "View facade specs" },
+      { tag: "Perimeter", title: "Boundary Walls", description: "A uniform, easy-to-clean finish along long wall runs.", cta: "View boundary specs" },
+      { tag: "Circulation", title: "Staircases & Corridors", description: "Seamless walls without grout lines to stain.", cta: "View corridor specs" },
+    ],
+    swatch: "#b0907a",
+  },
+  {
+    slug: "fair-face",
+    name: "Fair Face",
+    shortName: "Fair Face",
+    category: "Fair Face",
+    system: "plaster",
+    zones: ["interior", "exterior"],
+    rate: 250,
+    offerRate: 230,
+    coveragePerBag: 36,
+    badge: "Raw Concrete Look",
+    feature: "Exposed Concrete Finish",
+    blurb:
+      "Clean, raw exposed-concrete look for modern walls and facades, sealed to resist stains and weather.",
+    summary: "Exposed concrete look",
+    tagline: "Modern Concrete Finish Specialist",
+    description:
+      "A fair-face finish gives walls the clean, raw look of exposed concrete without casting it in place. The surface is finished smooth with subtle tonal variation and sealed against stains and moisture, which suits modern facades, feature walls and commercial interiors.",
+    highlights: [
+      "Contemporary raw-concrete look with subtle tonal variation.",
+      "Sealed against stains, dust and moisture.",
+      "Works on facades, feature walls and interiors.",
+    ],
+    gallery: [],
+    specs: {
+      zone: "Facades, Feature Walls & Interiors",
+      thickness: "2.0 mm – 4.0 mm",
+      tactility: "Smooth Raw Concrete",
+      curing: "48 Hours (Dry to Touch: 6h)",
+    },
+    rating: 4.7,
+    villas: 50,
+    specRef: "ZN-FF-2025-LHR",
+    performance: [
+      { icon: "sun", title: "Stable Concrete Tone", description: "Mineral tones stay consistent under sun and weather.", label: "Fade Resistance", value: "High" },
+      { icon: "droplets", title: "Stain & Moisture Sealer", description: "Sealer keeps the raw surface from absorbing stains.", label: "Water Resistance", value: "Sealed" },
+      { icon: "sliders", title: "Hairline Tolerance", description: "Flexible mix absorbs minor substrate movement.", label: "Crack Tolerance", value: "Good" },
+      { icon: "sparkles", title: "Low Maintenance", description: "Dust or wipe clean; periodic resealing keeps it protected.", label: "Annual Maintenance", value: "PKR 0 / year" },
+    ],
+    useAreasIntro: "Fair Face suits modern architecture that wants an honest, raw concrete surface.",
+    useAreas: [
+      { tag: "Exterior", title: "Modern Facades", description: "A clean concrete look for contemporary elevations.", cta: "View facade specs" },
+      { tag: "Feature", title: "Feature Walls", description: "A raw, architectural backdrop in lounges and lobbies.", cta: "View feature specs" },
+      { tag: "Commercial", title: "Showrooms & Offices", description: "A sharp, durable finish for commercial interiors.", cta: "View commercial specs" },
+      { tag: "Landscape", title: "Boundary & Courtyard Walls", description: "A restrained backdrop that lets planting stand out.", cta: "View courtyard specs" },
+    ],
+    swatch: "#9a9a96",
+  },
+  {
+    slug: "sand-texture",
+    name: "Sand Texture",
+    shortName: "Sand Texture",
+    category: "Sand Texture",
+    system: "plaster",
+    zones: ["exterior"],
+    rate: 55,
+    coveragePerBag: 45,
+    badge: "Most Economical",
+    feature: "Fine Sandy Matte",
+    blurb:
+      "Fine granulated sandy matte texture, the most economical way to give exterior walls a textured finish.",
+    summary: "Fine sandy matte",
+    tagline: "Exterior Texture Specialist",
+    description:
+      "Uniform fine-grain sand texture delivering an understated, non-reflective matte finish. Flexible binders bridge hairline cracks and resist peeling, making it a smart choice for boundary walls, side setbacks and large exterior surfaces.",
+    highlights: [
+      "Understated matte sandy finish that hides minor substrate imperfections.",
+      "Flexible binder bridges hairline cracks and resists peeling.",
+      "The most economical textured finish in the Zain & Co range.",
+    ],
+    image: "/images/cmp-sandtex.jpg",
+    gallery: [],
+    specs: {
+      zone: "Exterior Walls & Setbacks",
+      thickness: "1.5 mm – 2.5 mm",
+      tactility: "Fine Sandy Matte",
+      curing: "18 Hours (Dry to Touch: 3h)",
+    },
+    rating: 4.7,
+    villas: 130,
+    specRef: "ZN-SD-2025-LHR",
+    performance: [
+      { icon: "sun", title: "UV-Stable Grains", description: "Natural sand grains never fade or chalk in direct sun.", label: "UV Degradation", value: "< 0.3% Delta-E" },
+      { icon: "droplets", title: "Anti-Fungal Sealer", description: "Silicon sealer sheds rain and blocks algae streaks.", label: "Water Absorption", value: "< 0.06 g/m²·h" },
+      { icon: "sliders", title: "Flexible Bridging", description: "Flexible binder spans hairline cracks as walls move.", label: "Hairline Bridge", value: "Up to 1.0 mm" },
+      { icon: "sparkles", title: "Low Maintenance", description: "Rinse with a garden hose; no repainting cycle needed.", label: "Annual Maintenance", value: "PKR 0 / year" },
+    ],
+    useAreasIntro: "Sand Texture covers large exterior surfaces attractively without a premium budget.",
+    useAreas: [
+      { tag: "Perimeter", title: "Boundary & Rear Walls", description: "Cost-effective coverage for long perimeter runs.", cta: "View boundary specs", image: "/images/use-boundary.jpg" },
+      { tag: "Residential", title: "Side Setbacks", description: "Clean matte finish for narrow side elevations.", cta: "View setback specs", image: "/images/proj-bahria-residence.jpg" },
+      { tag: "Elevation", title: "Full House Elevations", description: "A calm neutral canvas for accent stone bands.", cta: "View elevation specs", image: "/images/use-facade.jpg" },
+      { tag: "Commercial", title: "Plaza & Shop Fronts", description: "Durable, easy-to-maintain commercial surfaces.", cta: "View commercial specs", image: "/images/rw-mm-alam.jpg" },
+    ],
+    swatch: "#cdb994",
+  },
+  {
     slug: "epoxy-flooring",
     name: "Epoxy Flooring",
     shortName: "Epoxy",
     category: "Epoxy Flooring",
     system: "floor",
     zones: ["interior"],
-    rate: 280,
+    rate: 250,
+    rateMax: 750,
     coveragePerBag: 100,
     badge: "Seamless Floors",
     feature: "Chemical & Wear Resistant",
@@ -509,6 +661,6 @@ export const getTextureByName = (name: string) =>
   textures.find((t) => t.name.toLowerCase() === name.toLowerCase());
 
 export const priceRange = {
-  min: Math.min(...textures.map((t) => t.rate)),
-  max: Math.max(...textures.map((t) => t.rate)),
+  min: Math.min(...textures.map(effectiveRate)),
+  max: Math.max(...textures.map(maxRate)),
 };

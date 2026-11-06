@@ -8,6 +8,7 @@ import { textures } from "@/data/textures";
 import { useT } from "@/i18n/client";
 import { calculateEstimate, MAX_AREA_SQFT } from "@/lib/pricing";
 import { formatPKR } from "@/lib/format";
+import { rateText } from "@/lib/rates";
 import { quoteHref } from "@/lib/quoteLink";
 
 const select =
@@ -65,7 +66,7 @@ export function RapidEstimator() {
           <select id={`${uid}-tex`} value={slug} onChange={(e) => setSlug(e.target.value)} className={select}>
             {textures.map((x) => (
               <option key={x.slug} value={x.slug}>
-                {t(x.name)} (PKR {x.rate}/{t("sqft")})
+                {t(x.name)} ({rateText(x)}/{t("sqft")})
               </option>
             ))}
           </select>
@@ -87,7 +88,11 @@ export function RapidEstimator() {
 
       <div className="mt-5 rounded-lg bg-clay-50 p-4" aria-live="polite">
         <p className="text-xs font-semibold text-ink-soft uppercase">{t("Est. Project Total:")}</p>
-        <p className="font-display mt-1 text-3xl font-extrabold text-clay-600 tnum">{formatPKR(estimate.total)}</p>
+        <p className="font-display mt-1 text-3xl font-extrabold text-clay-600 tnum">
+          {estimate.isFrom && <span className="me-2 text-base font-semibold text-ink-soft">{t("From")}</span>}
+          {estimate.isFrom && " "}
+          {formatPKR(estimate.total)}
+        </p>
         {loc.surcharge > 0 && (
           <p className="mt-1 text-xs text-ink-muted">{t("Includes {pct}% outstation logistics.", { pct: Math.round(loc.surcharge * 100) })}</p>
         )}

@@ -4,6 +4,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { ArrowRight, Armchair, Check, FileDown, Package, Building2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { WallMeasurer } from "@/components/features/WallMeasurer";
+import { Rate } from "@/components/ui/Rate";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { textures } from "@/data/textures";
 import { useT } from "@/i18n/client";
@@ -18,6 +19,7 @@ import {
   type AreaUnit,
 } from "@/lib/pricing";
 import { formatNumber, formatPKR } from "@/lib/format";
+import { rateText, warrantyOf } from "@/lib/rates";
 import { quoteHref } from "@/lib/quoteLink";
 import { waMessages, whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
@@ -40,8 +42,9 @@ export function CostCalculator() {
   const [unit, setUnit] = useState<AreaUnit>("sqft");
   const [zone, setZone] = useState<TextureZone>("exterior");
   const [slug, setSlug] = useState("italian-travertine");
-  const [scaffold, setScaffold] = useState(true);
-  const [primer, setPrimer] = useState(true);
+  // add-ons start unticked: the per-sq-ft rates are turnkey, so extras are opt-in
+  const [scaffold, setScaffold] = useState(false);
+  const [primer, setPrimer] = useState(false);
 
   const available = useMemo(() => textures.filter((x) => x.zones.includes(zone)), [zone]);
   const texture = available.find((x) => x.slug === slug) ?? available[0];
@@ -90,7 +93,7 @@ export function CostCalculator() {
   const downloadPdf = async () => {
     setPdfBusy(true);
     try {
-      await downloadEstimatePdf({ textureName: texture.name, rate: texture.rate, zone, estimate });
+      await downloadEstimatePdf({ textureName: texture.name, rateLabel: `${rateText(texture)} / sq ft`, warrantyYears: warrantyOf(texture), zone, estimate });
       track("estimate_pdf_download", { texture: texture.name, total: estimate.total });
     } finally {
       setPdfBusy(false);
@@ -197,12 +200,11 @@ export function CostCalculator() {
                 >
                   <span className="size-10 shrink-0 rounded-md border border-black/5" style={{ background: x.swatch }} aria-hidden="true" />
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-semibold text-ink">{t(x.name)}</span>
+                    <span className="block text-sm font-semibold text-ink">{t(x.name)}</span>
                     <span className="block truncate text-xs text-ink-muted">{t(x.summary)}</span>
-                  </span>
-                  <span className="text-end">
-                    <span className="block text-sm font-bold text-clay-600 tnum">PKR {x.rate}</span>
-                    <span className="block text-[10px] text-ink-muted">/ {t("sq ft")}</span>
+                    <span className="mt-0.5 block text-xs text-clay-600">
+                      <Rate texture={x} badge />
+                    </span>
                   </span>
                 </button>
               );
@@ -250,6 +252,8 @@ export function CostCalculator() {
           data-testid="calc-total"
           dir="ltr"
         >
+          {estimate.isFrom && <span className="me-2 text-xl font-semibold text-white/70">{t("From")}</span>}
+          {estimate.isFrom && " "}
           {formatPKR(estimate.total)}
         </p>
         <p className="mt-2 text-sm text-white/60 tnum">
@@ -301,7 +305,7 @@ export function CostCalculator() {
         <div className="mt-auto flex gap-3 pt-6 text-xs text-white/70">
           <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-sand-500" />
           <p>
-            <strong className="block text-sm text-white">{t("3-Year Written Warranty")}</strong>
+            <strong className="block text-sm text-white">{t("{n}-Year Written Warranty", { n: warrantyOf(texture) })}</strong>
             {t("Covers against flaking, micro-cracking, and monsoon weather discoloration.")}
           </p>
         </div>

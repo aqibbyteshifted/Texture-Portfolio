@@ -2,6 +2,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Accordion } from "@/components/ui/Accordion";
 import { faqs, priceExtremes } from "@/data/content";
 import { getI18n } from "@/i18n/server";
+import { effectiveRate, maxRate } from "@/lib/rates";
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -22,8 +23,8 @@ export async function FaqSection() {
     answer:
       f.id === "f1"
         ? t("Our turnkey rates range from PKR {min} / sq ft for {minName} up to PKR {max} / sq ft for {maxName}. This rate is all-inclusive, covering base preparation, imported materials, skilled karigar labor, and final protective sealing. See each finish's page for its exact rate.", {
-            min: cheapest.rate,
-            max: priciest.rate,
+            min: effectiveRate(cheapest),
+            max: maxRate(priciest),
             minName: t(cheapest.name),
             maxName: t(priciest.name),
           })

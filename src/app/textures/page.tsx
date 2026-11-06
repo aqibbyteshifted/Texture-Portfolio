@@ -10,7 +10,7 @@ import { quoteHref } from "@/lib/quoteLink";
 export const metadata: Metadata = {
   title: "Textures Catalog: Rockwall, Travertine, Microcement, Epoxy & More",
   description:
-    "Browse Zain & Co's finishes for Lahore: rockwall, stucco, graffiato, wash terrazzo, travertine, nugdi, velvet paint, limewash, microcement and epoxy flooring with transparent per sq ft pricing.",
+    "Browse Zain & Co's finishes for Lahore: rockwall, stucco, graffiato, wash terrazzo, travertine, nugdi, Nova paint, limewash, microcement, color crete, fair face, sand texture and epoxy flooring with transparent per sq ft pricing.",
   alternates: { canonical: "/textures" },
 };
 

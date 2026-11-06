@@ -1,10 +1,10 @@
 import { textures } from "@/data/textures";
 import { paymentFaq } from "@/data/policy";
+import { effectiveRate, maxRate } from "@/lib/rates";
 import type { Faq, Testimonial } from "@/types";
 
-const byRate = [...textures].sort((a, b) => a.rate - b.rate);
-const cheapest = byRate[0];
-const priciest = byRate[byRate.length - 1];
+const cheapest = [...textures].sort((a, b) => effectiveRate(a) - effectiveRate(b))[0];
+const priciest = [...textures].sort((a, b) => maxRate(b) - maxRate(a))[0];
 
 /** Used by the FAQ so the price answer can be translated with live numbers. */
 export const priceExtremes = { cheapest, priciest };
@@ -16,7 +16,7 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const faqs: Faq[] = [
-  { id: "f1", question: "What is the average cost per square foot for wall texturing in Lahore?", answer: `Our turnkey rates range from PKR ${cheapest.rate} / sq ft for ${cheapest.name} up to PKR ${priciest.rate} / sq ft for ${priciest.name}. This rate is all-inclusive, covering base preparation, imported materials, skilled karigar labor, and final protective sealing. See each finish's page for its exact rate.` },
+  { id: "f1", question: "What is the average cost per square foot for wall texturing in Lahore?", answer: `Our turnkey rates range from PKR ${effectiveRate(cheapest)} / sq ft for ${cheapest.name} up to PKR ${maxRate(priciest)} / sq ft for ${priciest.name}. This rate is all-inclusive, covering base preparation, imported materials, skilled karigar labor, and final protective sealing. See each finish's page for its exact rate.` },
   { id: "f2", question: "How long does it take to finish a typical 1-Kanal exterior elevation?", answer: "A standard 1-Kanal villa elevation in Lahore (approx. 3,500 – 4,500 sq ft of surface area) typically requires 7 to 10 working days. This timeframe accounts for essential curing intervals between the penetrating primer, base coat mesh embedding, and final artisan hand-trowel layers." },
   { id: "f3", question: "Can textures like Travertine or Rockwall be applied over old painted walls?", answer: "Yes. For existing renovations, our team first conducts an adhesion audit. We mechanically scrape off loose distemper or plastic paint, treat any seepages with moisture-resistant bonders, and apply our quartz keying primer to create a strong mechanical bond before texturing." },
   { id: "f4", question: "How do these finishes withstand Lahore's intense monsoon rains?", answer: "Our formulations use elastomeric polymers that bridge micro-settlement cracks, combined with anti-fungal silicon sealers that shed rainwater like a lotus leaf. This prevents rainwater penetration, dark algae streaks, and moisture peeling." },

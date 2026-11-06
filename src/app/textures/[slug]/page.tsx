@@ -17,6 +17,7 @@ import { getShades } from "@/data/shades";
 import { getTexture, textures } from "@/data/textures";
 import { site } from "@/data/site";
 import { getI18n } from "@/i18n/server";
+import { effectiveRate, hasOffer, hasRange, rateText, warrantyOf } from "@/lib/rates";
 import { quoteHref } from "@/lib/quoteLink";
 import { waMessages, whatsappLink } from "@/lib/whatsapp";
 
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const texture = getTexture((await params).slug);
   if (!texture) return {};
   return {
-    title: `${texture.name} Finish in Lahore | PKR ${texture.rate} / sq ft`,
+    title: `${texture.name} Finish in Lahore | ${rateText(texture)} / sq ft`,
     description: `${texture.description.slice(0, 150)}…`,
     alternates: { canonical: `/textures/${texture.slug}` },
     ...(texture.image ? { openGraph: { images: [{ url: texture.image }] } } : {}),
@@ -54,7 +55,7 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
     provider: { "@type": "HomeAndConstructionBusiness", name: site.group },
     areaServed: "Lahore, Pakistan",
     description: texture.description,
-    offers: { "@type": "Offer", priceCurrency: "PKR", price: texture.rate, unitText: "per sq ft" },
+    offers: { "@type": "Offer", priceCurrency: "PKR", price: effectiveRate(texture), unitText: "per sq ft" },
     aggregateRating: { "@type": "AggregateRating", ratingValue: texture.rating, reviewCount: texture.villas },
   };
 
@@ -106,15 +107,26 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
             <span>{t("{n}+ Lahore Villas", { n: texture.villas })}</span>
             <span aria-hidden="true">•</span>
             <span>{t("PEC Certified")}</span>
+            <span aria-hidden="true">•</span>
+            <span>{t("{n}-Year Written Warranty", { n: warrantyOf(texture) })}</span>
           </div>
 
           <div className="mt-6 rounded-xl border border-line bg-surface p-5 shadow-card">
             <p className="text-[11px] font-bold tracking-wider text-ink-muted uppercase">{t("Contractor Supply & Application Rate")}</p>
-            <p className="mt-1 flex flex-wrap items-baseline gap-2">
-              <span className="font-display text-4xl font-extrabold text-clay-600 tnum">PKR {texture.rate}</span>
+            <p className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              {hasOffer(texture) && <s className="text-lg text-ink-muted tnum">PKR {texture.rate}</s>}
+              <span className="font-display text-4xl font-extrabold text-clay-600 tnum" dir="ltr">
+                {hasRange(texture) ? `PKR ${effectiveRate(texture)} – ${texture.rateMax}` : `PKR ${effectiveRate(texture)}`}
+              </span>
               <span className="text-ink-soft">/ {t("sq ft")}</span>
+              {hasOffer(texture) && (
+                <span className="self-center rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-bold tracking-wide text-emerald-700 uppercase">{t("Offer price")}</span>
+              )}
               <span className="ms-auto rounded-md bg-clay-100 px-2 py-1 text-[11px] font-bold text-clay-600">{t("Material + Master Karigar Labour")}</span>
             </p>
+            {hasRange(texture) && (
+              <p className="mt-2 text-xs text-ink-muted">{t("Rate depends on the system chosen; the exact price is confirmed at the free site survey.")}</p>
+            )}
           </div>
 
           <p dir="auto" className="mt-5 leading-relaxed text-ink-soft">{t(texture.description)}</p>

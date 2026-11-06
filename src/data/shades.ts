@@ -61,7 +61,7 @@ export const shades: Record<string, Shade[]> = {
     ["Stone Grey", "#8d8a84"],
     ["Cream", "#e4d8c0"],
   ]),
-  "velvet-paint": build("VP", [
+  "nova-paint": build("NP", [
     ["Rose Dust", "#c9a0a0"],
     ["Midnight Blue", "#2f3e5c"],
     ["Emerald", "#2f6b5a"],
@@ -87,6 +87,29 @@ export const shades: Record<string, Shade[]> = {
     ["Sand", "#cdb99a"],
     ["Charcoal", "#4b4b4d"],
     ["Olive", "#7a7a5a"],
+  ]),
+  "color-crete": build("CR", [
+    ["Warm Grey", "#a8a29a"],
+    ["Terracotta", "#b8765a"],
+    ["Sand", "#cdb99a"],
+    ["Olive", "#868a6a"],
+    ["Charcoal", "#4f4f52"],
+    ["Blush", "#d6b9ac"],
+  ]),
+  "fair-face": build("FF", [
+    ["Light Concrete", "#b9b8b3"],
+    ["Mid Grey", "#8e8f8d"],
+    ["Warm Grey", "#a09a91"],
+    ["Charcoal", "#55575a"],
+    ["Sand Grey", "#b4aa98"],
+  ]),
+  "sand-texture": build("SD", [
+    ["Cream", "#e5d8bd"],
+    ["Sand", "#cdb994"],
+    ["Buff", "#c2a878"],
+    ["Ochre", "#b98a45"],
+    ["Terracotta", "#b3623f"],
+    ["Grey Stone", "#8d8a84"],
   ]),
   "epoxy-flooring": build("EF", [
     ["Light Grey", "#b9bcc0"],

@@ -27,7 +27,7 @@ export async function Footer() {
     <footer className="no-print border-t border-line bg-surface">
       <div className="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Logo />
+          <Logo size="lg" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-soft">
             {t("Lahore's premier architectural surface finishing contractor specializing in rockwall textures, travertine plastering, microcement, limewash, terrazzo, epoxy flooring and exterior monolithic facades for luxury villas and commercial landmarks.")}
           </p>

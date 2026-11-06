@@ -5,12 +5,14 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, Check, Minus } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Rate } from "@/components/ui/Rate";
 import { TextureImage } from "@/components/ui/TextureImage";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { getShades } from "@/data/shades";
 import { getTexture, textures } from "@/data/textures";
 import { useT } from "@/i18n/client";
 import { formatNumber, formatPKR } from "@/lib/format";
+import { effectiveRate, hasRange, maxRate, warrantyOf } from "@/lib/rates";
 import { quoteHref } from "@/lib/quoteLink";
 import { waMessages, whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
@@ -55,10 +57,14 @@ export function CompareTool() {
   const zoneLabel = (x: Texture) => x.zones.map((z) => t(z === "exterior" ? "Exterior" : "Interior")).join(" / ");
 
   const rows: { label: string; render: (x: Texture) => React.ReactNode }[] = [
-    { label: t("Rate"), render: (x) => <strong className="text-clay-600 tnum">PKR {x.rate} / {t("sq ft")}</strong> },
+    { label: t("Rate"), render: (x) => <span className="font-bold text-clay-600"><Rate texture={x} badge /></span> },
     {
       label: t("Estimated cost for {area} sq ft", { area: formatNumber(sqft) }),
-      render: (x) => <strong className="tnum">{formatPKR(sqft * x.rate)}</strong>,
+      render: (x) => (
+        <strong className="tnum" dir="ltr">
+          {hasRange(x) ? `${formatPKR(sqft * effectiveRate(x))} – ${formatNumber(sqft * maxRate(x))}` : formatPKR(sqft * effectiveRate(x))}
+        </strong>
+      ),
     },
     { label: t("Suited to"), render: (x) => zoneLabel(x) },
     { label: t("Best for"), render: (x) => x.specs.zone },
@@ -80,9 +86,9 @@ export function CompareTool() {
     { label: t("Shades available"), render: (x) => <span className="tnum">{getShades(x.slug).length}</span> },
     {
       label: t("Written warranty"),
-      render: () => (
+      render: (x) => (
         <span className="inline-flex items-center gap-1 font-semibold text-emerald-700">
-          <Check aria-hidden="true" className="size-4" /> {t("3 years")}
+          <Check aria-hidden="true" className="size-4" /> {t("{n} years", { n: warrantyOf(x) })}
         </span>
       ),
     },

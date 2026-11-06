@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Check, Send, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
 import { WhatsAppIcon } from "@/components/ui/icons";
+import { Rate } from "@/components/ui/Rate";
 import { TextureImage } from "@/components/ui/TextureImage";
 import { locationOptions } from "@/data/site";
 import { findShade, getShades } from "@/data/shades";
@@ -77,8 +78,8 @@ export function QuoteWizard() {
   const [detail, setDetail] = useState("");
   const [slug, setSlug] = useState(initial.texture);
   const [shadeCode, setShadeCode] = useState(initial.shade);
-  const [scaffold, setScaffold] = useState(initial.zone === "exterior");
-  const [primer, setPrimer] = useState(true);
+  const [scaffold, setScaffold] = useState(false);
+  const [primer, setPrimer] = useState(false);
   const [stepError, setStepError] = useState<string>();
   const [contact, setContact] = useState({ name: "", phone: "", email: "", date: "", window: windows[1], message: "", hp: "" });
   const today = useMemo(() => toDateInput(new Date()), []);
@@ -104,7 +105,7 @@ export function QuoteWizard() {
   const changeZone = (next: TextureZone) => {
     setZone(next);
     setScope(scopes[next][0]);
-    setScaffold(next === "exterior");
+    setScaffold(false);
     if (slug && !textures.find((x) => x.slug === slug)?.zones.includes(next)) {
       setSlug("");
       setShadeCode("");
@@ -223,7 +224,7 @@ export function QuoteWizard() {
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-sm font-bold">{t(x.name)}</span>
                       <span className="block truncate text-xs text-ink-muted">{t(x.summary)}</span>
-                      <span className="mt-0.5 block text-xs font-bold text-clay-600 tnum">PKR {x.rate} / {t("sq ft")}</span>
+                      <span className="mt-0.5 block text-xs font-bold text-clay-600"><Rate texture={x} badge /></span>
                     </span>
                   </button>
                 ))}
@@ -343,7 +344,7 @@ export function QuoteWizard() {
         </dl>
         <div className="mt-5 rounded-lg bg-ink p-4 text-white" aria-live="polite">
           <p className="text-[11px] font-semibold tracking-wider text-sand-500 uppercase">{t("Estimated Investment")}</p>
-          <p className="font-display mt-1 text-2xl font-extrabold tnum" dir="ltr">{estimate && estimate.total > 0 ? formatPKR(estimate.total) : "PKR —"}</p>
+          <p className="font-display mt-1 text-2xl font-extrabold tnum" dir="ltr">{estimate && estimate.total > 0 ? `${estimate.isFrom ? `${t("From")} ` : ""}${formatPKR(estimate.total)}` : "PKR —"}</p>
           {estimate && estimate.total > 0 && (
             <p className="mt-1 text-xs text-white/60 tnum" dir="ltr">
               {formatPKR(estimate.low)} – {formatPKR(estimate.high)}

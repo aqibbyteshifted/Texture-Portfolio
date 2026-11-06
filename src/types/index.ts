@@ -6,9 +6,12 @@ export type TextureCategory =
   | "Wash Terrazzo"
   | "Travertine"
   | "Nugdi"
-  | "Velvet Paint"
+  | "Nova Paint"
   | "Limewash"
   | "Microcement"
+  | "Color Crete"
+  | "Fair Face"
+  | "Sand Texture"
   | "Epoxy Flooring";
 
 /** Decides which bill-of-material template the estimate shows. */
@@ -38,8 +41,14 @@ export interface Texture {
   category: TextureCategory;
   system: TextureSystem;
   zones: TextureZone[];
-  /** PKR per sq ft, turnkey (material + master karigar labour) */
+  /** Regular PKR per sq ft, turnkey (material + master karigar labour) */
   rate: number;
+  /** Current offer price per sq ft. When set it is what customers pay and what every estimate uses. */
+  offerRate?: number;
+  /** Upper end when the rate depends on the system chosen (e.g. epoxy 250 to 750). `rate`/`offerRate` is the "from" price. */
+  rateMax?: number;
+  /** Written warranty in years. Defaults to 3. */
+  warrantyYears?: number;
   /** sq ft covered by one bag of base compound, used by the bill-of-material estimate */
   coveragePerBag: number;
   badge: string;

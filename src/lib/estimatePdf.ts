@@ -5,7 +5,9 @@ import type { Estimate } from "@/lib/pricing";
 
 export interface EstimatePdfInput {
   textureName: string;
-  rate: number;
+  /** e.g. "PKR 180 / sq ft" or "PKR 250–750 / sq ft" */
+  rateLabel: string;
+  warrantyYears: number;
   zone: "exterior" | "interior";
   estimate: Estimate;
 }
@@ -14,11 +16,24 @@ const CLAY: [number, number, number] = [181, 101, 29];
 const INK: [number, number, number] = [31, 31, 31];
 const MUTED: [number, number, number] = [120, 113, 108];
 
+/** Fetches the company logo as a data URL so it can be embedded in the PDF. */
+async function loadLogo(): Promise<string> {
+  const res = await fetch("/images/logo.jpg");
+  if (!res.ok) throw new Error("logo unavailable");
+  const blob = await res.blob();
+  return await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
+}
+
 /**
  * Builds a one-page, branded A4 estimate in the browser (jsPDF is loaded only when the button is clicked).
  * The PDF is always English/Latin script: embedding an Urdu font would add megabytes to the download.
  */
-export async function downloadEstimatePdf({ textureName, rate, zone, estimate }: EstimatePdfInput) {
+export async function downloadEstimatePdf({ textureName, rateLabel, warrantyYears, zone, estimate }: EstimatePdfInput) {
   const { jsPDF } = await import("jspdf");
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const W = doc.internal.pageSize.getWidth();
@@ -28,13 +43,23 @@ export async function downloadEstimatePdf({ textureName, rate, zone, estimate }:
   // header band
   doc.setFillColor(...CLAY);
   doc.rect(0, 0, W, 92, "F");
+  let textX = M;
+  try {
+    const logo = await loadLogo();
+    doc.setFillColor(255, 255, 255);
+    doc.circle(M + 30, 46, 33, "F");
+    doc.addImage(logo, "JPEG", M, 16, 60, 60);
+    textX = M + 78;
+  } catch {
+    /* the logo is a nicety: fall back to the text-only header */
+  }
   doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(22);
-  doc.text("ZAIN & CO", M, 48);
+  doc.text("ZAIN & CO", textX, 48);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
-  doc.text("ARCHITECTURAL FINISHES  •  LAHORE", M, 66);
+  doc.text("ARCHITECTURAL FINISHES  •  LAHORE", textX, 66);
   doc.setFontSize(9);
   doc.text(site.phone, W - M, 44, { align: "right" });
   doc.text(site.email, W - M, 58, { align: "right" });
@@ -60,7 +85,7 @@ export async function downloadEstimatePdf({ textureName, rate, zone, estimate }:
   const cols: [string, string][] = [
     ["FINISH", textureName],
     ["SURFACE AREA", `${formatNumber(estimate.sqft)} sq ft`],
-    ["RATE", `PKR ${formatNumber(rate)} / sq ft`],
+    ["RATE", rateLabel],
     ["ENVIRONMENT", zone === "exterior" ? "Exterior" : "Interior"],
   ];
   const colW = (W - M * 2) / cols.length;
@@ -105,7 +130,7 @@ export async function downloadEstimatePdf({ textureName, rate, zone, estimate }:
   y += 14;
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13);
-  doc.text("Estimated project investment", M, y);
+  doc.text(estimate.isFrom ? "Estimated investment (starting from)" : "Estimated project investment", M, y);
   doc.setFontSize(18);
   doc.setTextColor(...CLAY);
   doc.text(formatPKR(estimate.total), W - M, y, { align: "right" });
@@ -141,7 +166,7 @@ export async function downloadEstimatePdf({ textureName, rate, zone, estimate }:
   const notes = [
     "This is an indicative estimate. The final price is confirmed after a free on-site laser survey and surface moisture check.",
     "Includes primer, mesh, base coats and skilled artisan labour as listed. Payment milestones: 50% mobilisation, 30% mid-project, 20% on satisfied handover.",
-    "Every project is covered by a 3-year written warranty (flaking, debonding, hollow spots and UV colour fading).",
+    `Every project is covered by a ${warrantyYears}-year written warranty (flaking, debonding, hollow spots and UV colour fading).`,
     "Free 1x1 ft physical sample boards are brought to your site visit.",
     paymentRule.pdfNote,
   ];

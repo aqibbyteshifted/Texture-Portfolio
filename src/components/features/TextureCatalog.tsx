@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { useT } from "@/i18n/client";
 import { cn } from "@/lib/cn";
 import { quoteHref } from "@/lib/quoteLink";
+import { effectiveRate } from "@/lib/rates";
 import type { Texture, TextureZone } from "@/types";
 import { msg } from "@/i18n/config";
 
@@ -32,8 +33,8 @@ export function TextureCatalog({ items, initialZone = "all", showFilters = true 
         (zone === "all" || x.zones.includes(zone)) &&
         (!q || `${x.name} ${t(x.name)} ${x.category} ${x.blurb} ${x.feature}`.toLowerCase().includes(q)),
     );
-    if (sort === "price-asc") return [...filtered].sort((a, b) => a.rate - b.rate);
-    if (sort === "price-desc") return [...filtered].sort((a, b) => b.rate - a.rate);
+    if (sort === "price-asc") return [...filtered].sort((a, b) => effectiveRate(a) - effectiveRate(b));
+    if (sort === "price-desc") return [...filtered].sort((a, b) => effectiveRate(b) - effectiveRate(a));
     return filtered;
   }, [items, zone, query, sort, t]);
 

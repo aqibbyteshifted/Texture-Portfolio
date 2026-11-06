@@ -1,3 +1,4 @@
+import { effectiveRate, hasRange, maxRate } from "@/lib/rates";
 import type { Texture } from "@/types";
 
 export type AreaUnit = "sqft" | "marla" | "sqm";
@@ -43,6 +44,8 @@ export interface Estimate {
   total: number;
   low: number;
   high: number;
+  /** True when the finish is priced as a range (e.g. epoxy): `total` is the starting price and `high` the top end. */
+  isFrom: boolean;
   /** Human-readable bill-of-material line for this texture's application system */
   bomText: string;
 }
@@ -63,11 +66,15 @@ export function calculateEstimate({
   surcharge = 0,
 }: EstimateInput): Estimate {
   const sqft = toSqft(area, unit);
-  const base = Math.round(sqft * texture.rate);
+  const rate = effectiveRate(texture);
+  const ranged = hasRange(texture);
+  const base = Math.round(sqft * rate);
   const scaffoldCost = scaffold && sqft > 0 ? ADDON_PRICES.scaffold : 0;
   const primerCost = primer && sqft > 0 ? ADDON_PRICES.primer : 0;
   const logistics = Math.round((base + scaffoldCost + primerCost) * surcharge);
   const total = base + scaffoldCost + primerCost + logistics;
+  const topBase = Math.round(sqft * maxRate(texture));
+  const topTotal = Math.round((topBase + scaffoldCost + primerCost) * (1 + surcharge));
 
   return {
     sqft: Math.round(sqft),
@@ -76,8 +83,9 @@ export function calculateEstimate({
     primer: primerCost,
     logistics,
     total,
-    low: roundTo(total * RANGE_LOW, 1000),
-    high: roundTo(total * RANGE_HIGH, 1000),
+    low: ranged ? total : roundTo(total * RANGE_LOW, 1000),
+    high: ranged ? topTotal : roundTo(total * RANGE_HIGH, 1000),
+    isFrom: ranged,
     bomText: describeBom(texture, sqft),
   };
 }

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { useT } from "@/i18n/client";
 import { formatNumber, formatPKR } from "@/lib/format";
+import { effectiveRate } from "@/lib/rates";
 import { quoteHref } from "@/lib/quoteLink";
 import { waMessages, whatsappLink } from "@/lib/whatsapp";
 import type { Texture } from "@/types";
@@ -19,7 +20,7 @@ export function AreaCostCalculator({ texture }: { texture: Texture }) {
   const uid = useId();
   const [length, setLength] = useState("120");
   const [height, setHeight] = useState("5");
-  const [rate, setRate] = useState(String(texture.rate));
+  const [rate, setRate] = useState(String(effectiveRate(texture)));
 
   const { area, total } = useMemo(() => {
     const l = Math.max(0, Number(length) || 0);

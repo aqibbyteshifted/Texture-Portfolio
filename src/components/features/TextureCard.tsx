@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ChevronRight, ShieldCheck } from "lucide-react";
+import { Rate } from "@/components/ui/Rate";
 import { TextureImage } from "@/components/ui/TextureImage";
 import { useT } from "@/i18n/client";
 import type { Texture } from "@/types";
@@ -29,13 +30,15 @@ export function TextureCard({ texture, priority = false }: { texture: Texture; p
         </span>
       </Link>
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-baseline justify-between gap-3">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
           <h3 className="text-lg font-bold text-ink">
             <Link href={`/textures/${texture.slug}`} className="hover:text-clay-600">
               {t(texture.name)}
             </Link>
           </h3>
-          <p className="shrink-0 text-sm font-bold text-clay-600 tnum">PKR {texture.rate} / {t("sq ft")}</p>
+          <p className="shrink-0 text-end text-sm font-bold text-clay-600">
+            <Rate texture={texture} badge className="justify-end" />
+          </p>
         </div>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">{t(texture.blurb)}</p>
         <div className="mt-4 flex items-center justify-between border-t border-line pt-4">

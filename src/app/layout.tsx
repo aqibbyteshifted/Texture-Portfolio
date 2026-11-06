@@ -69,6 +69,7 @@ const jsonLd = {
   telephone: site.phone,
   email: site.email,
   image: `${site.url}/images/proj-dha-villa42.jpg`,
+  logo: `${site.url}/images/logo.jpg`,
   priceRange: `PKR ${priceRange.min} - PKR ${priceRange.max} / sq ft`,
   address: {
     "@type": "PostalAddress",
