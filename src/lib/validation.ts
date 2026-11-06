@@ -61,6 +61,7 @@ export const quoteSchema = z.object({
   area: z.string().trim().min(2, "Tell us your site location / sub-division").max(160),
   scope: z.string().trim().min(2, "Select the surface scope").max(120),
   texture: z.string().trim().min(2, "Select a texture").max(80),
+  shade: optionalText(80),
   areaSqft: z.number().positive().max(200_000),
   estimate: z.number().nonnegative().max(500_000_000).optional(),
   date: z.string().trim().max(20).optional(),

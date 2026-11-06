@@ -1,19 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Geist } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Noto_Naskh_Arabic, Noto_Nastaliq_Urdu } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import { site } from "@/data/site";
 import { priceRange } from "@/data/textures";
+import { dirOf } from "@/i18n/config";
+import { LocaleProvider } from "@/i18n/client";
+import { getI18n } from "@/i18n/server";
 import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
-const display = Bricolage_Grotesque({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-bricolage",
   display: "swap",
   axes: ["opsz"],
 });
+// Urdu: Naskh for readable UI text, Nastaliq for large headings. Not preloaded, so English visitors never download them.
+const naskh = Noto_Naskh_Arabic({ subsets: ["arabic"], variable: "--font-naskh", display: "swap", preload: false });
+const nastaliq = Noto_Nastaliq_Urdu({ subsets: ["arabic"], variable: "--font-nastaliq", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -78,21 +84,28 @@ const jsonLd = {
   areaServed: ["Lahore", "Islamabad", "Rawalpindi", "Faisalabad", "Multan"],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { locale, t } = await getI18n();
   return (
-    <html lang="en" className={`${geist.variable} ${display.variable}`}>
+    <html
+      lang={locale}
+      dir={dirOf(locale)}
+      className={`${geist.variable} ${bricolage.variable} ${naskh.variable} ${nastaliq.variable}`}
+    >
       <body className="min-h-dvh">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-clay-500 focus:px-4 focus:py-2 focus:text-white"
-        >
-          Skip to content
-        </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <FloatingActions />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <LocaleProvider locale={locale}>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:start-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-clay-500 focus:px-4 focus:py-2 focus:text-white"
+          >
+            {t("Skip to content")}
+          </a>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <FloatingActions />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        </LocaleProvider>
       </body>
     </html>
   );

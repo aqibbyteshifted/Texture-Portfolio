@@ -18,6 +18,19 @@ export const site = {
     hours: "Open Mon–Sat • 9:00 AM – 7:00 PM",
   },
   geo: { lat: 31.4697, lng: 74.3979 },
+  /** Opening hours in Asia/Karachi time. Day 0 = Sunday. Sunday is closed. */
+  hoursSchedule: { timeZone: "Asia/Karachi", openDays: [1, 2, 3, 4, 5, 6], opens: "09:00", closes: "19:00" },
+  /**
+   * Shown in the reviews badge when live Google data is not configured. Replace with your real figures,
+   * or set GOOGLE_PLACES_API_KEY + GOOGLE_PLACE_ID to pull them live (see README).
+   */
+  google: {
+    rating: 4.9,
+    count: 120,
+    url: process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL ?? "",
+  },
+  /** Used by the map embed and directions link */
+  mapQuery: process.env.NEXT_PUBLIC_MAPS_QUERY ?? "Plot 18-C, Commercial Broadway, DHA Phase 5, Lahore, Pakistan",
   stats: [
     { value: "500+", label: "Walls Finished", icon: "badge" },
     { value: "10+ Yrs", label: "Master Craft", icon: "award" },
@@ -29,9 +42,9 @@ export const site = {
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Textures", href: "/textures" },
+  { label: "Compare", href: "/compare" },
   { label: "Estimate", href: "/#estimate" },
   { label: "Our Work", href: "/#work" },
-  { label: "Process", href: "/#process" },
   { label: "Reviews", href: "/#reviews" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },

@@ -504,6 +504,7 @@ export const textures: Texture[] = [
 ];
 
 export const getTexture = (slug: string) => textures.find((t) => t.slug === slug);
+export const getTextureByCategory = (category: string) => textures.find((t) => t.category === category);
 export const getTextureByName = (name: string) =>
   textures.find((t) => t.name.toLowerCase() === name.toLowerCase());
 

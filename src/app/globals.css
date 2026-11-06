@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display), var(--font-geist), ui-sans-serif, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-geist), ui-sans-serif, sans-serif;
 
   --color-canvas: #faf8f5;
   --color-surface: #ffffff;
@@ -81,6 +81,49 @@
       transition-duration: 0.01ms !important;
     }
   }
+}
+
+/* Urdu / RTL: cursive script needs zero letter-spacing and generous line height */
+html[lang="ur"] {
+  --font-sans: var(--font-naskh), "Noto Naskh Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-display: var(--font-nastaliq), var(--font-naskh), "Noto Nastaliq Urdu", serif;
+}
+html[lang="ur"] body {
+  line-height: 1.85;
+  font-feature-settings: normal;
+}
+html[lang="ur"] * {
+  letter-spacing: 0 !important;
+}
+/* Nastaliq has tall ascenders/descenders: big headings get generous line height, small ones switch to Naskh */
+html[lang="ur"] h1 {
+  line-height: 2.15 !important;
+}
+html[lang="ur"] h2 {
+  line-height: 1.95 !important;
+}
+html[lang="ur"] :where(h3, h4) {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.7 !important;
+}
+html[lang="ur"] :where(button, a, label, th) {
+  line-height: 1.6;
+}
+/* Latin-script runs keep the Latin fonts even inside Urdu pages */
+html[lang="ur"] :where(.ltr-run, [dir="ltr"]) {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-geist), ui-sans-serif, sans-serif;
+  font-family: var(--font-sans);
+}
+html[lang="ur"] :where(.ltr-run, [dir="ltr"]).font-display {
+  font-family: var(--font-display);
+}
+/* Latin-script runs (phone numbers, ref IDs, prices) keep reading left-to-right inside RTL text */
+.ltr-run {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
 }
 
 @utility tnum {

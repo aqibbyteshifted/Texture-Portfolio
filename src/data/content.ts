@@ -5,6 +5,9 @@ const byRate = [...textures].sort((a, b) => a.rate - b.rate);
 const cheapest = byRate[0];
 const priciest = byRate[byRate.length - 1];
 
+/** Used by the FAQ so the price answer can be translated with live numbers. */
+export const priceExtremes = { cheapest, priciest };
+
 export const testimonials: Testimonial[] = [
   { id: "t1", rating: 5, name: "Ahmed Khan", meta: "DHA Phase 5, Lahore • 1 Kanal Elevation", quote: "We hired Zain & Co for the Italian Travertine elevation on our 1-Kanal villa in DHA Phase 5. The karigars were extremely respectful, protected our aluminum windows, and the depth of the finish looks like genuine imported stone. Delivered exactly on day eight." },
   { id: "t2", rating: 5, name: "Sana Malik", meta: "Gulberg III, Lahore • Interior Accent", quote: "Finding a team in Lahore that can execute authentic terracotta micro-cement color crete without cracking seemed impossible. Zain and his team created our drawing room feature wall in Gulberg with zero seams. Outstanding craftsmanship." },

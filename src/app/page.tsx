@@ -2,7 +2,10 @@ import { Hero } from "@/components/sections/Hero";
 import { TextureShowcase } from "@/components/sections/TextureShowcase";
 import { CalculatorSection } from "@/components/sections/CalculatorSection";
 import { WhyUs } from "@/components/sections/WhyUs";
+import { CredentialsSection } from "@/components/sections/CredentialsSection";
 import { Transformation } from "@/components/sections/Transformation";
+import { GallerySection } from "@/components/sections/GallerySection";
+import { TeamSection } from "@/components/sections/TeamSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ConsultationSection } from "@/components/sections/ConsultationSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
@@ -17,7 +20,10 @@ export default function HomePage() {
       <TextureShowcase />
       <CalculatorSection />
       <WhyUs />
+      <CredentialsSection />
       <Transformation />
+      <GallerySection />
+      <TeamSection />
       <ProcessSection />
       <ConsultationSection />
       <ReviewsSection />

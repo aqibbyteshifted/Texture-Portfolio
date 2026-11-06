@@ -6,6 +6,8 @@ interface QuoteLinkParams {
   texture?: string;
   zone?: "exterior" | "interior";
   location?: string;
+  /** Shade code from the shade picker, e.g. "TR-02" */
+  shade?: string;
 }
 
 /** Builds a /quote URL that prefills the quote wizard. */
@@ -16,6 +18,7 @@ export function quoteHref(params: QuoteLinkParams = {}) {
   if (params.texture) qs.set("texture", params.texture);
   if (params.zone) qs.set("zone", params.zone);
   if (params.location) qs.set("loc", params.location);
+  if (params.shade) qs.set("shade", params.shade);
   const query = qs.toString();
   return query ? `/quote?${query}` : "/quote";
 }

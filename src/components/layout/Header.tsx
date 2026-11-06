@@ -4,14 +4,18 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Clock, Menu, Phone, ShieldCheck, X } from "lucide-react";
+import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { Logo } from "@/components/layout/Logo";
 import { Button } from "@/components/ui/Button";
+import { OpenStatus } from "@/components/ui/OpenStatus";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { navLinks, site } from "@/data/site";
+import { useT } from "@/i18n/client";
 import { waMessages, whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 
 export function Header() {
+  const t = useT();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -54,17 +58,21 @@ export function Header() {
         <div className="container-page flex h-9 items-center justify-between">
           <div className="flex items-center gap-5">
             <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="flex items-center gap-1.5 hover:text-white">
-              <Phone aria-hidden="true" className="size-3.5" /> {site.phone}
+              <Phone aria-hidden="true" className="size-3.5" /> <span className="ltr-run">{site.phone}</span>
             </a>
             <span className="flex items-center gap-1.5">
-              <Clock aria-hidden="true" className="size-3.5" /> {site.hours}
+              <Clock aria-hidden="true" className="size-3.5" /> {t(site.hours)}
             </span>
+            <OpenStatus tone="dark" />
             <span className="text-white/40">•</span>
-            <span>Lahore Premier Architectural Contractors</span>
+            <span>{t("Lahore Premier Architectural Contractors")}</span>
           </div>
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck aria-hidden="true" className="size-3.5 text-sand-500" /> PEC Compliant • DHA Registered
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck aria-hidden="true" className="size-3.5 text-sand-500" /> {t("PEC Compliant • DHA Registered")}
+            </span>
+            <LanguageToggle tone="dark" />
+          </div>
         </div>
       </div>
 
@@ -77,7 +85,7 @@ export function Header() {
         <div className="container-page flex h-[68px] items-center justify-between gap-4">
           <Logo />
 
-          <nav aria-label="Primary" className="hidden items-center gap-0.5 xl:flex">
+          <nav aria-label={t("Primary")} className="hidden items-center gap-0.5 xl:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -88,24 +96,25 @@ export function Header() {
                   isActive(link.href) && "bg-clay-50 text-clay-600",
                 )}
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             ))}
           </nav>
 
           <div className="hidden items-center gap-2 md:flex">
-            <Button href={whatsappLink(waMessages.consult)} variant="whatsapp" size="sm" aria-label="Chat on WhatsApp">
-              <WhatsAppIcon className="size-4" /> <span className="hidden lg:inline">WhatsApp</span>
+            <LanguageToggle className="lg:hidden" />
+            <Button href={whatsappLink(waMessages.consult)} variant="whatsapp" size="sm" aria-label={t("Chat on WhatsApp")}>
+              <WhatsAppIcon className="size-4" /> <span className="hidden lg:inline">{t("WhatsApp")}</span>
             </Button>
             <Button href="/quote" size="sm">
-              Get Free Quote <ArrowRight aria-hidden="true" className="size-4" />
+              {t("Get Free Quote")} <ArrowRight aria-hidden="true" className="size-4 rtl:-scale-x-100" />
             </Button>
           </div>
 
           <button
             type="button"
             className="grid size-11 place-items-center rounded-lg border border-line-strong bg-surface text-ink xl:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t("Close menu") : t("Open menu")}
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
@@ -127,7 +136,7 @@ export function Header() {
           onClick={() => setOpen(false)}
         />
         <nav
-          aria-label="Mobile"
+          aria-label={t("Mobile")}
           className={cn(
             "absolute inset-x-0 top-0 max-h-[calc(100dvh-68px)] overflow-y-auto border-b border-line bg-canvas p-4 shadow-modal transition-transform duration-300",
             open ? "translate-y-0" : "-translate-y-4",
@@ -144,26 +153,27 @@ export function Header() {
                     isActive(link.href) && "bg-clay-50 text-clay-600",
                   )}
                 >
-                  {link.label}
-                  <ArrowRight aria-hidden="true" className="size-4 opacity-40" />
+                  {t(link.label)}
+                  <ArrowRight aria-hidden="true" className="size-4 opacity-40 rtl:-scale-x-100" />
                 </Link>
               </li>
             ))}
           </ul>
           <div className="mt-4 grid grid-cols-2 gap-3 border-t border-line pt-4">
             <Button href={whatsappLink(waMessages.consult)} variant="whatsapp" size="lg">
-              <WhatsAppIcon className="size-5" /> WhatsApp
+              <WhatsAppIcon className="size-5" /> {t("WhatsApp")}
             </Button>
             <Button href="/quote" size="lg" onClick={() => setOpen(false)}>
-              Free Quote
+              {t("Free Quote")}
             </Button>
           </div>
-          <a
-            href={`tel:${site.phone.replace(/\s/g, "")}`}
-            className="mt-4 flex items-center justify-center gap-2 text-sm font-medium text-ink-soft"
-          >
-            <Phone aria-hidden="true" className="size-4" /> {site.phone} • {site.hours}
-          </a>
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-sm font-medium text-ink-soft">
+              <Phone aria-hidden="true" className="size-4" /> <span className="ltr-run">{site.phone}</span>
+            </a>
+            <LanguageToggle />
+          </div>
+          <OpenStatus className="mt-3" />
         </nav>
       </div>
     </>

@@ -82,6 +82,11 @@ export interface Testimonial {
   name: string;
   meta: string;
   rating: number;
+  /** "google" for live Google reviews, otherwise a manually added testimonial */
+  source?: "google";
+  url?: string;
+  /** Optional video testimonial. Provide a YouTube id or an mp4 path under /public/videos. */
+  video?: { youtubeId?: string; file?: string; poster?: string };
 }
 
 export interface Faq {
@@ -98,6 +103,8 @@ export interface LeadRecord {
   email?: string;
   area?: string;
   texture?: string;
+  /** "<code> – <name>", e.g. "TR-02 – Classic Beige" */
+  shade?: string;
   scope?: string;
   areaSqft?: number;
   estimate?: number;

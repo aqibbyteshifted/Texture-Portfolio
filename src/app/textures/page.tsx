@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Columns3 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextureCatalog } from "@/components/features/TextureCatalog";
 import { Button } from "@/components/ui/Button";
 import { textures } from "@/data/textures";
+import { getI18n } from "@/i18n/server";
 import { quoteHref } from "@/lib/quoteLink";
 
 export const metadata: Metadata = {
@@ -12,15 +14,23 @@ export const metadata: Metadata = {
   alternates: { canonical: "/textures" },
 };
 
-export default function TexturesPage() {
+export default async function TexturesPage() {
+  const { t } = await getI18n();
   return (
     <div className="container-page py-12 sm:py-16">
       <SectionHeading
         as="h1"
-        eyebrow="Architectural Portfolio"
-        title="Textures Catalog"
-        description={`${textures.length} signature finishes, each engineered for Lahore's monsoon humidity and summer heat. Filter by environment, compare turnkey rates, and open any finish for full specifications.`}
-        action={<Button href={quoteHref()}>Get Free Quote</Button>}
+        eyebrow={t("Architectural Portfolio")}
+        title={t("Textures Catalog")}
+        description={t("{n} signature finishes, each engineered for Lahore's monsoon humidity and summer heat. Filter by environment, compare turnkey rates, and open any finish for full specifications.", { n: textures.length })}
+        action={
+          <div className="flex flex-wrap gap-2">
+            <Button href="/compare" variant="secondary">
+              <Columns3 aria-hidden="true" className="size-4" /> {t("Compare finishes")}
+            </Button>
+            <Button href={quoteHref()}>{t("Get Free Quote")}</Button>
+          </div>
+        }
       />
       <div className="mt-10">
         <TextureCatalog items={textures} />

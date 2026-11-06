@@ -5,12 +5,12 @@ import { ArrowRight, Armchair, Check, Package, Building2, ShieldCheck } from "lu
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { textures } from "@/data/textures";
+import { useT } from "@/i18n/client";
 import {
   ADDON_PRICES,
   calculateEstimate,
   MAX_AREA_SQFT,
   toSqft,
-  UNIT_LABEL,
   UNIT_TO_SQFT,
   type AreaUnit,
 } from "@/lib/pricing";
@@ -19,15 +19,19 @@ import { quoteHref } from "@/lib/quoteLink";
 import { waMessages, whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 import type { TextureZone } from "@/types";
+import { msg } from "@/i18n/config";
 
-const units = Object.keys(UNIT_LABEL) as AreaUnit[];
+const units: AreaUnit[] = ["sqft", "marla", "sqm"];
+const unitButton: Record<AreaUnit, string> = { sqft: msg("Sq Ft"), marla: msg("Marla"), sqm: msg("Sq M") };
+const unitSuffix: Record<AreaUnit, string> = { sqft: msg("sq ft"), marla: msg("marla"), sqm: msg("m²") };
 
 const hints: Record<TextureZone, string> = {
-  exterior: "Typical 1-Kanal Elevation: ~3,200 - 4,500 sq ft",
-  interior: "Typical 5 Marla feature wall + lounge: ~900 - 1,400 sq ft",
+  exterior: msg("Typical 1-Kanal Elevation: ~3,200 - 4,500 sq ft"),
+  interior: msg("Typical 5 Marla feature wall + lounge: ~900 - 1,400 sq ft"),
 };
 
 export function CostCalculator() {
+  const t = useT();
   const uid = useId();
   const [area, setArea] = useState("3500");
   const [unit, setUnit] = useState<AreaUnit>("sqft");
@@ -36,8 +40,8 @@ export function CostCalculator() {
   const [scaffold, setScaffold] = useState(true);
   const [primer, setPrimer] = useState(true);
 
-  const available = useMemo(() => textures.filter((t) => t.zones.includes(zone)), [zone]);
-  const texture = available.find((t) => t.slug === slug) ?? available[0];
+  const available = useMemo(() => textures.filter((x) => x.zones.includes(zone)), [zone]);
+  const texture = available.find((x) => x.slug === slug) ?? available[0];
 
   // sq ft is the source of truth; the input only displays it in the chosen unit,
   // so switching units never introduces rounding drift into the price.
@@ -58,7 +62,7 @@ export function CostCalculator() {
   };
 
   const hasArea = estimate.sqft > 0;
-  const sqftHint = unit !== "sqft" && hasArea ? `≈ ${formatNumber(estimate.sqft)} sq ft` : null;
+  const sqftHint = unit !== "sqft" && hasArea ? `≈ ${formatNumber(estimate.sqft)} ${t("sq ft")}` : null;
 
   return (
     <div className="grid overflow-hidden rounded-2xl border border-line bg-surface shadow-lift lg:grid-cols-[1.25fr_1fr]">
@@ -66,7 +70,7 @@ export function CostCalculator() {
         {/* Area */}
         <div>
           <label htmlFor={`${uid}-area`} className="text-sm font-bold text-ink">
-            Total Wall Surface Area
+            {t("Total Wall Surface Area")}
           </label>
           <div className="mt-3 flex flex-col gap-3 sm:flex-row">
             <div className="relative flex-1">
@@ -78,13 +82,13 @@ export function CostCalculator() {
                 max={MAX_AREA_SQFT}
                 value={area}
                 onChange={(e) => onAreaChange(e.target.value)}
-                className="h-13 w-full rounded-control border border-line-strong bg-surface px-4 pr-20 text-lg font-bold text-ink tnum focus:border-clay-500 focus:shadow-[0_0_0_3px_rgba(181,101,29,0.15)] focus:outline-none"
+                className="h-13 w-full rounded-control border border-line-strong bg-surface ps-4 pe-20 text-lg font-bold text-ink tnum focus:border-clay-500 focus:shadow-[0_0_0_3px_rgba(181,101,29,0.15)] focus:outline-none"
               />
-              <span className="pointer-events-none absolute inset-y-0 right-4 grid place-items-center text-sm text-ink-muted">
-                {unit === "sqft" ? "sq ft" : unit === "sqm" ? "m²" : "marla"}
+              <span className="pointer-events-none absolute inset-y-0 end-4 grid place-items-center text-sm text-ink-muted">
+                {t(unitSuffix[unit])}
               </span>
             </div>
-            <div role="group" aria-label="Area unit" className="grid grid-cols-3 rounded-control bg-sunken p-1">
+            <div role="group" aria-label={t("Area unit")} className="grid grid-cols-3 rounded-control bg-sunken p-1">
               {units.map((u) => (
                 <button
                   key={u}
@@ -97,25 +101,25 @@ export function CostCalculator() {
                     unit === u && "bg-surface text-clay-600 shadow-sm",
                   )}
                 >
-                  {u === "sqft" ? "Sq Ft" : u === "marla" ? "Marla" : "Sq M"}
+                  {t(unitButton[u])}
                 </button>
               ))}
             </div>
           </div>
           <p className="mt-2 text-xs text-ink-muted">
-            {hints[zone]}
-            {sqftHint && <span className="ml-2 font-semibold text-clay-600">{sqftHint}</span>}
+            {t(hints[zone])}
+            {sqftHint && <span className="ms-2 font-semibold text-clay-600">{sqftHint}</span>}
           </p>
         </div>
 
         {/* Environment */}
         <fieldset>
-          <legend className="text-sm font-bold text-ink">Application Environment</legend>
+          <legend className="text-sm font-bold text-ink">{t("Application Environment")}</legend>
           <div className="mt-3 grid grid-cols-2 gap-3">
             {(
               [
-                { value: "exterior", label: "Exterior Facade / Elevation", Icon: Building2 },
-                { value: "interior", label: "Interior Accent / Rooms", Icon: Armchair },
+                { value: "exterior", label: msg("Exterior Facade / Elevation"), Icon: Building2 },
+                { value: "interior", label: msg("Interior Accent / Rooms"), Icon: Armchair },
               ] as const
             ).map(({ value, label, Icon }) => (
               <button
@@ -124,14 +128,14 @@ export function CostCalculator() {
                 aria-pressed={zone === value}
                 onClick={() => setZone(value)}
                 className={cn(
-                  "flex min-h-14 items-center gap-3 rounded-lg border p-3 text-left text-sm font-semibold transition-colors",
+                  "flex min-h-14 items-center gap-3 rounded-lg border p-3 text-start text-sm font-semibold transition-colors",
                   zone === value
                     ? "border-clay-500 bg-clay-50 text-clay-600 ring-1 ring-clay-500"
                     : "border-line-strong bg-surface text-ink hover:bg-canvas",
                 )}
               >
                 <Icon aria-hidden="true" className="size-5 shrink-0" />
-                {label}
+                {t(label)}
               </button>
             ))}
           </div>
@@ -139,29 +143,29 @@ export function CostCalculator() {
 
         {/* Finish */}
         <fieldset>
-          <legend className="text-sm font-bold text-ink">Select Finish Specification</legend>
+          <legend className="text-sm font-bold text-ink">{t("Select Finish Specification")}</legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            {available.map((t) => {
-              const selected = t.slug === texture.slug;
+            {available.map((x) => {
+              const selected = x.slug === texture.slug;
               return (
                 <button
-                  key={t.slug}
+                  key={x.slug}
                   type="button"
                   aria-pressed={selected}
-                  onClick={() => setSlug(t.slug)}
+                  onClick={() => setSlug(x.slug)}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg border p-3 text-left transition-colors",
+                    "flex items-center gap-3 rounded-lg border p-3 text-start transition-colors",
                     selected ? "border-clay-500 bg-clay-50 ring-1 ring-clay-500" : "border-line-strong hover:bg-canvas",
                   )}
                 >
-                  <span className="size-10 shrink-0 rounded-md border border-black/5" style={{ background: t.swatch }} aria-hidden="true" />
+                  <span className="size-10 shrink-0 rounded-md border border-black/5" style={{ background: x.swatch }} aria-hidden="true" />
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-semibold text-ink">{t.name}</span>
-                    <span className="block truncate text-xs text-ink-muted">{t.summary}</span>
+                    <span className="block truncate text-sm font-semibold text-ink">{t(x.name)}</span>
+                    <span className="block truncate text-xs text-ink-muted">{t(x.summary)}</span>
                   </span>
-                  <span className="text-right">
-                    <span className="block text-sm font-bold text-clay-600 tnum">PKR {t.rate}</span>
-                    <span className="block text-[10px] text-ink-muted">/ sq ft</span>
+                  <span className="text-end">
+                    <span className="block text-sm font-bold text-clay-600 tnum">PKR {x.rate}</span>
+                    <span className="block text-[10px] text-ink-muted">/ {t("sq ft")}</span>
                   </span>
                 </button>
               );
@@ -171,30 +175,30 @@ export function CostCalculator() {
 
         {/* Add-ons */}
         <fieldset>
-          <legend className="text-sm font-bold text-ink">Preparation &amp; Site Logistics</legend>
+          <legend className="text-sm font-bold text-ink">{t("Preparation & Site Logistics")}</legend>
           <div className="mt-3 grid gap-3">
             {zone === "exterior" && (
               <AddOn
                 checked={scaffold}
                 onChange={setScaffold}
-                title="Steel Scaffolding & Safety Staging"
-                text="Includes double-height staging and DHA safety barriers"
+                title={t("Steel Scaffolding & Safety Staging")}
+                text={t("Includes double-height staging and DHA safety barriers")}
                 price={`+${formatPKR(ADDON_PRICES.scaffold)}`}
               />
             )}
             <AddOn
               checked={primer}
               onChange={setPrimer}
-              title="Deep Penetrating Primer & Hydro-Sealer"
-              text="Moisture block treatment protecting against wall dampness"
+              title={t("Deep Penetrating Primer & Hydro-Sealer")}
+              text={t("Moisture block treatment protecting against wall dampness")}
               price={`+${formatPKR(ADDON_PRICES.primer)}`}
             />
             <div className="flex items-center justify-between gap-3 rounded-lg border border-dashed border-line-strong bg-canvas p-3.5">
               <div>
-                <p className="text-sm font-semibold text-ink">Turnkey Materials &amp; Trowel Labor</p>
-                <p className="text-xs text-ink-muted">Imported binders, marble chips, and senior karigar compensation</p>
+                <p className="text-sm font-semibold text-ink">{t("Turnkey Materials & Trowel Labor")}</p>
+                <p className="text-xs text-ink-muted">{t("Imported binders, marble chips, and senior karigar compensation")}</p>
               </div>
-              <span className="shrink-0 text-sm font-bold text-emerald-600">Included</span>
+              <span className="shrink-0 text-sm font-bold text-emerald-600">{t("Included")}</span>
             </div>
           </div>
         </fieldset>
@@ -202,37 +206,38 @@ export function CostCalculator() {
 
       {/* Result */}
       <div className="flex flex-col bg-ink p-5 text-white sm:p-8">
-        <p className="text-xs font-semibold tracking-[0.14em] text-sand-500 uppercase">Estimated Project Investment</p>
+        <p className="text-xs font-semibold tracking-[0.14em] text-sand-500 uppercase">{t("Estimated Project Investment")}</p>
         <p
           className="font-display mt-2 text-4xl font-extrabold tracking-tight tnum sm:text-5xl"
           aria-live="polite"
           data-testid="calc-total"
+          dir="ltr"
         >
           {formatPKR(estimate.total)}
         </p>
         <p className="mt-2 text-sm text-white/60 tnum">
-          {hasArea ? `Estimated Range: ${formatPKR(estimate.low)} - ${formatPKR(estimate.high)}` : "Enter your wall area to begin"}
+          {hasArea
+            ? t("Estimated Range: {low} - {high}", { low: formatPKR(estimate.low), high: formatPKR(estimate.high) })
+            : t("Enter your wall area to begin")}
         </p>
 
         <dl className="mt-6 grid gap-3 border-t border-white/10 pt-5 text-sm">
-          <Row label={`Architectural Texture Plaster:`} value={formatPKR(estimate.base)} />
-          {estimate.primer > 0 && <Row label="Base Primer & Hydro-Sealers:" value={formatPKR(estimate.primer)} />}
-          {estimate.scaffold > 0 && <Row label="Scaffolding Rigging & Safety:" value={formatPKR(estimate.scaffold)} />}
-          <Row label="Master Karigar Supervision:" value="Free Inspection Included" accent />
+          <Row label={t("Architectural Texture Plaster:")} value={formatPKR(estimate.base)} />
+          {estimate.primer > 0 && <Row label={t("Base Primer & Hydro-Sealers:")} value={formatPKR(estimate.primer)} />}
+          {estimate.scaffold > 0 && <Row label={t("Scaffolding Rigging & Safety:")} value={formatPKR(estimate.scaffold)} />}
+          <Row label={t("Master Karigar Supervision:")} value={t("Free Inspection Included")} accent />
         </dl>
 
         <div className="mt-5 rounded-lg bg-white/5 p-4 text-xs leading-relaxed text-white/70">
           <p className="flex items-center gap-2 font-semibold text-white">
-            <Package aria-hidden="true" className="size-4 text-sand-500" /> Bill of Material Estimation:
+            <Package aria-hidden="true" className="size-4 text-sand-500" /> {t("Bill of Material Estimation:")}
           </p>
-          <p className="mt-2 tnum">
-            {hasArea
-              ? estimate.bomText
-              : "Material quantities appear once you enter an area."}
+          <p className="mt-2 tnum" lang="en" dir="ltr">
+            {hasArea ? estimate.bomText : t("Material quantities appear once you enter an area.")}
           </p>
         </div>
         <p className="mt-3 text-[11px] leading-snug text-white/50">
-          *Final price confirmed after complimentary on-site laser survey and surface moisture check in Lahore.
+          {t("*Final price confirmed after complimentary on-site laser survey and surface moisture check in Lahore.")}
         </p>
 
         <div className="mt-6 grid gap-3">
@@ -241,7 +246,7 @@ export function CostCalculator() {
             size="lg"
             className={cn(!hasArea && "pointer-events-none opacity-50")}
           >
-            Get Exact Quote / Book Visit <ArrowRight aria-hidden="true" className="size-4" />
+            {t("Get Exact Quote / Book Visit")} <ArrowRight aria-hidden="true" className="size-4 rtl:-scale-x-100" />
           </Button>
           <Button
             href={whatsappLink(waMessages.estimate(texture.name, estimate.sqft, formatPKR(estimate.total)))}
@@ -249,15 +254,15 @@ export function CostCalculator() {
             size="lg"
             className={cn(!hasArea && "pointer-events-none opacity-50")}
           >
-            <WhatsAppIcon className="size-5" /> Send Estimate on WhatsApp
+            <WhatsAppIcon className="size-5" /> {t("Send Estimate on WhatsApp")}
           </Button>
         </div>
 
         <div className="mt-auto flex gap-3 pt-6 text-xs text-white/70">
           <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-sand-500" />
           <p>
-            <strong className="block text-sm text-white">3-Year Written Warranty</strong>
-            Covers against flaking, micro-cracking, and monsoon weather discoloration.
+            <strong className="block text-sm text-white">{t("3-Year Written Warranty")}</strong>
+            {t("Covers against flaking, micro-cracking, and monsoon weather discoloration.")}
           </p>
         </div>
       </div>
@@ -296,7 +301,7 @@ function AddOn({
         <span className="block text-sm font-semibold text-ink">{title}</span>
         <span className="block text-xs text-ink-muted">{text}</span>
       </span>
-      <span className="shrink-0 text-sm font-bold text-clay-600 tnum">{price}</span>
+      <span className="shrink-0 text-sm font-bold text-clay-600 tnum" dir="ltr">{price}</span>
     </label>
   );
 }
@@ -305,7 +310,7 @@ function Row({ label, value, accent }: { label: string; value: string; accent?: 
   return (
     <div className="flex items-baseline justify-between gap-4">
       <dt className="text-white/60">{label}</dt>
-      <dd className={cn("text-right font-semibold tnum", accent && "text-emerald-400")}>{value}</dd>
+      <dd className={cn("text-end font-semibold tnum", accent && "text-emerald-400")}>{value}</dd>
     </div>
   );
 }
