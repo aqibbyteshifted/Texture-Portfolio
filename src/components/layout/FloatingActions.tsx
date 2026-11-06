@@ -8,6 +8,7 @@ import { OpenStatus } from "@/components/ui/OpenStatus";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { site } from "@/data/site";
 import { useT } from "@/i18n/client";
+import { track } from "@/lib/analytics";
 import { whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 import { msg } from "@/i18n/config";
@@ -69,6 +70,7 @@ export function FloatingActions() {
   };
 
   const send = (message: string) => {
+    track("whatsapp_click", { source: "chat_widget", topic: topic?.id ?? "free_text" });
     window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
     setOpen(false);
     reset();

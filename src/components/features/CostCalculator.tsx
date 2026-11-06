@@ -1,11 +1,14 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
-import { ArrowRight, Armchair, Check, Package, Building2, ShieldCheck } from "lucide-react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { ArrowRight, Armchair, Check, FileDown, Package, Building2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { WallMeasurer } from "@/components/features/WallMeasurer";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { textures } from "@/data/textures";
 import { useT } from "@/i18n/client";
+import { track } from "@/lib/analytics";
+import { downloadEstimatePdf } from "@/lib/estimatePdf";
 import {
   ADDON_PRICES,
   calculateEstimate,
@@ -61,6 +64,39 @@ export function CostCalculator() {
     setUnit(next);
   };
 
+  const applyMeasured = (sqft: number) => {
+    setUnit("sqft");
+    setArea(String(Math.round(sqft)));
+    setSqftValue(toSqft(sqft, "sqft"));
+  };
+
+  // one analytics event per visit once the visitor actually changes the inputs (debounced)
+  const firstRender = useRef(true);
+  const tracked = useRef(false);
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    if (tracked.current || estimate.total <= 0) return;
+    const id = setTimeout(() => {
+      tracked.current = true;
+      track("calculator_estimate", { texture: texture.name, area_sqft: estimate.sqft, total: estimate.total });
+    }, 1500);
+    return () => clearTimeout(id);
+  }, [estimate.total, estimate.sqft, texture.name]);
+
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const downloadPdf = async () => {
+    setPdfBusy(true);
+    try {
+      await downloadEstimatePdf({ textureName: texture.name, rate: texture.rate, zone, estimate });
+      track("estimate_pdf_download", { texture: texture.name, total: estimate.total });
+    } finally {
+      setPdfBusy(false);
+    }
+  };
+
   const hasArea = estimate.sqft > 0;
   const sqftHint = unit !== "sqft" && hasArea ? `≈ ${formatNumber(estimate.sqft)} ${t("sq ft")}` : null;
 
@@ -110,6 +146,7 @@ export function CostCalculator() {
             {t(hints[zone])}
             {sqftHint && <span className="ms-2 font-semibold text-clay-600">{sqftHint}</span>}
           </p>
+          <WallMeasurer onApply={applyMeasured} />
         </div>
 
         {/* Environment */}
@@ -255,6 +292,9 @@ export function CostCalculator() {
             className={cn(!hasArea && "pointer-events-none opacity-50")}
           >
             <WhatsAppIcon className="size-5" /> {t("Send Estimate on WhatsApp")}
+          </Button>
+          <Button variant="secondary" size="lg" disabled={!hasArea || pdfBusy} onClick={downloadPdf}>
+            <FileDown aria-hidden="true" className="size-5" /> {pdfBusy ? t("Preparing PDF…") : t("Download estimate (PDF)")}
           </Button>
         </div>
 

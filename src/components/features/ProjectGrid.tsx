@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, CalendarCheck, MapPin } from "lucide-react";
 import { useT } from "@/i18n/client";
 import { cn } from "@/lib/cn";
@@ -51,7 +52,7 @@ export function ProjectGrid({ projects, variant = "work", filterBy = "sector" }:
 
       <ul className={cn("grid gap-5 sm:grid-cols-2 lg:grid-cols-3", options.length > 2 && "mt-6")}>
         {visible.map((p) => (
-          <li key={p.id} className="group overflow-hidden rounded-card border border-line bg-surface shadow-card transition-shadow hover:shadow-lift">
+          <li key={p.id} className="group relative overflow-hidden rounded-card border border-line bg-surface shadow-card transition-shadow hover:shadow-lift">
             <div className="relative aspect-[4/3] overflow-hidden">
               <Image
                 src={p.image}
@@ -77,7 +78,11 @@ export function ProjectGrid({ projects, variant = "work", filterBy = "sector" }:
                   {variant === "spec" ? t("Completed {date}", { date: p.completed }) : t(p.type)}
                 </span>
               </div>
-              <h3 className="mt-2 text-lg font-bold text-ink">{t(p.title)}</h3>
+              <h3 className="mt-2 text-lg font-bold text-ink">
+                <Link href={`/projects/${p.slug}`} className="hover:text-clay-600 after:absolute after:inset-0 after:content-['']">
+                  {t(p.title)}
+                </Link>
+              </h3>
               <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{t(p.description)}</p>
               {variant === "spec" && (
                 <div className="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs">

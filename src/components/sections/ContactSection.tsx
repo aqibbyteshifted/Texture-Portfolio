@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Mail, MapPinned, Navigation, Phone } from "lucide-react";
 import { ContactForm } from "@/components/features/ContactForm";
 import { OpenStatus } from "@/components/ui/OpenStatus";
@@ -60,7 +61,9 @@ export async function ContactSection() {
             <p className="text-xs font-semibold tracking-wider text-ink-muted uppercase">{t("Active Daily Crews In:")}</p>
             <ul className="mt-3 flex flex-wrap gap-2">
               {crews.map((c) => (
-                <li key={c} className="rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-semibold text-ink-soft">{t(c)}</li>
+                <li key={c}>
+                  <Link href="/areas" className="block rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-semibold text-ink-soft hover:border-clay-300 hover:text-clay-600">{t(c)}</Link>
+                </li>
               ))}
             </ul>
           </div>

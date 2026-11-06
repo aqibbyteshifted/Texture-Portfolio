@@ -2,7 +2,9 @@ import Link from "next/link";
 import { CircleCheck, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 import { OpenStatus } from "@/components/ui/OpenStatus";
-import { coverageAreas, site } from "@/data/site";
+import { ManageCookies } from "@/components/layout/Analytics";
+import { areas } from "@/data/areas";
+import { site } from "@/data/site";
 import { textures } from "@/data/textures";
 import { getI18n } from "@/i18n/server";
 import { msg } from "@/i18n/config";
@@ -11,9 +13,11 @@ const quickLinks = [
   { label: msg("Home Overview"), href: "/" },
   { label: msg("Explore All Finishes"), href: "/textures" },
   { label: msg("Compare Finishes"), href: "/compare" },
-  { label: msg("Rockwall Specification"), href: "/textures/rockwall-aggregates" },
+  { label: msg("Colour Visualizer"), href: "/visualizer" },
+  { label: msg("Our Projects"), href: "/projects" },
+  { label: msg("Wall Texture Guides"), href: "/blog" },
+  { label: msg("Warranty & Care"), href: "/warranty" },
   { label: msg("Request Free Estimate"), href: "/quote" },
-  { label: msg("Our Work"), href: "/#gallery" },
   { label: msg("Frequently Asked Questions"), href: "/#faq" },
 ];
 
@@ -63,9 +67,12 @@ export async function Footer() {
         <div>
           <h3 className="text-base font-bold">{t("Lahore Coverage")}</h3>
           <ul className="mt-4 grid gap-2.5 text-sm text-ink-soft">
-            {coverageAreas.map((item) => (
-              <li key={item} className="flex gap-2">
-                <CircleCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-clay-500" /> {t(item)}
+            {areas.map((a) => (
+              <li key={a.slug} className="flex gap-2">
+                <CircleCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-clay-500" />
+                <Link href={`/areas/${a.slug}`} className="hover:text-clay-600">
+                  {t(a.name)}
+                </Link>
               </li>
             ))}
           </ul>
@@ -95,6 +102,7 @@ export async function Footer() {
               {t("PEC Registration")} <span className="ltr-run">#{site.pec}</span>
             </span>
             <span>{t("DHA Approved Contractor")}</span>
+            <ManageCookies />
           </p>
         </div>
       </div>

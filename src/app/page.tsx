@@ -1,6 +1,8 @@
 import { Hero } from "@/components/sections/Hero";
 import { TextureShowcase } from "@/components/sections/TextureShowcase";
 import { CalculatorSection } from "@/components/sections/CalculatorSection";
+import { VisualizerPromo } from "@/components/sections/VisualizerPromo";
+import { BlogSection } from "@/components/sections/BlogSection";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { CredentialsSection } from "@/components/sections/CredentialsSection";
 import { Transformation } from "@/components/sections/Transformation";
@@ -19,6 +21,7 @@ export default function HomePage() {
       <Hero />
       <TextureShowcase />
       <CalculatorSection />
+      <VisualizerPromo />
       <WhyUs />
       <CredentialsSection />
       <Transformation />
@@ -28,6 +31,7 @@ export default function HomePage() {
       <ConsultationSection />
       <ReviewsSection />
       <FaqSection />
+      <BlogSection />
       <CtaBand />
       <ContactSection />
     </>

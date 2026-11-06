@@ -1,3 +1,4 @@
+import { msg } from "@/i18n/config";
 export const site = {
   name: "Zain & Co",
   group: "Zain & Co Group",
@@ -29,6 +30,17 @@ export const site = {
     count: 120,
     url: process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL ?? "",
   },
+  /**
+   * Thin banner above the header. Change `id` whenever you change the message so visitors who dismissed the
+   * old one see the new one. Set `enabled: false` to hide it.
+   */
+  announcement: {
+    enabled: true,
+    id: "free-sample-board-v1",
+    text: msg("Free 1×1 ft sample board with every site visit in Lahore"),
+    cta: msg("Book a visit"),
+    href: "/quote",
+  },
   /** Used by the map embed and directions link */
   mapQuery: process.env.NEXT_PUBLIC_MAPS_QUERY ?? "Plot 18-C, Commercial Broadway, DHA Phase 5, Lahore, Pakistan",
   stats: [
@@ -42,11 +54,11 @@ export const site = {
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Textures", href: "/textures" },
+  { label: "Visualizer", href: "/visualizer" },
   { label: "Compare", href: "/compare" },
   { label: "Estimate", href: "/#estimate" },
   { label: "Our Work", href: "/#work" },
-  { label: "Reviews", href: "/#reviews" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Guides", href: "/blog" },
   { label: "Contact", href: "/#contact" },
 ] as const;
 

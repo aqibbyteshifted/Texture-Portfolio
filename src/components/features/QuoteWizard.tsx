@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Send, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -14,6 +14,7 @@ import { useLeadSubmit } from "@/hooks/useLeadSubmit";
 import { useT } from "@/i18n/client";
 import { ADDON_PRICES, calculateEstimate, MAX_AREA_SQFT, type AreaUnit } from "@/lib/pricing";
 import { formatNumber, formatPKR } from "@/lib/format";
+import { getReferral } from "@/lib/referral";
 import { waMessages, whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 import type { TextureZone } from "@/types";
@@ -81,6 +82,10 @@ export function QuoteWizard() {
   const [stepError, setStepError] = useState<string>();
   const [contact, setContact] = useState({ name: "", phone: "", email: "", date: "", window: windows[1], message: "", hp: "" });
   const today = useMemo(() => toDateInput(new Date()), []);
+  const [referral, setReferral] = useState("");
+  useEffect(() => {
+    setReferral(getReferral() ?? "");
+  }, []);
 
   const available = useMemo(() => textures.filter((x) => x.zones.includes(zone)), [zone]);
   const texture = available.find((x) => x.slug === slug);
@@ -140,6 +145,7 @@ export function QuoteWizard() {
       date: contact.date || undefined,
       window: contact.window,
       message: contact.message,
+      referral: referral.trim() || undefined,
       hp: contact.hp,
     });
     if (lead) router.push(`/quote/confirmation?ref=${encodeURIComponent(lead.ref)}`);
@@ -291,6 +297,7 @@ export function QuoteWizard() {
               <Field label={t("Preferred Site Visit Date")} type="date" min={today} value={contact.date} onChange={setC("date")} />
               <Field label={t("Time Window")} as="select" value={contact.window} onChange={setC("window")} options={windows.map((w) => ({ value: w, label: t(w) }))} />
             </div>
+            <Field label={t("Referral code (optional)")} value={referral} onChange={(e) => setReferral(e.target.value)} placeholder={t("If a friend referred you")} dir="ltr" />
             <Field label={t("Notes for our engineer (optional)")} as="textarea" value={contact.message} onChange={setC("message")} placeholder={t("Wall condition, gate/parking access, colour preferences…")} />
             <input tabIndex={-1} autoComplete="off" aria-hidden="true" value={contact.hp} onChange={setC("hp")} name="website" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
           </div>

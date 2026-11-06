@@ -64,6 +64,10 @@ export interface Texture {
 
 export interface Project {
   id: string;
+  /** URL slug for /projects/[slug] */
+  slug: string;
+  /** Surface area in sq ft when known */
+  areaSqft?: number;
   title: string;
   location: string;
   sector: "DHA Lahore" | "Bahria Town" | "Gulberg" | "Johar Town" | "Model Town" | "WAPDA Town" | "Lake City";
@@ -97,7 +101,7 @@ export interface Faq {
 
 export interface LeadRecord {
   ref: string;
-  type: "quote" | "visit" | "message";
+  type: "quote" | "visit" | "message" | "claim";
   name: string;
   phone: string;
   email?: string;
@@ -105,6 +109,11 @@ export interface LeadRecord {
   texture?: string;
   /** "<code> – <name>", e.g. "TR-02 – Classic Beige" */
   shade?: string;
+  /** Referral code carried from ?ref= or entered by the visitor */
+  referral?: string;
+  /** Warranty claim: kind of issue and the original quote reference */
+  issue?: string;
+  quoteRef?: string;
   scope?: string;
   areaSqft?: number;
   estimate?: number;

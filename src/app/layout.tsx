@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist, Noto_Naskh_Arabic, Noto_Nastaliq_Urdu } from "next/font/google";
+import { Suspense } from "react";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { Analytics } from "@/components/layout/Analytics";
+import { ReferralCapture } from "@/components/layout/ReferralCapture";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/layout/FloatingActions";
@@ -100,10 +104,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           >
             {t("Skip to content")}
           </a>
+          <AnnouncementBar />
           <Header />
           <main id="main">{children}</main>
           <Footer />
           <FloatingActions />
+          <Analytics />
+          <Suspense fallback={null}>
+            <ReferralCapture />
+          </Suspense>
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         </LocaleProvider>
       </body>

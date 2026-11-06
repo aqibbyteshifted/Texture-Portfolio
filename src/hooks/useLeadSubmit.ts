@@ -2,6 +2,8 @@
 
 import { useCallback, useState } from "react";
 import type { LeadInput } from "@/lib/validation";
+import { track } from "@/lib/analytics";
+import { getReferral } from "@/lib/referral";
 import type { LeadRecord } from "@/types";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -29,7 +31,7 @@ export function useLeadSubmit() {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, referral: payload.referral || getReferral() }),
       });
       const data = (await res.json()) as ApiResult;
       if (!res.ok || !data.ok || !data.lead) {
@@ -43,6 +45,12 @@ export function useLeadSubmit() {
       } catch {
         /* storage unavailable (private mode): confirmation page falls back gracefully */
       }
+      track("generate_lead", {
+        lead_type: data.lead.type,
+        value: data.lead.estimate,
+        currency: data.lead.estimate ? "PKR" : undefined,
+        texture: data.lead.texture,
+      });
       setLead(data.lead);
       setStatus("success");
       return data.lead;

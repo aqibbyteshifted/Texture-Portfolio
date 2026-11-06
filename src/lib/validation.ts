@@ -31,6 +31,7 @@ const email = z
   .transform((v) => (v ? v : undefined))
   .refine((v) => !v || z.email().safeParse(v).success, "Enter a valid email address");
 
+const referral = optionalText(40);
 const hp = z.string().max(200).optional(); // honeypot: real users leave it empty (route silently drops filled ones)
 
 export const visitSchema = z.object({
@@ -41,6 +42,7 @@ export const visitSchema = z.object({
   date: z.string().trim().max(20).optional(),
   window: z.string().trim().max(60).optional(),
   message: optionalText(1000),
+  referral,
   hp,
 });
 
@@ -50,6 +52,7 @@ export const messageSchema = z.object({
   phone,
   email,
   message: z.string().trim().min(5, "Please describe your project").max(2000),
+  referral,
   hp,
 });
 
@@ -67,10 +70,25 @@ export const quoteSchema = z.object({
   date: z.string().trim().max(20).optional(),
   window: z.string().trim().max(60).optional(),
   message: optionalText(1000),
+  referral,
   hp,
 });
 
-export const leadSchema = z.discriminatedUnion("type", [visitSchema, messageSchema, quoteSchema]);
+export const claimSchema = z.object({
+  type: z.literal("claim"),
+  name,
+  phone,
+  email,
+  quoteRef: optionalText(40),
+  area: z.string().trim().min(2, "Tell us the site address").max(160),
+  issue: z.string().trim().min(2, "Select the kind of issue").max(80),
+  date: z.string().trim().max(20).optional(),
+  message: z.string().trim().min(5, "Please describe the issue").max(2000),
+  referral,
+  hp,
+});
+
+export const leadSchema = z.discriminatedUnion("type", [visitSchema, messageSchema, quoteSchema, claimSchema]);
 
 export type LeadInput = z.input<typeof leadSchema>;
 export type LeadOutput = z.output<typeof leadSchema>;
