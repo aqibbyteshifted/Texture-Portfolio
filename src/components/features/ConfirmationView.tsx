@@ -25,6 +25,7 @@ import {
   Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { PaymentPolicy } from "@/components/features/PaymentPolicy";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { LAST_LEAD_KEY } from "@/hooks/useLeadSubmit";
 import { site } from "@/data/site";
@@ -269,6 +270,8 @@ export function ConfirmationView() {
                 <p className="mt-3 flex items-center gap-1.5 text-xs font-bold text-clay-600"><ShieldCheck aria-hidden="true" className="size-4" /> {t("3-Year Written Warranty Backed")}</p>
               </div>
             </section>
+
+            <PaymentPolicy compact />
 
             <section className="rounded-2xl border border-line bg-sunken p-5 text-sm">
               <p className="flex items-center gap-2 text-xs font-bold tracking-wider text-clay-600 uppercase"><Store aria-hidden="true" className="size-4" /> {t("Visit Lahore Experience Studio")}</p>

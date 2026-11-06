@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BadgeCheck, ClipboardCheck, Hammer, Send } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CareGuide } from "@/components/features/CareGuide";
+import { PaymentPolicy } from "@/components/features/PaymentPolicy";
 import { ClaimForm } from "@/components/features/ClaimForm";
 import { WarrantyCard } from "@/components/features/WarrantyCard";
 import { careTips } from "@/data/care";
@@ -64,6 +65,10 @@ export default async function WarrantyPage() {
             ))}
           </ol>
         </div>
+      </section>
+
+      <section className="container-page pb-4">
+        <PaymentPolicy />
       </section>
 
       <section id="claim" className="container-page grid gap-10 py-16 sm:py-20 lg:grid-cols-[1fr_1.2fr] lg:gap-16">

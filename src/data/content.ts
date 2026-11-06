@@ -1,4 +1,5 @@
 import { textures } from "@/data/textures";
+import { paymentFaq } from "@/data/policy";
 import type { Faq, Testimonial } from "@/types";
 
 const byRate = [...textures].sort((a, b) => a.rate - b.rate);
@@ -21,4 +22,5 @@ export const faqs: Faq[] = [
   { id: "f4", question: "How do these finishes withstand Lahore's intense monsoon rains?", answer: "Our formulations use elastomeric polymers that bridge micro-settlement cracks, combined with anti-fungal silicon sealers that shed rainwater like a lotus leaf. This prevents rainwater penetration, dark algae streaks, and moisture peeling." },
   { id: "f5", question: "What does the 3-Year Warranty cover?", answer: "Our warranty covers delamination, flaking, hollow spots, and color fading caused by UV light. In the unlikely event of any issue, our maintenance crew visits within 48 hours to re-trowel and seal the section at zero cost to you." },
   { id: "f6", question: "Do you take projects outside Lahore across Punjab?", answer: "Yes. For larger estates and commercial projects above 3,000 sq ft, we routinely mobilize teams to Islamabad/Rawalpindi, Faisalabad, Gujranwala, Sialkot, and Multan with dedicated on-site boarding and engineering supervision." },
+  paymentFaq,
 ];

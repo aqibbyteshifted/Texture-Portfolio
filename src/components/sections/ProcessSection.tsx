@@ -1,6 +1,7 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/icons";
+import { PaymentPolicy } from "@/components/features/PaymentPolicy";
 import { processSteps } from "@/data/site";
 import { getI18n } from "@/i18n/server";
 
@@ -34,6 +35,9 @@ export async function ProcessSection() {
           </li>
         ))}
       </ol>
+      <Reveal className="mt-8">
+        <PaymentPolicy />
+      </Reveal>
     </section>
   );
 }

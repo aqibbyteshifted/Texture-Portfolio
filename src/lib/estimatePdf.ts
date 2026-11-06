@@ -1,3 +1,4 @@
+import { paymentRule } from "@/data/policy";
 import { site } from "@/data/site";
 import { formatNumber, formatPKR } from "@/lib/format";
 import type { Estimate } from "@/lib/pricing";
@@ -142,6 +143,7 @@ export async function downloadEstimatePdf({ textureName, rate, zone, estimate }:
     "Includes primer, mesh, base coats and skilled artisan labour as listed. Payment milestones: 50% mobilisation, 30% mid-project, 20% on satisfied handover.",
     "Every project is covered by a 3-year written warranty (flaking, debonding, hollow spots and UV colour fading).",
     "Free 1x1 ft physical sample boards are brought to your site visit.",
+    paymentRule.pdfNote,
   ];
   for (const note of notes) {
     const lines = doc.splitTextToSize(`•  ${note}`, W - M * 2) as string[];
