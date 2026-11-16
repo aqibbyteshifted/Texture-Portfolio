@@ -57,7 +57,7 @@ export function CompareTool() {
   const zoneLabel = (x: Texture) => x.zones.map((z) => t(z === "exterior" ? "Exterior" : "Interior")).join(" / ");
 
   const rows: { label: string; render: (x: Texture) => React.ReactNode }[] = [
-    { label: t("Rate"), render: (x) => <span className="font-bold text-clay-600"><Rate texture={x} badge /></span> },
+    { label: t("Rate"), render: (x) => <span className="font-bold text-brand-600"><Rate texture={x} badge /></span> },
     {
       label: t("Estimated cost for {area} sq ft", { area: formatNumber(sqft) }),
       render: (x) => (
@@ -105,7 +105,7 @@ export function CompareTool() {
             <select
               value={slug}
               onChange={(e) => setSlot(i, e.target.value)}
-              className="h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink focus:border-clay-500 focus:outline-none"
+              className="h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink focus:border-brand-500 focus:outline-none"
             >
               {i > 0 && <option value="">{t("None")}</option>}
               {textures.map((x) => (
@@ -124,7 +124,7 @@ export function CompareTool() {
             min={0}
             value={area}
             onChange={(e) => setArea(e.target.value)}
-            className="h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm font-semibold text-ink tnum focus:border-clay-500 focus:outline-none"
+            className="h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm font-semibold text-ink tnum focus:border-brand-500 focus:outline-none"
           />
         </label>
       </div>
@@ -172,7 +172,7 @@ export function CompareTool() {
                       <Button href={quoteHref({ texture: x.slug, area: sqft, unit: "sqft" })} size="sm">
                         {t("Get Quote")} <ArrowRight aria-hidden="true" className="size-3.5 rtl:-scale-x-100" />
                       </Button>
-                      <Link href={`/textures/${x.slug}`} className="text-center text-[13px] font-bold text-clay-600 hover:text-clay-700">
+                      <Link href={`/textures/${x.slug}`} className="text-center text-[13px] font-bold text-brand-600 hover:text-brand-700">
                         {t("View details")}
                       </Link>
                     </div>

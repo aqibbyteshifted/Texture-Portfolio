@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail, MapPinned, Navigation, Phone } from "lucide-react";
-import { ContactForm } from "@/components/features/ContactForm";
+import { WhatsAppIcon } from "@/components/ui/icons";
+import { whatsappLink } from "@/lib/whatsapp";
 import { OpenStatus } from "@/components/ui/OpenStatus";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/data/site";
@@ -27,33 +28,33 @@ export async function ContactSection() {
     <section id="contact" className="container-page pb-16 sm:pb-24">
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="text-xs font-semibold tracking-[0.14em] text-clay-500 uppercase">{t("Direct Operations")}</p>
+          <p className="text-xs font-semibold tracking-[0.14em] text-brand-500 uppercase">{t("Direct Operations")}</p>
           <h2 className="mt-2 text-[1.75rem] font-bold sm:text-4xl">{t("Get in Touch")}</h2>
           <p className="mt-3 text-ink-soft">
             {t("Visit our architectural texture studio or call our project estimators directly for technical support.")}
           </p>
           <ul className="mt-8 grid gap-6">
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-clay-50 text-clay-500"><MapPinned aria-hidden="true" className="size-6" /></span>
+              <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-500"><MapPinned aria-hidden="true" className="size-6" /></span>
               <div>
                 <h3 className="font-sans text-base font-bold tracking-normal">{t("Lahore Head Office & Sample Studio")}</h3>
                 <p className="text-sm text-ink-soft"><bdi>{site.address}</bdi></p>
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-clay-50 text-clay-500"><Phone aria-hidden="true" className="size-6" /></span>
+              <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-500"><Phone aria-hidden="true" className="size-6" /></span>
               <div>
                 <h3 className="font-sans text-base font-bold tracking-normal">{t("Phone & Engineering Helpline")}</h3>
-                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="ltr-run text-sm font-semibold text-clay-600 hover:underline">{site.phone}</a>
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="ltr-run text-sm font-semibold text-brand-600 hover:underline">{site.phone}</a>
                 <p className="text-xs text-ink-muted">{t("Available Monday – Saturday, 9:00 AM – 7:00 PM")}</p>
                 <OpenStatus className="mt-1" />
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-clay-50 text-clay-500"><Mail aria-hidden="true" className="size-6" /></span>
+              <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-500"><Mail aria-hidden="true" className="size-6" /></span>
               <div>
                 <h3 className="font-sans text-base font-bold tracking-normal">{t("Architectural Specifications")}</h3>
-                <a href={`mailto:${site.email}`} className="ltr-run text-sm font-semibold text-clay-600 hover:underline">{site.email}</a>
+                <a href={`mailto:${site.email}`} className="ltr-run text-sm font-semibold text-brand-600 hover:underline">{site.email}</a>
               </div>
             </li>
           </ul>
@@ -62,7 +63,7 @@ export async function ContactSection() {
             <ul className="mt-3 flex flex-wrap gap-2">
               {crews.map((c) => (
                 <li key={c}>
-                  <Link href="/areas" className="block rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-semibold text-ink-soft hover:border-clay-300 hover:text-clay-600">{t(c)}</Link>
+                  <Link href="/areas" className="block rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-semibold text-ink-soft hover:border-brand-300 hover:text-brand-600">{t(c)}</Link>
                 </li>
               ))}
             </ul>
@@ -70,9 +71,17 @@ export async function ContactSection() {
         </div>
 
         <div className="rounded-2xl border border-line bg-surface p-5 shadow-lift sm:p-8">
-          <h3 className="text-xl font-bold">{t("Send a Quick Message")}</h3>
-          <p className="mt-1 mb-6 text-sm text-ink-soft">{t("Tell us about your project and a project manager will respond shortly.")}</p>
-          <ContactForm />
+          <h3 className="text-xl font-bold">{t("Talk to a Project Manager")}</h3>
+          <p className="mt-1 mb-6 text-sm text-ink-soft">{t("The fastest way to reach us is a call or a WhatsApp message. For a priced estimate use the free quote request.")}</p>
+          <div className="grid gap-3">
+            <Button href={whatsappLink("Salam Zain & Co, I would like to talk about a wall-texture project in Lahore.")} variant="whatsapp" size="lg">
+              <WhatsAppIcon className="size-5" /> {t("Chat on WhatsApp")}
+            </Button>
+            <Button href={`tel:${site.phone.replace(/s/g, "")}`} variant="secondary" size="lg">
+              <Phone aria-hidden="true" className="size-4" /> <span className="ltr-run">{site.phone}</span>
+            </Button>
+            <Button href="/quote" size="lg">{t("Request a Free Quote")}</Button>
+          </div>
         </div>
       </div>
 

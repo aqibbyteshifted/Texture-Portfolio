@@ -14,15 +14,15 @@ export async function WarrantyCard() {
 
   return (
     <figure className="relative mx-auto w-full max-w-lg" aria-label={t("Sample warranty card")}>
-      <div className="relative overflow-hidden rounded-2xl border-[3px] border-double border-clay-500/60 bg-gradient-to-br from-[#fffdf8] to-[#f7efe0] p-6 shadow-lift sm:p-8">
+      <div className="relative overflow-hidden rounded-2xl border-[3px] border-double border-brand-500/60 bg-gradient-to-br from-[#fffdf8] to-[#f7efe0] p-6 shadow-lift sm:p-8">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 grid place-items-center">
-          <span className="-rotate-12 font-display text-6xl font-extrabold tracking-widest text-clay-500/[0.07] uppercase sm:text-7xl">
+          <span className="-rotate-12 font-display text-6xl font-extrabold tracking-widest text-brand-500/[0.07] uppercase sm:text-7xl">
             {t("Sample")}
           </span>
         </div>
 
-        <div className="relative flex items-center gap-3 border-b border-clay-500/30 pb-4">
-          <span className="grid size-11 place-items-center rounded-lg bg-clay-500 text-white">
+        <div className="relative flex items-center gap-3 border-b border-brand-500/30 pb-4">
+          <span className="grid size-11 place-items-center rounded-lg bg-brand-500 text-white">
             <Landmark aria-hidden="true" className="size-5" />
           </span>
           <div>
@@ -32,13 +32,13 @@ export async function WarrantyCard() {
         </div>
 
         <div className="relative mt-5 text-center">
-          <p className="text-[11px] font-semibold tracking-[0.2em] text-clay-600 uppercase">{t("Certificate of Warranty")}</p>
+          <p className="text-[11px] font-semibold tracking-[0.2em] text-brand-600 uppercase">{t("Certificate of Warranty")}</p>
           <p className="font-display mt-1 text-4xl font-extrabold text-ink">{t("3 Years")}</p>
         </div>
 
         <dl className="relative mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
           {fields.map(([k, v]) => (
-            <div key={k} className="border-b border-dashed border-clay-500/30 pb-1.5">
+            <div key={k} className="border-b border-dashed border-brand-500/30 pb-1.5">
               <dt className="text-[10px] font-semibold tracking-wider text-ink-muted uppercase">{k}</dt>
               <dd className="font-semibold">{v}</dd>
             </div>
@@ -48,7 +48,7 @@ export async function WarrantyCard() {
         <ul className="relative mt-5 grid gap-1.5 text-[13px] text-ink-soft">
           {warrantyCoverage.map((c) => (
             <li key={c} className="flex items-center gap-2">
-              <BadgeCheck aria-hidden="true" className="size-4 shrink-0 text-clay-500" /> {t(c)}
+              <BadgeCheck aria-hidden="true" className="size-4 shrink-0 text-brand-500" /> {t(c)}
             </li>
           ))}
         </ul>
@@ -58,7 +58,7 @@ export async function WarrantyCard() {
             <div className="h-px w-32 bg-ink/40" />
             <p className="mt-1 text-[10px] tracking-wider text-ink-muted uppercase">{t("Authorised signature")}</p>
           </div>
-          <span className="grid size-16 rotate-[-8deg] place-items-center rounded-full border-2 border-clay-500/70 text-center text-[8px] leading-tight font-bold tracking-wider text-clay-600 uppercase">
+          <span className="grid size-16 rotate-[-8deg] place-items-center rounded-full border-2 border-brand-500/70 text-center text-[8px] leading-tight font-bold tracking-wider text-brand-600 uppercase">
             {t("Official")}
             <br />
             {t("Stamp")}

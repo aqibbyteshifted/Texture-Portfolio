@@ -32,7 +32,7 @@ export function Accordion({ items, defaultOpen = items[0]?.id }: { items: Item[]
                 <span>{item.question}</span>
                 <ChevronDown
                   aria-hidden="true"
-                  className={cn("size-5 shrink-0 text-clay-500 transition-transform duration-300", expanded && "rotate-180")}
+                  className={cn("size-5 shrink-0 text-brand-500 transition-transform duration-300", expanded && "rotate-180")}
                 />
               </button>
             </h3>

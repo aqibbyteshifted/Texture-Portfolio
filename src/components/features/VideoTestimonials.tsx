@@ -31,7 +31,7 @@ function VideoCard({ item }: { item: Testimonial & { video: NonNullable<Testimon
             {/* eslint-disable-next-line @next/next/no-img-element */}
             {thumb && <img src={thumb} alt="" loading="lazy" className="absolute inset-0 size-full object-cover opacity-80 transition-opacity group-hover:opacity-100" />}
             <span className="absolute inset-0 grid place-items-center">
-              <span className="grid size-16 place-items-center rounded-full bg-clay-500 text-white shadow-lift transition-transform group-hover:scale-110">
+              <span className="grid size-16 place-items-center rounded-full bg-brand-500 text-white shadow-lift transition-transform group-hover:scale-110">
                 <Play aria-hidden="true" className="size-7 fill-current" />
               </span>
             </span>

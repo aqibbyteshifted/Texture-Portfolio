@@ -67,7 +67,7 @@ export function TextureCatalog({ items, initialZone = "all", showFilters = true 
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t("Search finishes…")}
-                className="h-10 w-full rounded-full border border-line-strong bg-surface ps-9 pe-4 text-sm text-ink focus:border-clay-500 focus:shadow-[0_0_0_3px_rgba(181,101,29,0.15)] focus:outline-none"
+                className="h-10 w-full rounded-full border border-line-strong bg-surface ps-9 pe-4 text-sm text-ink focus:border-brand-500 focus:shadow-[0_0_0_3px_rgba(154,116,31,0.15)] focus:outline-none"
               />
             </label>
             <label className="block">
@@ -75,7 +75,7 @@ export function TextureCatalog({ items, initialZone = "all", showFilters = true 
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as Sort)}
-                className="h-10 w-full rounded-full border border-line-strong bg-surface px-4 text-sm text-ink focus:border-clay-500 focus:outline-none"
+                className="h-10 w-full rounded-full border border-line-strong bg-surface px-4 text-sm text-ink focus:border-brand-500 focus:outline-none"
               >
                 <option value="featured">{t("Featured")}</option>
                 <option value="price-asc">{t("Price: Low to High")}</option>

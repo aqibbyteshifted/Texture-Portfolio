@@ -34,28 +34,6 @@ const email = z
 const referral = optionalText(40);
 const hp = z.string().max(200).optional(); // honeypot: real users leave it empty (route silently drops filled ones)
 
-export const visitSchema = z.object({
-  type: z.literal("visit"),
-  name,
-  phone,
-  area: z.string().trim().min(2, "Tell us your Lahore area / sector").max(120),
-  date: z.string().trim().max(20).optional(),
-  window: z.string().trim().max(60).optional(),
-  message: optionalText(1000),
-  referral,
-  hp,
-});
-
-export const messageSchema = z.object({
-  type: z.literal("message"),
-  name,
-  phone,
-  email,
-  message: z.string().trim().min(5, "Please describe your project").max(2000),
-  referral,
-  hp,
-});
-
 export const quoteSchema = z.object({
   type: z.literal("quote"),
   name,
@@ -88,7 +66,7 @@ export const claimSchema = z.object({
   hp,
 });
 
-export const leadSchema = z.discriminatedUnion("type", [visitSchema, messageSchema, quoteSchema, claimSchema]);
+export const leadSchema = z.discriminatedUnion("type", [quoteSchema, claimSchema]);
 
 export type LeadInput = z.input<typeof leadSchema>;
 export type LeadOutput = z.output<typeof leadSchema>;

@@ -15,7 +15,7 @@ export async function PostCard({ post }: { post: BlogPost }) {
       </div>
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-lg leading-snug font-bold text-ink">
-          <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0 after:content-[''] hover:text-clay-600">
+          <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0 after:content-[''] hover:text-brand-600">
             <span dir="auto">{post.title}</span>
           </Link>
         </h3>
@@ -24,7 +24,7 @@ export async function PostCard({ post }: { post: BlogPost }) {
           <span className="flex items-center gap-1.5">
             <Clock aria-hidden="true" className="size-3.5" /> {t("{n} min read", { n: post.readMinutes })} · {formatDate(post.date, { dateStyle: "medium" })}
           </span>
-          <ArrowRight aria-hidden="true" className="size-4 text-clay-500 transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100" />
+          <ArrowRight aria-hidden="true" className="size-4 text-brand-500 transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100" />
         </p>
       </div>
     </article>

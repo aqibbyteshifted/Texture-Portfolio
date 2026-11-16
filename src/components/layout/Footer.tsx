@@ -18,6 +18,8 @@ const quickLinks = [
   { label: msg("Wall Texture Guides"), href: "/blog" },
   { label: msg("Warranty & Care"), href: "/warranty" },
   { label: msg("Request Free Estimate"), href: "/quote" },
+  { label: msg("Help & Tools"), href: "/help" },
+  { label: msg("Track Your Project"), href: "/track" },
   { label: msg("Frequently Asked Questions"), href: "/#faq" },
 ];
 
@@ -33,16 +35,16 @@ export async function Footer() {
           </p>
           <ul className="mt-5 grid gap-2.5 text-sm text-ink-soft">
             <li className="flex gap-2.5">
-              <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-clay-500" /> <bdi>{site.addressShort}</bdi>
+              <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-500" /> <bdi>{site.addressShort}</bdi>
             </li>
             <li>
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="flex gap-2.5 hover:text-clay-600">
-                <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-clay-500" /> <span className="ltr-run">{site.phone}</span>
+              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="flex gap-2.5 hover:text-brand-600">
+                <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-500" /> <span className="ltr-run">{site.phone}</span>
               </a>
             </li>
             <li>
-              <a href={`mailto:${site.email}`} className="flex gap-2.5 hover:text-clay-600">
-                <Mail aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-clay-500" /> <span className="ltr-run">{site.email}</span>
+              <a href={`mailto:${site.email}`} className="flex gap-2.5 hover:text-brand-600">
+                <Mail aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-500" /> <span className="ltr-run">{site.email}</span>
               </a>
             </li>
             <li className="ps-6.5">
@@ -56,7 +58,7 @@ export async function Footer() {
           <ul className="mt-4 grid gap-2.5 text-sm text-ink-soft">
             {textures.map((x) => (
               <li key={x.slug}>
-                <Link href={`/textures/${x.slug}`} className="hover:text-clay-600">
+                <Link href={`/textures/${x.slug}`} className="hover:text-brand-600">
                   {t(x.name)}
                 </Link>
               </li>
@@ -69,8 +71,8 @@ export async function Footer() {
           <ul className="mt-4 grid gap-2.5 text-sm text-ink-soft">
             {areas.map((a) => (
               <li key={a.slug} className="flex gap-2">
-                <CircleCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-clay-500" />
-                <Link href={`/areas/${a.slug}`} className="hover:text-clay-600">
+                <CircleCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-500" />
+                <Link href={`/areas/${a.slug}`} className="hover:text-brand-600">
                   {t(a.name)}
                 </Link>
               </li>
@@ -83,7 +85,7 @@ export async function Footer() {
           <ul className="mt-4 grid gap-2.5 text-sm text-ink-soft">
             {quickLinks.map((item) => (
               <li key={item.label}>
-                <Link href={item.href} className="hover:text-clay-600">
+                <Link href={item.href} className="hover:text-brand-600">
                   {t(item.label)}
                 </Link>
               </li>
@@ -102,6 +104,8 @@ export async function Footer() {
               {t("PEC Registration")} <span className="ltr-run">#{site.pec}</span>
             </span>
             <span>{t("DHA Approved Contractor")}</span>
+            <Link href="/terms" className="hover:text-brand-600">{t("Terms & Conditions")}</Link>
+            <Link href="/privacy" className="hover:text-brand-600">{t("Privacy Policy")}</Link>
             <ManageCookies />
           </p>
         </div>

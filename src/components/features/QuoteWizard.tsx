@@ -158,9 +158,9 @@ export function QuoteWizard() {
         <ol className="mb-8 grid grid-cols-3 gap-2" aria-label={t("Progress")}>
           {steps.map((label, i) => (
             <li key={label} aria-current={i === step ? "step" : undefined} className="min-w-0">
-              <div className={cn("h-1.5 rounded-full transition-colors", i <= step ? "bg-clay-500" : "bg-line-strong")} />
-              <p className={cn("mt-2 flex items-center gap-1.5 text-xs font-semibold", i <= step ? "text-clay-600" : "text-ink-muted")}>
-                <span className={cn("grid size-5 shrink-0 place-items-center rounded-full text-[11px]", i < step ? "bg-clay-500 text-white" : i === step ? "bg-clay-100 text-clay-600" : "bg-sunken")}>
+              <div className={cn("h-1.5 rounded-full transition-colors", i <= step ? "bg-brand-500" : "bg-line-strong")} />
+              <p className={cn("mt-2 flex items-center gap-1.5 text-xs font-semibold", i <= step ? "text-brand-600" : "text-ink-muted")}>
+                <span className={cn("grid size-5 shrink-0 place-items-center rounded-full text-[11px]", i < step ? "bg-brand-500 text-white" : i === step ? "bg-brand-100 text-brand-600" : "bg-sunken")}>
                   {i < step ? <Check aria-hidden="true" className="size-3" strokeWidth={3} /> : i + 1}
                 </span>
                 <span className="truncate">
@@ -183,7 +183,7 @@ export function QuoteWizard() {
                     type="button"
                     aria-pressed={zone === z}
                     onClick={() => changeZone(z)}
-                    className={cn("rounded-lg border p-4 text-start text-sm font-semibold transition-colors", zone === z ? "border-clay-500 bg-clay-50 text-clay-600 ring-1 ring-clay-500" : "border-line-strong hover:bg-canvas")}
+                    className={cn("rounded-lg border p-4 text-start text-sm font-semibold transition-colors", zone === z ? "border-brand-500 bg-brand-50 text-brand-600 ring-1 ring-brand-500" : "border-line-strong hover:bg-canvas")}
                   >
                     {z === "exterior" ? t("Exterior Facade / Boundary") : t("Interior Rooms / Floors")}
                   </button>
@@ -216,7 +216,7 @@ export function QuoteWizard() {
                     type="button"
                     aria-pressed={slug === x.slug}
                     onClick={() => pickTexture(x.slug)}
-                    className={cn("flex items-center gap-3 overflow-hidden rounded-lg border p-2.5 pe-3 text-start transition-colors", slug === x.slug ? "border-clay-500 bg-clay-50 ring-1 ring-clay-500" : "border-line-strong hover:bg-canvas")}
+                    className={cn("flex items-center gap-3 overflow-hidden rounded-lg border p-2.5 pe-3 text-start transition-colors", slug === x.slug ? "border-brand-500 bg-brand-50 ring-1 ring-brand-500" : "border-line-strong hover:bg-canvas")}
                   >
                     <span className="relative size-16 shrink-0 overflow-hidden rounded-md">
                       <TextureImage src={x.image} alt={x.name} swatch={x.swatch} sizes="64px" />
@@ -224,7 +224,7 @@ export function QuoteWizard() {
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-sm font-bold">{t(x.name)}</span>
                       <span className="block truncate text-xs text-ink-muted">{t(x.summary)}</span>
-                      <span className="mt-0.5 block text-xs font-bold text-clay-600"><Rate texture={x} badge /></span>
+                      <span className="mt-0.5 block text-xs font-bold text-brand-600"><Rate texture={x} badge /></span>
                     </span>
                   </button>
                 ))}
@@ -242,7 +242,7 @@ export function QuoteWizard() {
                     role="radio"
                     aria-checked={!shade}
                     onClick={() => setShadeCode("")}
-                    className={cn("h-10 rounded-full border px-4 text-xs font-semibold", !shade ? "border-clay-500 bg-clay-50 text-clay-600" : "border-line-strong text-ink-soft hover:bg-canvas")}
+                    className={cn("h-10 rounded-full border px-4 text-xs font-semibold", !shade ? "border-brand-500 bg-brand-50 text-brand-600" : "border-line-strong text-ink-soft hover:bg-canvas")}
                   >
                     {t("No preference")}
                   </button>
@@ -255,7 +255,7 @@ export function QuoteWizard() {
                       aria-label={`${s.name} (${s.code})`}
                       title={`${s.name} · ${s.code}`}
                       onClick={() => setShadeCode(s.code)}
-                      className={cn("grid size-10 place-items-center rounded-full border-2 transition-transform hover:scale-110", shade?.code === s.code ? "border-clay-500 ring-2 ring-clay-500/30" : "border-white shadow-card")}
+                      className={cn("grid size-10 place-items-center rounded-full border-2 transition-transform hover:scale-110", shade?.code === s.code ? "border-brand-500 ring-2 ring-brand-500/30" : "border-white shadow-card")}
                       style={{ backgroundColor: s.hex }}
                     >
                       {shade?.code === s.code && <Check aria-hidden="true" className="size-4 text-white drop-shadow" strokeWidth={3} />}
@@ -278,8 +278,8 @@ export function QuoteWizard() {
               <Check2 checked={primer} onChange={setPrimer} label={t("Deep penetrating primer & hydro-sealer")} price={`+${formatPKR(ADDON_PRICES.primer)}`} />
             </fieldset>
 
-            <div className="flex items-start gap-3 rounded-lg bg-clay-50 p-4 text-sm">
-              <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-clay-500" />
+            <div className="flex items-start gap-3 rounded-lg bg-brand-50 p-4 text-sm">
+              <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand-500" />
               <p className="text-ink-soft">
                 <strong className="text-ink">{t("Free 1×1 ft sample boards")}</strong> {t("and a laser moisture assessment are included with every site visit, at zero cost.")}
               </p>
@@ -333,7 +333,7 @@ export function QuoteWizard() {
       </form>
 
       <aside className="rounded-2xl border border-line bg-surface p-5 shadow-card sm:p-6 lg:sticky lg:top-24" aria-label={t("Quote summary")}>
-        <p className="text-xs font-semibold tracking-[0.14em] text-clay-500 uppercase">{t("Live Summary")}</p>
+        <p className="text-xs font-semibold tracking-[0.14em] text-brand-500 uppercase">{t("Live Summary")}</p>
         <dl className="mt-4 grid gap-3 text-sm">
           <Line label={t("Environment")} value={zone === "exterior" ? t("Exterior") : t("Interior")} />
           <Line label={t("Scope")} value={t(scope)} />
@@ -343,7 +343,7 @@ export function QuoteWizard() {
           {shade && <Line label={t("Shade")} value={`${shade.name} (${shade.code})`} />}
         </dl>
         <div className="mt-5 rounded-lg bg-ink p-4 text-white" aria-live="polite">
-          <p className="text-[11px] font-semibold tracking-wider text-sand-500 uppercase">{t("Estimated Investment")}</p>
+          <p className="text-[11px] font-semibold tracking-wider text-gold-500 uppercase">{t("Estimated Investment")}</p>
           <p className="font-display mt-1 text-2xl font-extrabold tnum" dir="ltr">{estimate && estimate.total > 0 ? `${estimate.isFrom ? `${t("From")} ` : ""}${formatPKR(estimate.total)}` : "PKR —"}</p>
           {estimate && estimate.total > 0 && (
             <p className="mt-1 text-xs text-white/60 tnum" dir="ltr">
@@ -371,13 +371,13 @@ function Line({ label, value }: { label: string; value: string }) {
 
 function Check2({ checked, onChange, label, price }: { checked: boolean; onChange: (v: boolean) => void; label: string; price: string }) {
   return (
-    <label className={cn("flex cursor-pointer items-center gap-3 rounded-lg border p-3.5", checked ? "border-clay-500 bg-clay-50" : "border-line-strong hover:bg-canvas")}>
+    <label className={cn("flex cursor-pointer items-center gap-3 rounded-lg border p-3.5", checked ? "border-brand-500 bg-brand-50" : "border-line-strong hover:bg-canvas")}>
       <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="peer sr-only" />
-      <span aria-hidden="true" className="grid size-5 shrink-0 place-items-center rounded border border-line-strong bg-surface text-white peer-checked:border-clay-500 peer-checked:bg-clay-500 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sand-500">
+      <span aria-hidden="true" className="grid size-5 shrink-0 place-items-center rounded border border-line-strong bg-surface text-white peer-checked:border-brand-500 peer-checked:bg-brand-500 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gold-500">
         {checked && <Check className="size-3.5" strokeWidth={3} />}
       </span>
       <span className="flex-1 text-sm font-semibold">{label}</span>
-      <span className="text-sm font-bold text-clay-600 tnum" dir="ltr">{price}</span>
+      <span className="text-sm font-bold text-brand-600 tnum" dir="ltr">{price}</span>
     </label>
   );
 }

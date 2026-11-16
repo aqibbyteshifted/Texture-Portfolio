@@ -22,7 +22,7 @@ export function ShadePicker({ texture, shades }: { texture: Texture; shades: Sha
   return (
     <section id="shades" aria-labelledby="shade-title" className="container-page py-16 sm:py-20">
       <div className="mb-8 max-w-2xl">
-        <p className="mb-2 text-xs font-semibold tracking-[0.14em] text-clay-500 uppercase">{t("Colour Palette")}</p>
+        <p className="mb-2 text-xs font-semibold tracking-[0.14em] text-brand-500 uppercase">{t("Colour Palette")}</p>
         <h2 id="shade-title" className="text-[1.75rem] leading-[1.1] font-bold sm:text-4xl">
           {t("Choose Your Shade")}
         </h2>
@@ -62,7 +62,7 @@ export function ShadePicker({ texture, shades }: { texture: Texture; shades: Sha
                     onClick={() => setActive(i)}
                     className={cn(
                       "group relative block aspect-square w-full rounded-xl border-2 transition-transform hover:scale-105",
-                      selected ? "border-clay-500 ring-2 ring-clay-500/30" : "border-white shadow-card",
+                      selected ? "border-brand-500 ring-2 ring-brand-500/30" : "border-white shadow-card",
                     )}
                     style={{ backgroundColor: s.hex }}
                   >

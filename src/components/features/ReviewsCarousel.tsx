@@ -46,7 +46,7 @@ export function ReviewsCarousel({ items }: { items: Testimonial[] }) {
             key={r.id}
             className="relative flex w-[86%] shrink-0 snap-center flex-col rounded-card border border-line bg-surface p-6 shadow-card sm:w-[60%] lg:w-auto"
           >
-            <Quote aria-hidden="true" className="absolute end-5 top-5 size-8 text-clay-100" />
+            <Quote aria-hidden="true" className="absolute end-5 top-5 size-8 text-brand-100" />
             <div className="flex items-center gap-2">
               <div className="flex gap-0.5 text-amber-500" role="img" aria-label={t("{n} out of 5 stars", { n: r.rating })}>
                 {Array.from({ length: r.rating }).map((_, i) => (
@@ -61,13 +61,13 @@ export function ReviewsCarousel({ items }: { items: Testimonial[] }) {
               “{r.quote}”
             </blockquote>
             <div className="mt-5 flex items-center gap-3 border-t border-line pt-4">
-              <span className="grid size-10 place-items-center rounded-full bg-clay-100 font-bold text-clay-600">{r.name.charAt(0)}</span>
+              <span className="grid size-10 place-items-center rounded-full bg-brand-100 font-bold text-brand-600">{r.name.charAt(0)}</span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-bold text-ink">{r.name}</span>
                 <span className="block truncate text-xs text-ink-muted">{r.meta}</span>
               </span>
               {r.url && (
-                <a href={r.url} target="_blank" rel="noopener noreferrer" aria-label={t("View on Google")} className="text-ink-muted hover:text-clay-600">
+                <a href={r.url} target="_blank" rel="noopener noreferrer" aria-label={t("View on Google")} className="text-ink-muted hover:text-brand-600">
                   <ExternalLink aria-hidden="true" className="size-4" />
                 </a>
               )}
@@ -82,7 +82,7 @@ export function ReviewsCarousel({ items }: { items: Testimonial[] }) {
         </button>
         <div className="flex gap-2" aria-hidden="true">
           {items.map((r, i) => (
-            <span key={r.id} className={cn("h-2 rounded-full transition-all", i === index ? "w-6 bg-clay-500" : "w-2 bg-line-strong")} />
+            <span key={r.id} className={cn("h-2 rounded-full transition-all", i === index ? "w-6 bg-brand-500" : "w-2 bg-line-strong")} />
           ))}
         </div>
         <button type="button" aria-label={t("Next review")} onClick={() => go(Math.min(items.length - 1, index + 1))} className="grid size-10 place-items-center rounded-full border border-line-strong bg-surface">

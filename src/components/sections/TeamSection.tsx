@@ -22,19 +22,19 @@ export async function TeamSection() {
             <Reveal delay={i * 80} className="h-full">
               <article className="flex h-full flex-col items-center rounded-card border border-line bg-surface p-7 text-center shadow-card">
                 {m.photo ? (
-                  <span className="relative size-24 overflow-hidden rounded-full ring-4 ring-clay-100">
+                  <span className="relative size-24 overflow-hidden rounded-full ring-4 ring-brand-100">
                     <Image src={m.photo} alt={m.name} fill sizes="96px" className="object-cover" />
                   </span>
                 ) : (
-                  <span aria-hidden="true" className="font-display grid size-24 place-items-center rounded-full bg-clay-500 text-4xl font-extrabold text-white ring-4 ring-clay-100">
+                  <span aria-hidden="true" className="font-display grid size-24 place-items-center rounded-full bg-brand-500 text-4xl font-extrabold text-white ring-4 ring-brand-100">
                     {m.name.replace(/^The\s+/, "").charAt(0)}
                   </span>
                 )}
                 <h3 className="mt-5 text-xl font-bold">{t(m.name)}</h3>
-                <p className="text-sm font-semibold text-clay-600">{t(m.role)}</p>
+                <p className="text-sm font-semibold text-brand-600">{t(m.role)}</p>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{t(m.bio)}</p>
                 {m.highlight && (
-                  <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-clay-50 px-3 py-1.5 text-xs font-bold text-clay-600">
+                  <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-600">
                     <BadgeCheck aria-hidden="true" className="size-3.5" /> {t(m.highlight)}
                   </p>
                 )}

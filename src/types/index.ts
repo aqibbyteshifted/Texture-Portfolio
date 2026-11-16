@@ -110,7 +110,7 @@ export interface Faq {
 
 export interface LeadRecord {
   ref: string;
-  type: "quote" | "visit" | "message" | "claim";
+  type: "quote" | "claim";
   name: string;
   phone: string;
   email?: string;

@@ -37,7 +37,7 @@ export function TextureGallery({ title, badge, highlight, swatch, main, images }
           </div>
         ))}
         <span className="absolute start-4 top-4 flex items-center gap-1.5 rounded-full bg-surface/95 px-3 py-1.5 text-xs font-bold shadow-sm">
-          <ShieldCheck aria-hidden="true" className="size-4 text-clay-500" /> {badge}
+          <ShieldCheck aria-hidden="true" className="size-4 text-brand-500" /> {badge}
         </span>
         <span className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-2 text-[11px] font-semibold text-white">
           <span className="flex items-center gap-1.5 rounded-full bg-black/55 px-3 py-1.5 backdrop-blur">
@@ -60,7 +60,7 @@ export function TextureGallery({ title, badge, highlight, swatch, main, images }
                 onClick={() => setActive(i)}
                 className={cn(
                   "relative block aspect-square w-full overflow-hidden rounded-lg border-2 transition-all",
-                  i === active ? "border-clay-500" : "border-transparent opacity-75 hover:opacity-100",
+                  i === active ? "border-brand-500" : "border-transparent opacity-75 hover:opacity-100",
                 )}
               >
                 {img.src ? (

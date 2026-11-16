@@ -1,7 +1,7 @@
 import { msg } from "@/i18n/config";
 
 /**
- * Payment rule shown on the process section, quote confirmation, warranty page, FAQ and the PDF estimate.
+ * Payment rule shown on the Terms page (full), the quote confirmation (compact) and the PDF estimate.
  * Edit the wording here and it updates everywhere. Confirm every clause matches Zain & Co's real policy before publishing.
  */
 export const paymentRule = {

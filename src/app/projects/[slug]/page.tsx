@@ -67,11 +67,11 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
     <>
       <div className="container-page pt-6">
         <nav aria-label={t("Breadcrumb")} className="flex flex-wrap items-center gap-2 text-xs text-ink-muted">
-          <Link href="/" className="flex items-center gap-1 hover:text-clay-600"><House aria-hidden="true" className="size-3.5" /> {t("Home")}</Link>
+          <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><House aria-hidden="true" className="size-3.5" /> {t("Home")}</Link>
           <span aria-hidden="true">/</span>
-          <Link href="/projects" className="hover:text-clay-600">{t("Our Projects")}</Link>
+          <Link href="/projects" className="hover:text-brand-600">{t("Our Projects")}</Link>
           <span aria-hidden="true">/</span>
-          <span aria-current="page" className="font-semibold text-clay-600">{t(project.title)}</span>
+          <span aria-current="page" className="font-semibold text-brand-600">{t(project.title)}</span>
         </nav>
       </div>
 
@@ -80,7 +80,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
           <Image src={project.image} alt={`${t(project.title)}, ${project.location}`} fill priority sizes="(min-width: 1024px) 760px, 100vw" className="object-cover" />
         </div>
         <div className="flex flex-col">
-          <p className="text-xs font-semibold tracking-[0.14em] text-clay-500 uppercase">{t("Case Study")}</p>
+          <p className="text-xs font-semibold tracking-[0.14em] text-brand-500 uppercase">{t("Case Study")}</p>
           <h1 className="mt-2 text-4xl leading-[1.05] font-extrabold">{t(project.title)}</h1>
           <p className="mt-4 leading-relaxed text-ink-soft">{t(project.description)}</p>
           <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line">

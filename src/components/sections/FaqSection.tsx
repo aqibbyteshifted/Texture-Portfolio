@@ -1,5 +1,5 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Accordion } from "@/components/ui/Accordion";
+import { FaqList } from "@/components/features/FaqList";
 import { faqs, priceExtremes } from "@/data/content";
 import { getI18n } from "@/i18n/server";
 import { effectiveRate, maxRate } from "@/lib/rates";
@@ -40,7 +40,7 @@ export async function FaqSection() {
           description={t("Transparent guidelines on texture longevity, square foot calculations, and application technicalities.")}
         />
         <div className="mt-10">
-          <Accordion items={items} />
+          <FaqList items={items} />
         </div>
       </div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />

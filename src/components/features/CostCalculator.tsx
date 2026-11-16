@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { ArrowRight, Armchair, Check, FileDown, Package, Building2, ShieldCheck } from "lucide-react";
+import { ArrowRight, Armchair, Check, FileDown, Link2, Package, Building2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { WallMeasurer } from "@/components/features/WallMeasurer";
 import { Rate } from "@/components/ui/Rate";
@@ -100,6 +100,17 @@ export function CostCalculator() {
     }
   };
 
+  const [copied, setCopied] = useState(false);
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(`${window.location.origin}${quoteHref({ area: estimate.sqft, unit: "sqft", texture: texture.slug, zone })}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard blocked: ignore */
+    }
+  };
+
   const hasArea = estimate.sqft > 0;
   const sqftHint = unit !== "sqft" && hasArea ? `≈ ${formatNumber(estimate.sqft)} ${t("sq ft")}` : null;
 
@@ -121,7 +132,7 @@ export function CostCalculator() {
                 max={MAX_AREA_SQFT}
                 value={area}
                 onChange={(e) => onAreaChange(e.target.value)}
-                className="h-13 w-full rounded-control border border-line-strong bg-surface ps-4 pe-20 text-lg font-bold text-ink tnum focus:border-clay-500 focus:shadow-[0_0_0_3px_rgba(181,101,29,0.15)] focus:outline-none"
+                className="h-13 w-full rounded-control border border-line-strong bg-surface ps-4 pe-20 text-lg font-bold text-ink tnum focus:border-brand-500 focus:shadow-[0_0_0_3px_rgba(154,116,31,0.15)] focus:outline-none"
               />
               <span className="pointer-events-none absolute inset-y-0 end-4 grid place-items-center text-sm text-ink-muted">
                 {t(unitSuffix[unit])}
@@ -137,7 +148,7 @@ export function CostCalculator() {
                   className={cn(
                     "rounded-md px-3 text-xs font-semibold whitespace-nowrap text-ink-soft transition-colors sm:h-11",
                     "h-10",
-                    unit === u && "bg-surface text-clay-600 shadow-sm",
+                    unit === u && "bg-surface text-brand-600 shadow-sm",
                   )}
                 >
                   {t(unitButton[u])}
@@ -147,7 +158,7 @@ export function CostCalculator() {
           </div>
           <p className="mt-2 text-xs text-ink-muted">
             {t(hints[zone])}
-            {sqftHint && <span className="ms-2 font-semibold text-clay-600">{sqftHint}</span>}
+            {sqftHint && <span className="ms-2 font-semibold text-brand-600">{sqftHint}</span>}
           </p>
           <WallMeasurer onApply={applyMeasured} />
         </div>
@@ -170,7 +181,7 @@ export function CostCalculator() {
                 className={cn(
                   "flex min-h-14 items-center gap-3 rounded-lg border p-3 text-start text-sm font-semibold transition-colors",
                   zone === value
-                    ? "border-clay-500 bg-clay-50 text-clay-600 ring-1 ring-clay-500"
+                    ? "border-brand-500 bg-brand-50 text-brand-600 ring-1 ring-brand-500"
                     : "border-line-strong bg-surface text-ink hover:bg-canvas",
                 )}
               >
@@ -195,14 +206,14 @@ export function CostCalculator() {
                   onClick={() => setSlug(x.slug)}
                   className={cn(
                     "flex items-center gap-3 rounded-lg border p-3 text-start transition-colors",
-                    selected ? "border-clay-500 bg-clay-50 ring-1 ring-clay-500" : "border-line-strong hover:bg-canvas",
+                    selected ? "border-brand-500 bg-brand-50 ring-1 ring-brand-500" : "border-line-strong hover:bg-canvas",
                   )}
                 >
                   <span className="size-10 shrink-0 rounded-md border border-black/5" style={{ background: x.swatch }} aria-hidden="true" />
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-semibold text-ink">{t(x.name)}</span>
                     <span className="block truncate text-xs text-ink-muted">{t(x.summary)}</span>
-                    <span className="mt-0.5 block text-xs text-clay-600">
+                    <span className="mt-0.5 block text-xs text-brand-600">
                       <Rate texture={x} badge />
                     </span>
                   </span>
@@ -245,7 +256,7 @@ export function CostCalculator() {
 
       {/* Result */}
       <div className="flex flex-col bg-ink p-5 text-white sm:p-8">
-        <p className="text-xs font-semibold tracking-[0.14em] text-sand-500 uppercase">{t("Estimated Project Investment")}</p>
+        <p className="text-xs font-semibold tracking-[0.14em] text-gold-500 uppercase">{t("Estimated Project Investment")}</p>
         <p
           className="font-display mt-2 text-4xl font-extrabold tracking-tight tnum sm:text-5xl"
           aria-live="polite"
@@ -271,7 +282,7 @@ export function CostCalculator() {
 
         <div className="mt-5 rounded-lg bg-white/5 p-4 text-xs leading-relaxed text-white/70">
           <p className="flex items-center gap-2 font-semibold text-white">
-            <Package aria-hidden="true" className="size-4 text-sand-500" /> {t("Bill of Material Estimation:")}
+            <Package aria-hidden="true" className="size-4 text-gold-500" /> {t("Bill of Material Estimation:")}
           </p>
           <p className="mt-2 tnum" lang="en" dir="ltr">
             {hasArea ? estimate.bomText : t("Material quantities appear once you enter an area.")}
@@ -300,10 +311,13 @@ export function CostCalculator() {
           <Button variant="secondary" size="lg" disabled={!hasArea || pdfBusy} onClick={downloadPdf}>
             <FileDown aria-hidden="true" className="size-5" /> {pdfBusy ? t("Preparing PDF…") : t("Download estimate (PDF)")}
           </Button>
+          <Button variant="secondary" size="lg" disabled={!hasArea} onClick={copyLink}>
+            <Link2 aria-hidden="true" className="size-5" /> {copied ? t("Link copied") : t("Copy shareable link")}
+          </Button>
         </div>
 
         <div className="mt-auto flex gap-3 pt-6 text-xs text-white/70">
-          <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-sand-500" />
+          <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-gold-500" />
           <p>
             <strong className="block text-sm text-white">{t("{n}-Year Written Warranty", { n: warrantyOf(texture) })}</strong>
             {t("Covers against flaking, micro-cracking, and monsoon weather discoloration.")}
@@ -331,13 +345,13 @@ function AddOn({
     <label
       className={cn(
         "flex cursor-pointer items-center gap-3 rounded-lg border p-3.5 transition-colors",
-        checked ? "border-clay-500 bg-clay-50" : "border-line-strong hover:bg-canvas",
+        checked ? "border-brand-500 bg-brand-50" : "border-line-strong hover:bg-canvas",
       )}
     >
       <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="peer sr-only" />
       <span
         aria-hidden="true"
-        className="grid size-5 shrink-0 place-items-center rounded border border-line-strong bg-surface text-white peer-checked:border-clay-500 peer-checked:bg-clay-500 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sand-500"
+        className="grid size-5 shrink-0 place-items-center rounded border border-line-strong bg-surface text-white peer-checked:border-brand-500 peer-checked:bg-brand-500 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gold-500"
       >
         {checked && <Check className="size-3.5" strokeWidth={3} />}
       </span>
@@ -345,7 +359,7 @@ function AddOn({
         <span className="block text-sm font-semibold text-ink">{title}</span>
         <span className="block text-xs text-ink-muted">{text}</span>
       </span>
-      <span className="shrink-0 text-sm font-bold text-clay-600 tnum" dir="ltr">{price}</span>
+      <span className="shrink-0 text-sm font-bold text-brand-600 tnum" dir="ltr">{price}</span>
     </label>
   );
 }

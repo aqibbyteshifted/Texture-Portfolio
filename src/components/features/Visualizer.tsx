@@ -318,7 +318,7 @@ export function Visualizer() {
     ctx.font = `600 ${fs}px sans-serif`;
     const padX = fs, boxH = fs * 2;
     const textW = ctx.measureText(label).width;
-    ctx.fillStyle = "rgba(31,31,31,0.65)";
+    ctx.fillStyle = "rgba(17,17,17,0.65)";
     ctx.fillRect(0, out.height - boxH, textW + padX * 2, boxH);
     ctx.fillStyle = "#fff";
     ctx.textBaseline = "middle";
@@ -385,7 +385,7 @@ export function Visualizer() {
                   aria-pressed={source === s.id}
                   aria-label={t(s.label)}
                   onClick={() => loadSample(s)}
-                  className={cn("relative block aspect-square w-full overflow-hidden rounded-lg border-2", source === s.id ? "border-clay-500" : "border-transparent opacity-80 hover:opacity-100")}
+                  className={cn("relative block aspect-square w-full overflow-hidden rounded-lg border-2", source === s.id ? "border-brand-500" : "border-transparent opacity-80 hover:opacity-100")}
                 >
                   <Image src={s.src} alt="" fill sizes="110px" className="object-cover" />
                 </button>
@@ -396,7 +396,7 @@ export function Visualizer() {
                 type="button"
                 aria-pressed={source === "upload"}
                 onClick={() => fileRef.current?.click()}
-                className={cn("grid aspect-square w-full place-items-center rounded-lg border-2 border-dashed text-center text-[11px] font-semibold text-clay-600 hover:bg-clay-50", source === "upload" ? "border-clay-500 bg-clay-50" : "border-line-strong")}
+                className={cn("grid aspect-square w-full place-items-center rounded-lg border-2 border-dashed text-center text-[11px] font-semibold text-brand-600 hover:bg-brand-50", source === "upload" ? "border-brand-500 bg-brand-50" : "border-line-strong")}
               >
                 <span>
                   <ImagePlus aria-hidden="true" className="mx-auto mb-1 size-5" />
@@ -407,7 +407,7 @@ export function Visualizer() {
             </li>
           </ul>
           <p className="mt-3 flex items-start gap-2 text-xs text-ink-muted">
-            <ShieldCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-clay-500" />
+            <ShieldCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-500" />
             {t("Your photo stays on your device. It is never uploaded.")}
           </p>
         </section>
@@ -416,7 +416,7 @@ export function Visualizer() {
           <h2 className="text-base font-bold">{t("2. Tap the wall")}</h2>
           <div role="group" aria-label={t("Selection mode")} className="mt-3 grid grid-cols-2 gap-1 rounded-control bg-sunken p-1">
             {(["add", "remove"] as const).map((m) => (
-              <button key={m} type="button" aria-pressed={mode === m} onClick={() => setMode(m)} className={cn("h-10 rounded-md text-sm font-semibold", mode === m ? "bg-surface text-clay-600 shadow-sm" : "text-ink-soft")}>
+              <button key={m} type="button" aria-pressed={mode === m} onClick={() => setMode(m)} className={cn("h-10 rounded-md text-sm font-semibold", mode === m ? "bg-surface text-brand-600 shadow-sm" : "text-ink-soft")}>
                 {m === "add" ? t("Add to selection") : t("Remove from selection")}
               </button>
             ))}
@@ -425,7 +425,7 @@ export function Visualizer() {
             <span className="flex items-center justify-between text-xs font-semibold text-ink-soft uppercase">
               {t("Tolerance")} <span className="tnum text-ink">{tolerance}</span>
             </span>
-            <input type="range" min={6} max={80} value={tolerance} onChange={(e) => setTolerance(Number(e.target.value))} className="mt-2 w-full accent-[#b5651d]" />
+            <input type="range" min={6} max={80} value={tolerance} onChange={(e) => setTolerance(Number(e.target.value))} className="mt-2 w-full accent-[#9a741f]" />
             <span className="text-[11px] text-ink-muted">{t("Higher selects more of the wall; lower is more precise around furniture.")}</span>
           </label>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -439,7 +439,7 @@ export function Visualizer() {
           <h2 className="text-base font-bold">{t("3. Pick a finish and colour")}</h2>
           <label className="mt-3 block">
             <span className="mb-1.5 block text-xs font-semibold text-ink-soft uppercase">{t("Finish")}</span>
-            <select value={textureSlug} onChange={(e) => pickTexture(e.target.value)} className="h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink focus:border-clay-500 focus:outline-none" data-testid="viz-texture">
+            <select value={textureSlug} onChange={(e) => pickTexture(e.target.value)} className="h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink focus:border-brand-500 focus:outline-none" data-testid="viz-texture">
               {textures.map((x) => (
                 <option key={x.slug} value={x.slug}>{t(x.name)}</option>
               ))}
@@ -450,7 +450,7 @@ export function Visualizer() {
             {shades.map((s, i) => {
               const on = !custom && i === shadeIdx;
               return (
-                <button key={s.code} type="button" role="radio" aria-checked={on} aria-label={`${s.name} (${s.code})`} title={`${s.name} · ${s.code}`} onClick={() => { setShadeIdx(i); setCustom(null); }} className={cn("size-10 rounded-full border-2 transition-transform hover:scale-110", on ? "border-clay-500 ring-2 ring-clay-500/30" : "border-white shadow-card")} style={{ backgroundColor: s.hex }} />
+                <button key={s.code} type="button" role="radio" aria-checked={on} aria-label={`${s.name} (${s.code})`} title={`${s.name} · ${s.code}`} onClick={() => { setShadeIdx(i); setCustom(null); }} className={cn("size-10 rounded-full border-2 transition-transform hover:scale-110", on ? "border-brand-500 ring-2 ring-brand-500/30" : "border-white shadow-card")} style={{ backgroundColor: s.hex }} />
               );
             })}
             <label className="relative ms-1 grid size-10 cursor-pointer place-items-center overflow-hidden rounded-full border-2 border-dashed border-line-strong text-[10px] font-bold text-ink-soft" title={t("Custom colour")}>
@@ -474,7 +474,7 @@ export function Visualizer() {
           </div>
           <label className="mt-4 block">
             <span className="flex items-center justify-between text-xs font-semibold text-ink-soft uppercase">{t("Texture strength")} <span className="tnum text-ink">{grain}%</span></span>
-            <input type="range" min={0} max={100} value={grain} onChange={(e) => setGrain(Number(e.target.value))} className="mt-2 w-full accent-[#b5651d]" disabled={effect === "smooth"} />
+            <input type="range" min={0} max={100} value={grain} onChange={(e) => setGrain(Number(e.target.value))} className="mt-2 w-full accent-[#9a741f]" disabled={effect === "smooth"} />
           </label>
         </section>
 

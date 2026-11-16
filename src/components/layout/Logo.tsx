@@ -14,8 +14,8 @@ export function Logo({ className, light = false, size = "md" }: { className?: st
       <Image
         src="/images/logo.jpg"
         alt=""
-        width={160}
-        height={160}
+        width={200}
+        height={200}
         priority
         className={cn("shrink-0 rounded-full bg-white object-cover ring-1 ring-line-strong", size === "lg" ? "size-14" : "size-11")}
       />

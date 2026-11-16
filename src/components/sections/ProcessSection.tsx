@@ -1,7 +1,6 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/icons";
-import { PaymentPolicy } from "@/components/features/PaymentPolicy";
 import { processSteps } from "@/data/site";
 import { getI18n } from "@/i18n/server";
 
@@ -22,22 +21,19 @@ export async function ProcessSection() {
             <Reveal delay={i * 90} className="h-full">
               <div className="h-full rounded-card border border-line bg-surface p-6 shadow-card">
                 <div className="flex items-center justify-between">
-                  <span className="relative z-10 grid size-14 place-items-center rounded-full bg-clay-500 text-white shadow-lift">
+                  <span className="relative z-10 grid size-14 place-items-center rounded-full bg-brand-500 text-white shadow-lift">
                     <Icon name={p.icon} className="size-6" />
                   </span>
                   <span className="font-display text-5xl font-extrabold text-line-strong/70 tnum">0{p.step}</span>
                 </div>
                 <h3 className="mt-5 text-lg font-bold">{t(p.title)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{t(p.description)}</p>
-                <p className="mt-4 inline-block rounded-full bg-clay-50 px-3 py-1 text-xs font-bold text-clay-600">{t(p.meta)}</p>
+                <p className="mt-4 inline-block rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-600">{t(p.meta)}</p>
               </div>
             </Reveal>
           </li>
         ))}
       </ol>
-      <Reveal className="mt-8">
-        <PaymentPolicy />
-      </Reveal>
     </section>
   );
 }

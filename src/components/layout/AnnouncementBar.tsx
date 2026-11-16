@@ -25,11 +25,11 @@ export function AnnouncementBar() {
   if (!enabled || hidden) return null;
 
   return (
-    <div className="no-print relative bg-clay-600 text-white" role="region" aria-label={t("Announcement")}>
+    <div className="no-print relative bg-brand-600 text-white" role="region" aria-label={t("Announcement")}>
       <div className="container-page flex min-h-10 items-center justify-center gap-3 py-2 pe-10 text-center text-[13px] font-medium">
-        <Sparkles aria-hidden="true" className="hidden size-4 shrink-0 text-sand-300 sm:block" />
+        <Sparkles aria-hidden="true" className="hidden size-4 shrink-0 text-gold-300 sm:block" />
         <p>{t(text)}</p>
-        <Link href={href} className="inline-flex shrink-0 items-center gap-1 font-bold underline underline-offset-2 hover:text-sand-300">
+        <Link href={href} className="inline-flex shrink-0 items-center gap-1 font-bold underline underline-offset-2 hover:text-gold-300">
           {t(cta)} <ArrowRight aria-hidden="true" className="size-3.5 rtl:-scale-x-100" />
         </Link>
       </div>

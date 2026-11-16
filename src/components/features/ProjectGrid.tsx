@@ -70,7 +70,7 @@ export function ProjectGrid({ projects, variant = "work", filterBy = "sector" }:
             </div>
             <div className="p-5">
               <div className="flex items-center justify-between gap-3 text-xs text-ink-muted">
-                <span className="flex items-center gap-1 font-semibold text-clay-600">
+                <span className="flex items-center gap-1 font-semibold text-brand-600">
                   <MapPin aria-hidden="true" className="size-3.5" /> {p.location}
                 </span>
                 <span className="flex items-center gap-1">
@@ -79,7 +79,7 @@ export function ProjectGrid({ projects, variant = "work", filterBy = "sector" }:
                 </span>
               </div>
               <h3 className="mt-2 text-lg font-bold text-ink">
-                <Link href={`/projects/${p.slug}`} className="hover:text-clay-600 after:absolute after:inset-0 after:content-['']">
+                <Link href={`/projects/${p.slug}`} className="hover:text-brand-600 after:absolute after:inset-0 after:content-['']">
                   {t(p.title)}
                 </Link>
               </h3>
@@ -88,7 +88,7 @@ export function ProjectGrid({ projects, variant = "work", filterBy = "sector" }:
                 <div className="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs">
                   <span className="text-ink-muted">{t("Contract Scope")}</span>
                   <span className="flex items-center gap-1 font-semibold text-ink">
-                    {t(p.scope)} <ArrowUpRight aria-hidden="true" className="size-3.5 text-clay-500 rtl:-scale-x-100" />
+                    {t(p.scope)} <ArrowUpRight aria-hidden="true" className="size-3.5 text-brand-500 rtl:-scale-x-100" />
                   </span>
                 </div>
               )}

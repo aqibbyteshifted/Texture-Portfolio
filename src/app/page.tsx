@@ -1,12 +1,12 @@
 import { Hero } from "@/components/sections/Hero";
 import { TextureShowcase } from "@/components/sections/TextureShowcase";
 import { CalculatorSection } from "@/components/sections/CalculatorSection";
+import { HelpTools } from "@/components/sections/HelpTools";
 import { VisualizerPromo } from "@/components/sections/VisualizerPromo";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { CredentialsSection } from "@/components/sections/CredentialsSection";
 import { Transformation } from "@/components/sections/Transformation";
-import { GallerySection } from "@/components/sections/GallerySection";
 import { TeamSection } from "@/components/sections/TeamSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ConsultationSection } from "@/components/sections/ConsultationSection";
@@ -22,10 +22,10 @@ export default function HomePage() {
       <TextureShowcase />
       <CalculatorSection />
       <VisualizerPromo />
+      <HelpTools />
       <WhyUs />
       <CredentialsSection />
       <Transformation />
-      <GallerySection />
       <TeamSection />
       <ProcessSection />
       <ConsultationSection />

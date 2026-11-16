@@ -21,7 +21,7 @@ export async function Transformation() {
         <Reveal className="mt-10">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold tracking-wide text-clay-500 uppercase">{t("Case Study • Phase 6 DHA Lahore")}</p>
+              <p className="text-xs font-semibold tracking-wide text-brand-500 uppercase">{t("Case Study • Phase 6 DHA Lahore")}</p>
               <h3 className="text-xl font-bold sm:text-2xl">{t("Raw Cement Plaster to Italian Travertine")}</h3>
             </div>
             <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700">

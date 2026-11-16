@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { BadgeCheck, ClipboardCheck, Hammer, Send } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CareGuide } from "@/components/features/CareGuide";
-import { PaymentPolicy } from "@/components/features/PaymentPolicy";
 import { ClaimForm } from "@/components/features/ClaimForm";
 import { WarrantyCard } from "@/components/features/WarrantyCard";
 import { careTips } from "@/data/care";
@@ -40,7 +39,7 @@ export default async function WarrantyPage() {
           <ul className="mt-6 grid gap-2.5">
             {warrantyCoverage.map((c) => (
               <li key={c} className="flex items-center gap-2.5 text-ink-soft">
-                <BadgeCheck aria-hidden="true" className="size-5 shrink-0 text-clay-500" /> {t(c)}
+                <BadgeCheck aria-hidden="true" className="size-5 shrink-0 text-brand-500" /> {t(c)}
               </li>
             ))}
           </ul>
@@ -55,20 +54,16 @@ export default async function WarrantyPage() {
           <ol className="mt-10 grid gap-5 sm:grid-cols-3">
             {steps.map((s, i) => (
               <li key={s.title} className="rounded-card border border-line bg-surface p-6 shadow-card">
-                <span className="grid size-12 place-items-center rounded-full bg-clay-500 text-white">
+                <span className="grid size-12 place-items-center rounded-full bg-brand-500 text-white">
                   <s.icon aria-hidden="true" className="size-5" />
                 </span>
-                <p className="mt-4 text-xs font-bold tracking-wider text-clay-600 uppercase">{t("Step {n}", { n: i + 1 })}</p>
+                <p className="mt-4 text-xs font-bold tracking-wider text-brand-600 uppercase">{t("Step {n}", { n: i + 1 })}</p>
                 <h2 className="mt-1 text-lg font-bold">{t(s.title)}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{t(s.text)}</p>
               </li>
             ))}
           </ol>
         </div>
-      </section>
-
-      <section className="container-page pb-4">
-        <PaymentPolicy />
       </section>
 
       <section id="claim" className="container-page grid gap-10 py-16 sm:py-20 lg:grid-cols-[1fr_1.2fr] lg:gap-16">

@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf8f5",
+  themeColor: "#111111",
   width: "device-width",
   initialScale: 1,
 };
@@ -101,7 +101,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <LocaleProvider locale={locale}>
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:start-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-clay-500 focus:px-4 focus:py-2 focus:text-white"
+            className="sr-only focus:not-sr-only focus:fixed focus:start-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-brand-500 focus:px-4 focus:py-2 focus:text-white"
           >
             {t("Skip to content")}
           </a>

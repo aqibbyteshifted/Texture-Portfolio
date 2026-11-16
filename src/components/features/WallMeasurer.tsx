@@ -16,7 +16,7 @@ interface Row {
 
 const MAX_ROWS = 20;
 const input =
-  "h-10 w-full rounded-control border border-line-strong bg-surface px-2.5 text-sm text-ink tnum focus:border-clay-500 focus:outline-none";
+  "h-10 w-full rounded-control border border-line-strong bg-surface px-2.5 text-sm text-ink tnum focus:border-brand-500 focus:outline-none";
 
 /** Adds up several walls (length × height) into one total area, then hands it to the calculator. */
 export function WallMeasurer({ onApply }: { onApply: (sqft: number) => void }) {
@@ -38,7 +38,7 @@ export function WallMeasurer({ onApply }: { onApply: (sqft: number) => void }) {
         aria-expanded={open}
         aria-controls={`${uid}-panel`}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-clay-600 hover:text-clay-700"
+        className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700"
       >
         <Ruler aria-hidden="true" className="size-4" /> {open ? t("Hide wall measurer") : t("Measure by walls")}
       </button>
@@ -97,7 +97,7 @@ export function WallMeasurer({ onApply }: { onApply: (sqft: number) => void }) {
                 type="button"
                 disabled={total <= 0}
                 onClick={() => onApply(total)}
-                className="h-10 rounded-control bg-clay-500 px-4 text-sm font-semibold text-white hover:bg-clay-600 disabled:opacity-50"
+                className="h-10 rounded-control bg-brand-500 px-4 text-sm font-semibold text-white hover:bg-brand-600 disabled:opacity-50"
               >
                 {t("Use this area")}
               </button>

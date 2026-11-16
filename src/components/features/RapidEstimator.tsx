@@ -12,7 +12,7 @@ import { rateText } from "@/lib/rates";
 import { quoteHref } from "@/lib/quoteLink";
 
 const select =
-  "h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink focus:border-clay-500 focus:shadow-[0_0_0_3px_rgba(181,101,29,0.15)] focus:outline-none";
+  "h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink focus:border-brand-500 focus:shadow-[0_0_0_3px_rgba(154,116,31,0.15)] focus:outline-none";
 
 export function RapidEstimator() {
   const t = useT();
@@ -32,9 +32,9 @@ export function RapidEstimator() {
 
   return (
     <div className="rounded-xl border border-white/60 bg-surface p-5 text-ink shadow-modal sm:p-6">
-      <p className="text-[11px] font-semibold tracking-[0.14em] text-clay-500 uppercase">{t("Rapid Estimator")}</p>
+      <p className="text-[11px] font-semibold tracking-[0.14em] text-brand-500 uppercase">{t("Rapid Estimator")}</p>
       <h2 className="mt-1 flex items-center gap-2 text-xl font-bold text-ink">
-        <Calculator aria-hidden="true" className="size-5 text-clay-500" /> {t("Instant Estimate in 30s")}
+        <Calculator aria-hidden="true" className="size-5 text-brand-500" /> {t("Instant Estimate in 30s")}
       </h2>
 
       <div className="mt-5 grid gap-4">
@@ -86,9 +86,9 @@ export function RapidEstimator() {
         </div>
       </div>
 
-      <div className="mt-5 rounded-lg bg-clay-50 p-4" aria-live="polite">
+      <div className="mt-5 rounded-lg bg-brand-50 p-4" aria-live="polite">
         <p className="text-xs font-semibold text-ink-soft uppercase">{t("Est. Project Total:")}</p>
-        <p className="font-display mt-1 text-3xl font-extrabold text-clay-600 tnum">
+        <p className="font-display mt-1 text-3xl font-extrabold text-brand-600 tnum">
           {estimate.isFrom && <span className="me-2 text-base font-semibold text-ink-soft">{t("From")}</span>}
           {estimate.isFrom && " "}
           {formatPKR(estimate.total)}

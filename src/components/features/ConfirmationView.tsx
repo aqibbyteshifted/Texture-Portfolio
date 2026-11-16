@@ -76,7 +76,7 @@ export function ConfirmationView() {
   if (!reference) {
     return (
       <div className="container-page max-w-xl py-24 text-center">
-        <ClipboardCheck aria-hidden="true" className="mx-auto size-12 text-clay-500" />
+        <ClipboardCheck aria-hidden="true" className="mx-auto size-12 text-brand-500" />
         <h1 className="mt-4 text-3xl font-bold">{t("No recent request found")}</h1>
         <p className="mt-3 text-ink-soft">{t("Start a free quote request and we'll confirm it here with a reference number.")}</p>
         <Button href={quoteHref()} size="lg" className="mt-6">
@@ -90,29 +90,29 @@ export function ConfirmationView() {
   const firstName = lead?.name.split(" ")[0];
 
   return (
-    <div className="bg-[radial-gradient(60rem_30rem_at_90%_-10%,rgba(253,186,116,0.2),transparent)]">
+    <div className="bg-[radial-gradient(60rem_30rem_at_90%_-10%,rgba(227,195,111,0.2),transparent)]">
       <div className="container-page max-w-5xl py-8 sm:py-12">
         <ol className="no-print mb-6 flex flex-wrap items-center justify-between gap-3 text-xs font-medium text-ink-muted" aria-label={t("Progress")}>
           <li className="flex items-center gap-2">
-            <Link href="/" className="hover:text-clay-600">{t("Home")}</Link> / <span>{t("Quote Request")}</span> /{" "}
-            <span aria-current="page" className="font-semibold text-clay-600">{t("Confirmation")}</span>
+            <Link href="/" className="hover:text-brand-600">{t("Home")}</Link> / <span>{t("Quote Request")}</span> /{" "}
+            <span aria-current="page" className="font-semibold text-brand-600">{t("Confirmation")}</span>
           </li>
           <li className="flex items-center gap-2">
             {[msg("Project Scope"), msg("Texture Spec")].map((s, i) => (
               <span key={s} className="flex items-center gap-1.5">
-                <span className="grid size-5 place-items-center rounded-full bg-clay-100 text-[11px] text-clay-600">{i + 1}</span> {t(s)} <span className="text-line-strong">—</span>
+                <span className="grid size-5 place-items-center rounded-full bg-brand-100 text-[11px] text-brand-600">{i + 1}</span> {t(s)} <span className="text-line-strong">—</span>
               </span>
             ))}
             <span className="flex items-center gap-1.5 font-semibold text-ink">
-              <span className="grid size-5 place-items-center rounded-full bg-clay-500 text-white"><Check aria-hidden="true" className="size-3" strokeWidth={3} /></span> {t("Dispatched")}
+              <span className="grid size-5 place-items-center rounded-full bg-brand-500 text-white"><Check aria-hidden="true" className="size-3" strokeWidth={3} /></span> {t("Dispatched")}
             </span>
           </li>
         </ol>
 
         <section className="overflow-hidden rounded-2xl border border-line bg-surface p-6 shadow-lift sm:p-9">
           <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-            <div className="relative grid size-20 shrink-0 place-items-center rounded-full bg-clay-100 sm:size-24">
-              <span className="grid size-14 place-items-center rounded-full bg-clay-500 text-white sm:size-16">
+            <div className="relative grid size-20 shrink-0 place-items-center rounded-full bg-brand-100 sm:size-24">
+              <span className="grid size-14 place-items-center rounded-full bg-brand-500 text-white sm:size-16">
                 <Check aria-hidden="true" className="size-8" strokeWidth={3} />
               </span>
               <span className="absolute -end-0.5 -bottom-0.5 grid size-7 place-items-center rounded-full bg-whatsapp text-white ring-4 ring-surface">
@@ -120,8 +120,8 @@ export function ConfirmationView() {
               </span>
             </div>
             <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-clay-100 px-3 py-1 text-[11px] font-bold tracking-wider text-clay-600 uppercase">
-                <span className="size-1.5 rounded-full bg-clay-500" /> {t("Site Engineer Notification Queued")}
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-3 py-1 text-[11px] font-bold tracking-wider text-brand-600 uppercase">
+                <span className="size-1.5 rounded-full bg-brand-500" /> {t("Site Engineer Notification Queued")}
               </span>
               <h1 className="mt-3 text-2xl font-extrabold sm:text-4xl">
                 {firstName ? t("Thank You, {name}! Your Request Has Been Dispatched", { name: firstName }) : t("Thank You! Your Request Has Been Dispatched")}
@@ -137,7 +137,7 @@ export function ConfirmationView() {
               <dt className="text-[11px] font-semibold tracking-wider text-ink-muted uppercase">{t("Quote Reference")}</dt>
               <dd className="mt-1 flex items-center gap-2 text-lg font-extrabold tnum">
                 <span className="ltr-run">#{reference}</span>
-                <button type="button" onClick={copy} className="no-print flex items-center gap-1 text-xs font-medium text-clay-600 hover:text-clay-700" aria-label={t("Copy reference number")}>
+                <button type="button" onClick={copy} className="no-print flex items-center gap-1 text-xs font-medium text-brand-600 hover:text-brand-700" aria-label={t("Copy reference number")}>
                   {copied ? <Check aria-hidden="true" className="size-3.5" /> : <Copy aria-hidden="true" className="size-3.5" />} {copied ? t("copied") : t("copy")}
                 </button>
               </dd>
@@ -152,7 +152,7 @@ export function ConfirmationView() {
             <div>
               <dt className="text-[11px] font-semibold tracking-wider text-ink-muted uppercase">{t("Assigned Operational Desk")}</dt>
               <dd className="mt-1 flex items-center gap-1.5 font-semibold">
-                <MapPin aria-hidden="true" className="size-4 text-clay-500" /> {t("Lahore DHA & Gulberg Zone")}
+                <MapPin aria-hidden="true" className="size-4 text-brand-500" /> {t("Lahore DHA & Gulberg Zone")}
               </dd>
             </div>
           </dl>
@@ -163,10 +163,10 @@ export function ConfirmationView() {
             <section className="rounded-2xl border border-line bg-surface p-6 shadow-card sm:p-8">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-xs font-semibold tracking-[0.14em] text-clay-500 uppercase">{t("Submission Spec")}</p>
+                  <p className="text-xs font-semibold tracking-[0.14em] text-brand-500 uppercase">{t("Submission Spec")}</p>
                   <h2 className="mt-1 text-2xl font-bold">{t("Itemized Request Summary")}</h2>
                 </div>
-                <span className="flex items-center gap-1.5 rounded-full bg-clay-100 px-3 py-1.5 text-xs font-bold text-clay-600">
+                <span className="flex items-center gap-1.5 rounded-full bg-brand-100 px-3 py-1.5 text-xs font-bold text-brand-600">
                   <CircleCheck aria-hidden="true" className="size-3.5" /> {t("Verified Lead")}
                 </span>
               </div>
@@ -177,26 +177,26 @@ export function ConfirmationView() {
                     <Cell label={t("Client Name")} value={lead.name} />
                     <Cell label={t("Direct Contact")} value={lead.phone} ltr icon={<Phone aria-hidden="true" className="size-3.5 text-emerald-500" />} />
                   </div>
-                  {lead.area && <Cell label={t("Site Location & Sub-Division")} value={lead.area} icon={<MapPin aria-hidden="true" className="size-4 text-clay-500" />} />}
+                  {lead.area && <Cell label={t("Site Location & Sub-Division")} value={lead.area} icon={<MapPin aria-hidden="true" className="size-4 text-brand-500" />} />}
                   <div className="grid gap-3 sm:grid-cols-2">
                     {lead.scope && <Cell label={t("Surface Coverage Scope")} value={t(lead.scope)} sub={lead.areaSqft ? `${t("Est.")} ${lead.areaSqft.toLocaleString("en-PK")} ${t("sq ft")}` : undefined} />}
                     {lead.texture && <Cell label={t("Selected Architectural Texture")} value={t(lead.texture)} accent />}
                   </div>
-                  {lead.shade && <Cell label={t("Preferred Shade")} value={lead.shade} icon={<Palette aria-hidden="true" className="size-4 text-clay-500" />} />}
+                  {lead.shade && <Cell label={t("Preferred Shade")} value={lead.shade} icon={<Palette aria-hidden="true" className="size-4 text-brand-500" />} />}
                   {lead.estimate ? <Cell label={t("Estimated Investment")} value={formatPKR(lead.estimate)} ltr sub={t("Final price confirmed after free site survey")} /> : null}
-                  <div className="flex items-start gap-3 rounded-xl bg-clay-50 p-4">
-                    <Layers aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-clay-500" />
+                  <div className="flex items-start gap-3 rounded-xl bg-brand-50 p-4">
+                    <Layers aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand-500" />
                     <div className="flex-1">
                       <p className="font-bold">{t("Requested Free Physical Samples")}</p>
                       <p className="text-sm text-ink-soft">{t("2x Hand-crafted 1×1 ft Sample Boards + Calibrated Laser Moisture Assessment")}</p>
                     </div>
-                    <span className="rounded-full bg-surface px-2.5 py-1 text-[10px] font-bold text-clay-600 uppercase">{t("Included • PKR 0")}</span>
+                    <span className="rounded-full bg-surface px-2.5 py-1 text-[10px] font-bold text-brand-600 uppercase">{t("Included • PKR 0")}</span>
                   </div>
                   {(lead.date || lead.window) && (
                     <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-sunken p-4 text-sm">
                       <span className="text-[11px] font-semibold tracking-wider text-ink-muted uppercase">{t("Requested Site Window")}</span>
                       <span className="flex items-center gap-2 font-semibold">
-                        <Calendar aria-hidden="true" className="size-4 text-clay-500" />
+                        <Calendar aria-hidden="true" className="size-4 text-brand-500" />
                         {[lead.date && formatDate(lead.date, { dateStyle: "medium" }), lead.window && t(lead.window)].filter(Boolean).join(" • ")}
                       </span>
                     </div>
@@ -209,7 +209,7 @@ export function ConfirmationView() {
                 </p>
               )}
 
-              <button type="button" onClick={() => window.print()} className="no-print mt-5 flex items-center gap-2 text-sm font-semibold text-clay-600 hover:text-clay-700">
+              <button type="button" onClick={() => window.print()} className="no-print mt-5 flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700">
                 <Download aria-hidden="true" className="size-4" /> {t("Download Summary Copy (PDF Specification Slip)")}
               </button>
               <p className="mt-1 text-xs text-ink-muted">
@@ -218,15 +218,15 @@ export function ConfirmationView() {
             </section>
 
             <section className="rounded-2xl border border-line bg-surface p-6 shadow-card sm:p-8">
-              <p className="text-xs font-semibold tracking-[0.14em] text-clay-500 uppercase">{t("Engineering Workflow")}</p>
+              <p className="text-xs font-semibold tracking-[0.14em] text-brand-500 uppercase">{t("Engineering Workflow")}</p>
               <h2 className="mt-1 text-2xl font-bold">{t("What Happens Next?")}</h2>
               <p className="mt-1 text-sm text-ink-soft">{t("Transparent milestones from physical inspection to precision execution.")}</p>
               <ol className="mt-6 grid gap-4 sm:grid-cols-3">
                 {nextSteps.map((s) => (
                   <li key={s.n} className="rounded-xl bg-sunken p-4">
-                    <span className={`grid size-8 place-items-center rounded-full text-sm font-bold text-white ${s.n === 3 ? "bg-ink" : "bg-clay-500"}`}>{s.n}</span>
+                    <span className={`grid size-8 place-items-center rounded-full text-sm font-bold text-white ${s.n === 3 ? "bg-ink" : "bg-brand-500"}`}>{s.n}</span>
                     <h3 className="mt-3 text-lg font-bold">{t(s.title)}</h3>
-                    <p className="text-[11px] font-bold tracking-wider text-clay-600 uppercase">{t(s.tag)}</p>
+                    <p className="text-[11px] font-bold tracking-wider text-brand-600 uppercase">{t(s.tag)}</p>
                     <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">{t(s.text)}</p>
                   </li>
                 ))}
@@ -245,7 +245,7 @@ export function ConfirmationView() {
               </div>
               <p className="mt-4 text-sm leading-relaxed text-ink-soft">
                 {t("Want faster confirmation? Share your elevation sketches, house photos, or AutoCAD layouts directly via WhatsApp with your quote reference.")}{" "}
-                <strong className="ltr-run text-clay-600">#{reference}</strong>
+                <strong className="ltr-run text-brand-600">#{reference}</strong>
               </p>
               <Button href={waRef} variant="whatsapp" size="lg" className="mt-4 w-full">
                 <WhatsAppIcon className="size-5" /> {t("Chat on WhatsApp Instantly")}
@@ -260,21 +260,21 @@ export function ConfirmationView() {
                 <Image src="/images/bg-c-1.jpg" alt={t("DHA Phase 6 villa exterior finished in rockwall and travertine")} fill sizes="(min-width: 1024px) 340px, 100vw" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent" />
                 <div className="absolute start-4 bottom-3 text-white">
-                  <p className="text-[10px] font-bold tracking-wider text-sand-300 uppercase">{t("Reference Execution")}</p>
+                  <p className="text-[10px] font-bold tracking-wider text-gold-300 uppercase">{t("Reference Execution")}</p>
                   <p className="text-lg font-bold">{t("DHA Phase 6 Villa Exterior")}</p>
                 </div>
               </div>
               <div className="p-5 text-sm text-ink-soft">
                 <div className="flex justify-between text-xs"><span>{t("Contractor: Zain & Co Group")}</span><span>{t("Completed: Jan 2025")}</span></div>
                 <p className="mt-3 leading-relaxed">{t("Your site will receive the same architectural grade binders, anti-fungal silicon primer, and UV-stable natural aggregates.")}</p>
-                <p className="mt-3 flex items-center gap-1.5 text-xs font-bold text-clay-600"><ShieldCheck aria-hidden="true" className="size-4" /> {t("3-Year Written Warranty Backed")}</p>
+                <p className="mt-3 flex items-center gap-1.5 text-xs font-bold text-brand-600"><ShieldCheck aria-hidden="true" className="size-4" /> {t("3-Year Written Warranty Backed")}</p>
               </div>
             </section>
 
             <PaymentPolicy compact />
 
             <section className="rounded-2xl border border-line bg-sunken p-5 text-sm">
-              <p className="flex items-center gap-2 text-xs font-bold tracking-wider text-clay-600 uppercase"><Store aria-hidden="true" className="size-4" /> {t("Visit Lahore Experience Studio")}</p>
+              <p className="flex items-center gap-2 text-xs font-bold tracking-wider text-brand-600 uppercase"><Store aria-hidden="true" className="size-4" /> {t("Visit Lahore Experience Studio")}</p>
               <p className="mt-2 text-ink-soft">{t("Want to see 50+ monolithic wall textures in person under balanced architectural lighting?")}</p>
               <p className="mt-3 font-bold">{site.studio.name}</p>
               <p className="text-ink-soft"><bdi>{site.studio.address}</bdi></p>
@@ -285,12 +285,12 @@ export function ConfirmationView() {
 
         <section className="no-print mt-6 flex flex-col items-start justify-between gap-5 rounded-2xl bg-sunken p-6 lg:flex-row lg:items-center">
           <div className="flex items-center gap-4">
-            <span className="grid size-12 shrink-0 place-items-center rounded-full bg-clay-500 text-white"><Headset aria-hidden="true" className="size-6" /></span>
+            <span className="grid size-12 shrink-0 place-items-center rounded-full bg-brand-500 text-white"><Headset aria-hidden="true" className="size-6" /></span>
             <div>
               <h2 className="text-lg font-bold">{t("Need immediate scheduling adjustments?")}</h2>
               <p className="text-sm text-ink-soft">
-                {t("Reach Project Manager directly at")} <strong className="ltr-run text-clay-600">{site.phone}</strong> {t("or email")}{" "}
-                <a href={`mailto:${site.email}`} className="ltr-run font-semibold text-clay-600">{site.email}</a>
+                {t("Reach Project Manager directly at")} <strong className="ltr-run text-brand-600">{site.phone}</strong> {t("or email")}{" "}
+                <a href={`mailto:${site.email}`} className="ltr-run font-semibold text-brand-600">{site.email}</a>
               </p>
             </div>
           </div>
@@ -308,7 +308,7 @@ function Cell({ label, value, sub, icon, accent, ltr }: { label: string; value: 
   return (
     <div className="rounded-xl bg-sunken p-4">
       <p className="text-[11px] font-semibold tracking-wider text-ink-muted uppercase">{label}</p>
-      <p className={`mt-1 flex items-center gap-2 font-bold ${accent ? "text-clay-600" : "text-ink"}`}>
+      <p className={`mt-1 flex items-center gap-2 font-bold ${accent ? "text-brand-600" : "text-ink"}`}>
         {accent ? <Hammer aria-hidden="true" className="size-4" /> : null}
         {icon}
         <span className={ltr ? "ltr-run" : undefined}>{value}</span>

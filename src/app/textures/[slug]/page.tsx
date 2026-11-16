@@ -70,12 +70,12 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
     <>
       <div className="container-page pt-6">
         <nav aria-label={t("Breadcrumb")} className="flex flex-wrap items-center gap-2 text-xs text-ink-muted">
-          <Link href="/" className="flex items-center gap-1 hover:text-clay-600"><House aria-hidden="true" className="size-3.5" /> {t("Home")}</Link>
+          <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><House aria-hidden="true" className="size-3.5" /> {t("Home")}</Link>
           <span aria-hidden="true">/</span>
-          <Link href="/textures" className="hover:text-clay-600">{t("Textures Catalog")}</Link>
+          <Link href="/textures" className="hover:text-brand-600">{t("Textures Catalog")}</Link>
           <span aria-hidden="true">/</span>
-          <span aria-current="page" className="font-semibold text-clay-600">{t(texture.name)}</span>
-          <span className="ms-auto hidden rounded-full bg-clay-100 px-3 py-1 text-[11px] font-bold text-clay-600 sm:inline">{t("DHA & Bahria Batch Ready")}</span>
+          <span aria-current="page" className="font-semibold text-brand-600">{t(texture.name)}</span>
+          <span className="ms-auto hidden rounded-full bg-brand-100 px-3 py-1 text-[11px] font-bold text-brand-600 sm:inline">{t("DHA & Bahria Batch Ready")}</span>
         </nav>
       </div>
 
@@ -91,7 +91,7 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
         />
 
         <div>
-          <p className="inline-flex items-center gap-1.5 rounded-full bg-clay-50 px-3 py-1 text-[11px] font-bold tracking-wider text-clay-600 uppercase">
+          <p className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-[11px] font-bold tracking-wider text-brand-600 uppercase">
             <Mountain aria-hidden="true" className="size-3.5" /> {t(texture.tagline)}
           </p>
           <h1 className="mt-3 text-4xl leading-[1.05] font-extrabold sm:text-5xl">{t(texture.name)}</h1>
@@ -115,14 +115,14 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
             <p className="text-[11px] font-bold tracking-wider text-ink-muted uppercase">{t("Contractor Supply & Application Rate")}</p>
             <p className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
               {hasOffer(texture) && <s className="text-lg text-ink-muted tnum">PKR {texture.rate}</s>}
-              <span className="font-display text-4xl font-extrabold text-clay-600 tnum" dir="ltr">
+              <span className="font-display text-4xl font-extrabold text-brand-600 tnum" dir="ltr">
                 {hasRange(texture) ? `PKR ${effectiveRate(texture)} – ${texture.rateMax}` : `PKR ${effectiveRate(texture)}`}
               </span>
               <span className="text-ink-soft">/ {t("sq ft")}</span>
               {hasOffer(texture) && (
                 <span className="self-center rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-bold tracking-wide text-emerald-700 uppercase">{t("Offer price")}</span>
               )}
-              <span className="ms-auto rounded-md bg-clay-100 px-2 py-1 text-[11px] font-bold text-clay-600">{t("Material + Master Karigar Labour")}</span>
+              <span className="ms-auto rounded-md bg-brand-100 px-2 py-1 text-[11px] font-bold text-brand-600">{t("Material + Master Karigar Labour")}</span>
             </p>
             {hasRange(texture) && (
               <p className="mt-2 text-xs text-ink-muted">{t("Rate depends on the system chosen; the exact price is confirmed at the free site survey.")}</p>
@@ -133,7 +133,7 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
           <ul className="mt-5 grid gap-2.5">
             {texture.highlights.map((h) => (
               <li key={h} dir="auto" className="flex gap-2.5 text-sm text-ink-soft">
-                <CircleCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-clay-500" /> {t(h)}
+                <CircleCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand-500" /> {t(h)}
               </li>
             ))}
           </ul>
@@ -156,7 +156,7 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
             </Button>
           </div>
           {shades.length > 0 && (
-            <Link href="#shades" className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-clay-600 hover:text-clay-700">
+            <Link href="#shades" className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700">
               <span className="flex -space-x-1.5 rtl:space-x-reverse">
                 {shades.slice(0, 5).map((s) => (
                   <span key={s.code} className="size-5 rounded-full border-2 border-white" style={{ backgroundColor: s.hex }} />
@@ -184,14 +184,14 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
               <li key={m.title}>
                 <Reveal delay={i * 70} className="h-full">
                   <div className="flex h-full flex-col rounded-card border border-line bg-surface p-6 shadow-card">
-                    <span className="grid size-11 place-items-center rounded-lg bg-clay-50 text-clay-500">
+                    <span className="grid size-11 place-items-center rounded-lg bg-brand-50 text-brand-500">
                       <Icon name={m.icon} className="size-6" />
                     </span>
                     <h3 dir="auto" className="mt-4 text-lg font-bold">{t(m.title)}</h3>
                     <p dir="auto" className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">{t(m.description)}</p>
                     <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-3 text-xs">
                       <span className="text-ink-muted">{t(m.label)}</span>
-                      <strong dir="auto" className="text-clay-600 tnum">{t(m.value)}</strong>
+                      <strong dir="auto" className="text-brand-600 tnum">{t(m.value)}</strong>
                     </div>
                   </div>
                 </Reveal>
@@ -220,7 +220,7 @@ export default async function TextureDetailPage({ params }: { params: Promise<Pa
               <div className="p-5">
                 <h3 className="text-lg font-bold">{t(u.title)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{t(u.description)}</p>
-                <Link href={quoteHref({ texture: texture.slug })} className="mt-4 inline-flex items-center gap-1 text-[13px] font-bold text-clay-600 hover:text-clay-700">
+                <Link href={quoteHref({ texture: texture.slug })} className="mt-4 inline-flex items-center gap-1 text-[13px] font-bold text-brand-600 hover:text-brand-700">
                   {t(u.cta)} <ArrowRight aria-hidden="true" className="size-4 rtl:-scale-x-100" />
                 </Link>
               </div>

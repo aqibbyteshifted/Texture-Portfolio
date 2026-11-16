@@ -61,7 +61,7 @@ export function BeforeAfterSlider({
         <span className="pointer-events-none absolute top-4 left-4 rounded-full bg-black/60 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-white backdrop-blur">
           {t(beforeLabel)}
         </span>
-        <span className="pointer-events-none absolute top-4 right-4 rounded-full bg-clay-500/90 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-white backdrop-blur">
+        <span className="pointer-events-none absolute top-4 right-4 rounded-full bg-brand-500/90 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-white backdrop-blur">
           {t(afterLabel)}
         </span>
 
@@ -83,7 +83,7 @@ export function BeforeAfterSlider({
               else return;
               e.preventDefault();
             }}
-            className="pointer-events-auto absolute top-1/2 left-1/2 grid size-12 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize place-items-center rounded-full bg-white text-clay-600 shadow-modal focus-visible:ring-4 focus-visible:ring-sand-500/50"
+            className="pointer-events-auto absolute top-1/2 left-1/2 grid size-12 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize place-items-center rounded-full bg-white text-brand-600 shadow-modal focus-visible:ring-4 focus-visible:ring-gold-500/50"
           >
             <ArrowLeftRight aria-hidden="true" className="size-5" />
           </div>

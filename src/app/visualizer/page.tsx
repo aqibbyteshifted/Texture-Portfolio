@@ -33,10 +33,10 @@ export default async function VisualizerPage() {
       <ol className="mt-14 grid gap-5 sm:grid-cols-3">
         {steps.map((s, i) => (
           <li key={s.title} className="rounded-card border border-line bg-surface p-6 shadow-card">
-            <span className="grid size-11 place-items-center rounded-full bg-clay-500 text-white">
+            <span className="grid size-11 place-items-center rounded-full bg-brand-500 text-white">
               <s.icon aria-hidden="true" className="size-5" />
             </span>
-            <p className="mt-4 text-xs font-bold tracking-wider text-clay-600 uppercase">{t("Step {n}", { n: i + 1 })}</p>
+            <p className="mt-4 text-xs font-bold tracking-wider text-brand-600 uppercase">{t("Step {n}", { n: i + 1 })}</p>
             <h2 className="mt-1 text-lg font-bold">{t(s.title)}</h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">{t(s.text)}</p>
           </li>

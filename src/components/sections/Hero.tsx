@@ -19,10 +19,10 @@ export async function Hero() {
       <div className="container-page grid gap-10 py-14 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-14 lg:py-24">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide backdrop-blur">
-            <span className="size-1.5 rounded-full bg-sand-500" /> {t("Lahore Premier Wall Crafters • PEC Registered")}
+            <span className="size-1.5 rounded-full bg-gold-500" /> {t("Lahore Premier Wall Crafters • PEC Registered")}
           </p>
           <h1 className="mt-5 text-[2.5rem] leading-[1.02] font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-            {t("Give Your Walls a Texture")} <span className="text-sand-500">{t("That Lasts")}</span>
+            {t("Give Your Walls a Texture")} <span className="text-gold-500">{t("That Lasts")}</span>
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
             {t("Premium rockwall, authentic Italian travertine, refined stucco, microcement, limewash and epoxy finishes crafted for luxury residences across Lahore, DHA, Bahria Town, and Punjab.")}
@@ -40,7 +40,7 @@ export async function Hero() {
           <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-7 sm:grid-cols-4">
             {site.stats.map((s) => (
               <div key={s.label} className="flex items-center gap-3">
-                <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-white/10 text-sand-500">
+                <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-white/10 text-gold-500">
                   <Icon name={s.icon} className="size-5" />
                 </span>
                 <div>

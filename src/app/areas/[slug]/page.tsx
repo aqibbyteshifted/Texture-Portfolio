@@ -89,16 +89,16 @@ export default async function AreaPage({ params }: { params: Promise<Params> }) 
     <>
       <div className="container-page pt-6">
         <nav aria-label={t("Breadcrumb")} className="flex flex-wrap items-center gap-2 text-xs text-ink-muted">
-          <Link href="/" className="flex items-center gap-1 hover:text-clay-600"><House aria-hidden="true" className="size-3.5" /> {t("Home")}</Link>
+          <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><House aria-hidden="true" className="size-3.5" /> {t("Home")}</Link>
           <span aria-hidden="true">/</span>
-          <Link href="/areas" className="hover:text-clay-600">{t("Areas We Serve")}</Link>
+          <Link href="/areas" className="hover:text-brand-600">{t("Areas We Serve")}</Link>
           <span aria-hidden="true">/</span>
-          <span aria-current="page" className="font-semibold text-clay-600">{name}</span>
+          <span aria-current="page" className="font-semibold text-brand-600">{name}</span>
         </nav>
       </div>
 
       <section className="container-page py-10 sm:py-14">
-        <p className="inline-flex items-center gap-1.5 rounded-full bg-clay-50 px-3 py-1 text-[11px] font-bold tracking-wider text-clay-600 uppercase">
+        <p className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-[11px] font-bold tracking-wider text-brand-600 uppercase">
           <MapPin aria-hidden="true" className="size-3.5" /> {t("Free site visits in {area}", { area: name })}
         </p>
         <h1 className="mt-4 max-w-3xl text-4xl leading-[1.05] font-extrabold sm:text-5xl">

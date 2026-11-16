@@ -11,10 +11,10 @@ export async function CtaBand() {
   const { t } = await getI18n();
   return (
     <section className="container-page py-16 sm:py-24">
-      <div className="relative isolate overflow-hidden rounded-3xl bg-clay-600 px-6 py-14 text-center text-white sm:px-12 sm:py-20">
-        <div aria-hidden="true" className="absolute -end-24 -top-24 -z-10 size-96 rounded-full bg-clay-500/60 blur-3xl" />
+      <div className="relative isolate overflow-hidden rounded-3xl bg-brand-600 px-6 py-14 text-center text-white sm:px-12 sm:py-20">
+        <div aria-hidden="true" className="absolute -end-24 -top-24 -z-10 size-96 rounded-full bg-brand-500/60 blur-3xl" />
         <div aria-hidden="true" className="absolute -start-20 -bottom-32 -z-10 size-96 rounded-full bg-ink/40 blur-3xl" />
-        <p className="text-xs font-semibold tracking-[0.14em] text-sand-300 uppercase">{t("Start Your Project Today")}</p>
+        <p className="text-xs font-semibold tracking-[0.14em] text-gold-300 uppercase">{t("Start Your Project Today")}</p>
         <h2 className="mx-auto mt-3 max-w-3xl text-3xl leading-[1.1] font-extrabold sm:text-5xl">
           {t("Ready to Transform Your Ordinary Walls into Architectural Works of Art?")}
         </h2>
@@ -32,7 +32,7 @@ export async function CtaBand() {
         <ul className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-medium text-white/85">
           {assurances.map((a) => (
             <li key={a} className="flex items-center gap-2">
-              <Check aria-hidden="true" className="size-4 text-sand-300" strokeWidth={3} /> {t(a)}
+              <Check aria-hidden="true" className="size-4 text-gold-300" strokeWidth={3} /> {t(a)}
             </li>
           ))}
         </ul>

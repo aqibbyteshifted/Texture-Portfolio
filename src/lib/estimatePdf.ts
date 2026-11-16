@@ -12,7 +12,7 @@ export interface EstimatePdfInput {
   estimate: Estimate;
 }
 
-const CLAY: [number, number, number] = [181, 101, 29];
+const GOLD: [number, number, number] = [154, 116, 31];
 const INK: [number, number, number] = [31, 31, 31];
 const MUTED: [number, number, number] = [120, 113, 108];
 
@@ -41,7 +41,7 @@ export async function downloadEstimatePdf({ textureName, rateLabel, warrantyYear
   let y = 0;
 
   // header band
-  doc.setFillColor(...CLAY);
+  doc.setFillColor(...GOLD);
   doc.rect(0, 0, W, 92, "F");
   let textX = M;
   try {
@@ -132,7 +132,7 @@ export async function downloadEstimatePdf({ textureName, rateLabel, warrantyYear
   doc.setFontSize(13);
   doc.text(estimate.isFrom ? "Estimated investment (starting from)" : "Estimated project investment", M, y);
   doc.setFontSize(18);
-  doc.setTextColor(...CLAY);
+  doc.setTextColor(...GOLD);
   doc.text(formatPKR(estimate.total), W - M, y, { align: "right" });
   y += 18;
   doc.setFont("helvetica", "normal");

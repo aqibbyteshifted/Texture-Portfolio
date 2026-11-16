@@ -12,7 +12,7 @@ import { waMessages, whatsappLink } from "@/lib/whatsapp";
 import type { Texture } from "@/types";
 
 const input =
-  "h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm font-semibold text-ink tnum focus:border-clay-500 focus:shadow-[0_0_0_3px_rgba(181,101,29,0.15)] focus:outline-none";
+  "h-11 w-full rounded-control border border-line-strong bg-surface px-3 text-sm font-semibold text-ink tnum focus:border-brand-500 focus:shadow-[0_0_0_3px_rgba(154,116,31,0.15)] focus:outline-none";
 
 /** Wall length x height x rate calculator used on texture detail pages. */
 export function AreaCostCalculator({ texture }: { texture: Texture }) {
@@ -34,7 +34,7 @@ export function AreaCostCalculator({ texture }: { texture: Texture }) {
     <section id="estimator" aria-labelledby={`${uid}-title`} className="rounded-2xl border border-line bg-surface p-5 shadow-lift sm:p-8">
       <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
         <div>
-          <p className="text-xs font-semibold tracking-[0.14em] text-clay-500 uppercase">{t("Instant Estimator")}</p>
+          <p className="text-xs font-semibold tracking-[0.14em] text-brand-500 uppercase">{t("Instant Estimator")}</p>
           <h2 id={`${uid}-title`} className="mt-1 text-2xl font-bold sm:text-3xl">
             {t("{name} Area Cost Calculator", { name: t(texture.shortName) })}
           </h2>
@@ -56,16 +56,16 @@ export function AreaCostCalculator({ texture }: { texture: Texture }) {
           </div>
 
           <div className="mt-5 flex items-center gap-3 rounded-lg bg-sunken p-3.5 text-sm text-ink-soft">
-            <Hammer aria-hidden="true" className="size-5 shrink-0 text-clay-500" />
+            <Hammer aria-hidden="true" className="size-5 shrink-0 text-brand-500" />
             <span>
               <strong className="text-ink">{t("Application Standard:")}</strong> {t("Trowel Finish")} • <span className="ltr-run">{texture.specs.thickness}</span>
             </span>
           </div>
         </div>
 
-        <div className="rounded-xl border border-clay-300/50 bg-clay-50 p-5 text-center sm:p-6" aria-live="polite">
-          <p className="text-xs font-bold tracking-wide text-clay-600 uppercase">{t("Estimated Total (Material + Labor)")}</p>
-          <p className="font-display mt-2 text-3xl font-extrabold text-clay-600 tnum sm:text-4xl" data-testid="area-total" dir="ltr">
+        <div className="rounded-xl border border-brand-300/50 bg-brand-50 p-5 text-center sm:p-6" aria-live="polite">
+          <p className="text-xs font-bold tracking-wide text-brand-600 uppercase">{t("Estimated Total (Material + Labor)")}</p>
+          <p className="font-display mt-2 text-3xl font-extrabold text-brand-600 tnum sm:text-4xl" data-testid="area-total" dir="ltr">
             {formatPKR(total)}
           </p>
           <p className="mt-1 text-sm text-ink-soft tnum">({formatNumber(area)} {t("sq ft")})</p>

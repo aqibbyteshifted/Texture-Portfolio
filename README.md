@@ -2,7 +2,7 @@
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Zod
 
-Built from the Stitch designs (Home, Rockwall product, Quote confirmation), then extended.
+Built from the Stitch designs (Home, Rockwall product, Quote confirmation), then extended. Brand colours (black + gold) come from the logo in `public/images/logo.jpg`; the tokens are `brand-*` and `gold-*` in `src/app/globals.css`.
 
 ## Run
 
@@ -28,14 +28,17 @@ Copy `.env.example` to `.env.local`. The important ones:
 ## Pages and features
 
 * `/areas`, `/areas/[slug]`: one SEO page per Lahore locality (DHA, Bahria, Gulberg, Model Town, Johar/Lake City, WAPDA/Valencia), built from `data/areas.ts` plus your projects and reviews.
+* `GallerySection` (photo + video lightbox from `data/gallery.ts`) is no longer on the home page because it duplicated the project cards; re-add it to any page if you start shooting videos.
 * `/projects`, `/projects/[slug]`: case-study page for every project in `data/projects.ts`.
 * `/blog`, `/blog/[slug]`: guides written as data in `data/blog.ts` (Article JSON-LD, sitemap).
 * `/visualizer`: colour & texture visualizer. Pick a sample room or upload a photo, tap a wall, try finishes and shades. Runs fully in the browser (photos are never uploaded). Edge-aware wall selection, add/remove/undo/redo, download PNG, keyboard support.
+* `/help` hub: `/wall-doctor` (symptoms to repair plan), `/finish-finder` (3 questions to top 3 finishes, live prices), `/measure` (wall totals + sq ft/marla/sq m converter), `/prepare` (printable checklist) and `/track` (project status by code). Content is in `src/data/guides.ts` and `src/data/tracking.ts` (English only). Add a real project to `trackedProjects` when work starts and delete the `ZC-DEMO` entry before launch. The FAQ has a search box (Roman Urdu words like baarish, qeemat work) and the calculator can copy a shareable link.
+* `/terms`, `/privacy`: Terms & Conditions (includes the "pay only the company, never the workers" rule) and Privacy Policy. Text lives in `src/data/legal.ts` and `src/data/policy.ts`. They are original drafts, not legal advice: have a lawyer review them.
 * `/warranty`: coverage, claim form (stored like any lead, `type: "claim"`) and a care guide per finish.
 * Calculator extras: measure several walls and total them, and download a branded PDF estimate (jsPDF, English only).
 * Announcement bar (`site.announcement`), referral capture (`?referral=CODE` is stored for 30 days and attached to every enquiry).
 * `/` landing page: hero estimator, texture catalog, cost calculator, credentials + warranty card, before/after slider,
-  project gallery with lightbox (photos + videos), team, process, consultation form, reviews (Google + video), FAQ, contact + map.
+  before/after + project case-study cards, team, process, free-visit call-to-action, reviews (Google + video), FAQ, contact + map. The only lead forms are the quote wizard and the warranty claim form; everything else sends people to those, WhatsApp or the phone.
 * `/textures`, `/textures/[slug]`: 10 finishes, each with specs, performance, use areas, **shade picker**, area calculator.
 * `/compare`: side-by-side comparison of up to 3 finishes (shareable URL).
 * `/quote` → `/quote/confirmation`: 3-step quote wizard (prefilled from calculators and shade picker).
@@ -90,5 +93,6 @@ Slot booking with real availability, photo upload to your server, a leads dashbo
 * Rates, specs, performance figures for Wash Terrazzo, Nugdi, Velvet Paint, Limewash, Epoxy Flooring.
 * Shade palettes and codes (`shades.ts`), team members, Google rating/count, map address.
 * Guides, area text and care tips are general drafts: review them and add Zain & Co's own specifics (they are indexed by Google).
+* Photos from the Stitch designs are AI-generated images with unclear usage rights. Replace them with your own project photos before launch.
 * Photos are low resolution (512px) copies from the Stitch designs; replace with real project photos.
 * Warranty is stated as 3 years everywhere (the Stitch confirmation screen said 5; the home page said 3).

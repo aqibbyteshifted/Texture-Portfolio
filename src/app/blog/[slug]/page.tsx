@@ -53,14 +53,14 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
     <>
       <div className="container-page pt-6">
         <nav aria-label={t("Breadcrumb")} className="flex flex-wrap items-center gap-2 text-xs text-ink-muted">
-          <Link href="/" className="flex items-center gap-1 hover:text-clay-600"><House aria-hidden="true" className="size-3.5" /> {t("Home")}</Link>
+          <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><House aria-hidden="true" className="size-3.5" /> {t("Home")}</Link>
           <span aria-hidden="true">/</span>
-          <Link href="/blog" className="hover:text-clay-600">{t("Wall Texture Guides")}</Link>
+          <Link href="/blog" className="hover:text-brand-600">{t("Wall Texture Guides")}</Link>
         </nav>
       </div>
 
       <article className="container-page max-w-3xl py-10 sm:py-14" lang="en" dir="auto">
-        <p className="text-xs font-semibold tracking-[0.14em] text-clay-500 uppercase">{post.category}</p>
+        <p className="text-xs font-semibold tracking-[0.14em] text-brand-500 uppercase">{post.category}</p>
         <h1 className="mt-2 text-3xl leading-[1.1] font-extrabold sm:text-5xl">{post.title}</h1>
         <p className="mt-3 flex items-center gap-2 text-sm text-ink-muted">
           <Clock aria-hidden="true" className="size-4" /> {post.readMinutes} min read · {formatDate(post.date, { dateStyle: "long" })}
@@ -75,13 +75,13 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
             if (b.type === "p") return <p key={i}>{b.text}</p>;
             if (b.type === "ul")
               return (
-                <ul key={i} className="list-disc space-y-2 ps-6 marker:text-clay-500">
+                <ul key={i} className="list-disc space-y-2 ps-6 marker:text-brand-500">
                   {b.items.map((it) => <li key={it}>{it}</li>)}
                 </ul>
               );
             return (
-              <aside key={i} className="flex gap-3 rounded-xl border border-clay-300/50 bg-clay-50 p-5 text-ink">
-                <Lightbulb aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-clay-500" />
+              <aside key={i} className="flex gap-3 rounded-xl border border-brand-300/50 bg-brand-50 p-5 text-ink">
+                <Lightbulb aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand-500" />
                 <p>{b.text}</p>
               </aside>
             );

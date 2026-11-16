@@ -91,7 +91,7 @@ export function FloatingActions() {
   };
 
   const input =
-    "h-10 w-full rounded-lg border border-line-strong bg-surface px-3 text-sm text-ink placeholder:text-ink-muted/70 focus:border-clay-500 focus:outline-none";
+    "h-10 w-full rounded-lg border border-line-strong bg-surface px-3 text-sm text-ink placeholder:text-ink-muted/70 focus:border-brand-500 focus:outline-none";
 
   return (
     <div className="no-print">
@@ -215,7 +215,7 @@ export function FloatingActions() {
           </a>
           <Link
             href="/quote"
-            className="flex h-11 items-center justify-center gap-1.5 rounded-control bg-clay-500 text-sm font-semibold text-white"
+            className="flex h-11 items-center justify-center gap-1.5 rounded-control bg-brand-500 text-sm font-semibold text-white"
           >
             <Calculator aria-hidden="true" className="size-4" /> {t("Quote")}
           </Link>

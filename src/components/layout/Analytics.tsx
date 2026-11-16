@@ -112,14 +112,14 @@ export function Analytics() {
           className="no-print fixed inset-x-3 bottom-[4.75rem] z-[60] mx-auto max-w-xl rounded-2xl border border-line bg-surface p-4 shadow-modal sm:p-5 lg:start-5 lg:end-auto lg:bottom-5 lg:mx-0"
         >
           <p className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
-            <Cookie aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-clay-500" />
+            <Cookie aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand-500" />
             <span>{t("We use cookies for analytics and advertising to understand which pages and ads bring enquiries. You can accept or decline.")}</span>
           </p>
           <div className="mt-4 flex justify-end gap-2">
             <button type="button" onClick={() => choose("denied")} className="h-10 rounded-control border border-line-strong px-4 text-sm font-semibold hover:bg-sunken">
               {t("Decline")}
             </button>
-            <button type="button" onClick={() => choose("granted")} className="h-10 rounded-control bg-clay-500 px-4 text-sm font-semibold text-white hover:bg-clay-600">
+            <button type="button" onClick={() => choose("granted")} className="h-10 rounded-control bg-brand-500 px-4 text-sm font-semibold text-white hover:bg-brand-600">
               {t("Accept")}
             </button>
           </div>
@@ -134,7 +134,7 @@ export function ManageCookies() {
   const t = useT();
   if (!analyticsEnabled) return null;
   return (
-    <button type="button" onClick={() => window.dispatchEvent(new Event(CONSENT_RESET_EVENT))} className="text-xs underline-offset-2 hover:text-clay-600 hover:underline">
+    <button type="button" onClick={() => window.dispatchEvent(new Event(CONSENT_RESET_EVENT))} className="text-xs underline-offset-2 hover:text-brand-600 hover:underline">
       {t("Cookie settings")}
     </button>
   );

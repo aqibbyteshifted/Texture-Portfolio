@@ -29,12 +29,12 @@ export default async function AreasPage() {
           return (
             <li key={a.slug}>
               <Link href={`/areas/${a.slug}`} className="group flex h-full flex-col rounded-card border border-line bg-surface p-6 shadow-card transition-shadow hover:shadow-lift">
-                <span className="grid size-11 place-items-center rounded-lg bg-clay-50 text-clay-500">
+                <span className="grid size-11 place-items-center rounded-lg bg-brand-50 text-brand-500">
                   <MapPin aria-hidden="true" className="size-5" />
                 </span>
                 <h2 className="mt-4 text-xl font-bold">{t(a.name)}</h2>
                 <p className="mt-1 flex-1 text-sm text-ink-soft">{a.neighbourhoods.slice(0, 4).join(" • ")}{a.neighbourhoods.length > 4 ? " …" : ""}</p>
-                <p className="mt-4 flex items-center justify-between text-sm font-bold text-clay-600">
+                <p className="mt-4 flex items-center justify-between text-sm font-bold text-brand-600">
                   <span>{count > 0 ? t("{n} projects", { n: count }) : t("Free site visit")}</span>
                   <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100" />
                 </p>

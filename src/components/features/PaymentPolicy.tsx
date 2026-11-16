@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Ban, Phone, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/icons";
@@ -15,10 +16,10 @@ export function PaymentPolicy({ compact = false, className }: { compact?: boolea
   return (
     <aside
       aria-labelledby="payment-rule-title"
-      className={cn("rounded-2xl border border-clay-300/60 bg-clay-50 text-ink", compact ? "p-5 text-sm" : "p-6 sm:p-8", className)}
+      className={cn("rounded-2xl border border-brand-300/60 bg-brand-50 text-ink", compact ? "p-5 text-sm" : "p-6 sm:p-8", className)}
     >
       <div className="flex items-start gap-3">
-        <span className={cn("grid shrink-0 place-items-center rounded-full bg-clay-500 text-white", compact ? "size-9" : "size-11")}>
+        <span className={cn("grid shrink-0 place-items-center rounded-full bg-brand-500 text-white", compact ? "size-9" : "size-11")}>
           <Ban aria-hidden="true" className={compact ? "size-4" : "size-5"} />
         </span>
         <div>
@@ -33,7 +34,7 @@ export function PaymentPolicy({ compact = false, className }: { compact?: boolea
         <ul className="mt-5 grid gap-2.5">
           {paymentRule.points.map((p) => (
             <li key={p} className="flex gap-2.5 text-[15px] leading-relaxed text-ink-soft">
-              <ShieldAlert aria-hidden="true" className="mt-1 size-4 shrink-0 text-clay-500" /> {t(p)}
+              <ShieldAlert aria-hidden="true" className="mt-1 size-4 shrink-0 text-brand-500" /> {t(p)}
             </li>
           ))}
         </ul>
@@ -50,6 +51,11 @@ export function PaymentPolicy({ compact = false, className }: { compact?: boolea
           </Button>
         </div>
       </div>
+      {compact && (
+        <Link href="/terms#payments" className="mt-3 inline-block text-[13px] font-semibold text-brand-600 underline-offset-2 hover:underline">
+          {t("Read the full payment terms")}
+        </Link>
+      )}
     </aside>
   );
 }

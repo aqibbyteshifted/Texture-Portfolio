@@ -69,7 +69,7 @@ export function Header() {
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <ShieldCheck aria-hidden="true" className="size-3.5 text-sand-500" /> {t("PEC Compliant • DHA Registered")}
+              <ShieldCheck aria-hidden="true" className="size-3.5 text-gold-500" /> {t("PEC Compliant • DHA Registered")}
             </span>
             <LanguageToggle tone="dark" />
           </div>
@@ -93,7 +93,7 @@ export function Header() {
                 aria-current={isActive(link.href) ? "page" : undefined}
                 className={cn(
                   "rounded-md px-3 py-2 text-[13.5px] font-medium text-ink-soft transition-colors hover:text-ink",
-                  isActive(link.href) && "bg-clay-50 text-clay-600",
+                  isActive(link.href) && "bg-brand-50 text-brand-600",
                 )}
               >
                 {t(link.label)}
@@ -150,7 +150,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className={cn(
                     "flex items-center justify-between rounded-lg px-4 py-3.5 text-base font-medium text-ink hover:bg-sunken",
-                    isActive(link.href) && "bg-clay-50 text-clay-600",
+                    isActive(link.href) && "bg-brand-50 text-brand-600",
                   )}
                 >
                   {t(link.label)}

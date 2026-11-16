@@ -22,12 +22,12 @@ export async function CredentialsSection() {
               <li key={c.id}>
                 <Reveal delay={i * 80}>
                   <div className="flex gap-4 rounded-card border border-line bg-surface p-5 shadow-card">
-                    <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-clay-50 text-clay-500">
+                    <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-500">
                       <Icon name={c.icon} className="size-6" />
                     </span>
                     <div className="min-w-0 flex-1">
                       <h3 className="text-lg font-bold">{t(c.title)}</h3>
-                      <p className="text-sm font-semibold text-clay-600">
+                      <p className="text-sm font-semibold text-brand-600">
                         <bdi>{t(c.detail)}</bdi>
                       </p>
                       <p className="mt-1 text-sm leading-relaxed text-ink-soft">{t(c.description)}</p>

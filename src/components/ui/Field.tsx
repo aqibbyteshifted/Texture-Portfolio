@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 
 const control =
   "w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink placeholder:text-ink-muted/70 " +
-  "transition-shadow focus:border-clay-500 focus:shadow-[0_0_0_3px_rgba(181,101,29,0.15)] focus:outline-none " +
+  "transition-shadow focus:border-brand-500 focus:shadow-[0_0_0_3px_rgba(154,116,31,0.15)] focus:outline-none " +
   "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-[0_0_0_3px_rgba(239,68,68,0.12)]";
 
 interface BaseProps {
@@ -37,7 +37,7 @@ export function Field({
     <div className={className}>
       <label htmlFor={id} className="mb-1.5 block text-xs font-semibold tracking-wide text-ink-soft uppercase">
         {label}
-        {props.required && <span className="text-clay-500"> *</span>}
+        {props.required && <span className="text-brand-500"> *</span>}
       </label>
       {as === "textarea" ? (
         <textarea {...shared} rows={4} className={cn(control, "min-h-24 resize-y py-2.5")} {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)} />
