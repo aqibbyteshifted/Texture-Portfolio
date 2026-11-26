@@ -65,7 +65,7 @@ export function Header() {
             </span>
             <OpenStatus tone="dark" />
             <span className="text-white/40">•</span>
-            <span>{t("Lahore Premier Architectural Contractors")}</span>
+            <span>{t("Premier Architectural Contractors • Lahore, Islamabad, Rawalpindi & Karachi")}</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">

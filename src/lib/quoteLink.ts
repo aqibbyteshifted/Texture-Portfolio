@@ -8,6 +8,8 @@ interface QuoteLinkParams {
   location?: string;
   /** Shade code from the shade picker, e.g. "TR-02" */
   shade?: string;
+  /** Free text for the engineer (e.g. a whole-house breakdown). Trimmed to 900 characters. */
+  notes?: string;
 }
 
 /** Builds a /quote URL that prefills the quote wizard. */
@@ -19,6 +21,7 @@ export function quoteHref(params: QuoteLinkParams = {}) {
   if (params.zone) qs.set("zone", params.zone);
   if (params.location) qs.set("loc", params.location);
   if (params.shade) qs.set("shade", params.shade);
+  if (params.notes) qs.set("notes", params.notes.slice(0, 900));
   const query = qs.toString();
   return query ? `/quote?${query}` : "/quote";
 }

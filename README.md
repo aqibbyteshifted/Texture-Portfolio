@@ -27,11 +27,12 @@ Copy `.env.example` to `.env.local`. The important ones:
 
 ## Pages and features
 
-* `/areas`, `/areas/[slug]`: one SEO page per Lahore locality (DHA, Bahria, Gulberg, Model Town, Johar/Lake City, WAPDA/Valencia), built from `data/areas.ts` plus your projects and reviews.
+* `/areas`, `/areas/[slug]`: one SEO page per locality in Lahore, Islamabad, Rawalpindi and Karachi, built from `data/areas.ts` plus your projects and reviews. City details (typical homes, climate, preset house layouts, whether the free survey is confirmed) are in `data/cities.ts`; the quote/calculator location list and each city's logistics surcharge are `locationOptions` in `data/site.ts`. The Islamabad, Rawalpindi and Karachi surcharges (8%, 8%, 12%) are placeholders. Those cities have no projects or reviews yet: add real ones to `data/projects.ts` / `data/content.ts`.
 * `GallerySection` (photo + video lightbox from `data/gallery.ts`) is no longer on the home page because it duplicated the project cards; re-add it to any page if you start shooting videos.
 * `/projects`, `/projects/[slug]`: case-study page for every project in `data/projects.ts`.
 * `/blog`, `/blog/[slug]`: guides written as data in `data/blog.ts` (Article JSON-LD, sitemap).
 * `/visualizer`: colour & texture visualizer. Pick a sample room or upload a photo, tap a wall, try finishes and shades. Runs fully in the browser (photos are never uploaded). Edge-aware wall selection, add/remove/undo/redo, download PNG, keyboard support.
+* `/house-estimator`: whole-house calculator (front, sides, upper floors, mumty, parapet, boundary with one/both faces, openings deducted, lump-sum rows, per-part finish). Parts and standard door/window/gate sizes live in `src/data/house.ts`; the draft is kept in the visitor's browser.
 * `/help` hub: `/wall-doctor` (symptoms to repair plan), `/finish-finder` (3 questions to top 3 finishes, live prices), `/measure` (wall totals + sq ft/marla/sq m converter), `/prepare` (printable checklist) and `/track` (project status by code). Content is in `src/data/guides.ts` and `src/data/tracking.ts` (English only). Add a real project to `trackedProjects` when work starts and delete the `ZC-DEMO` entry before launch. The FAQ has a search box (Roman Urdu words like baarish, qeemat work) and the calculator can copy a shareable link.
 * `/terms`, `/privacy`: Terms & Conditions (includes the "pay only the company, never the workers" rule) and Privacy Policy. Text lives in `src/data/legal.ts` and `src/data/policy.ts`. They are original drafts, not legal advice: have a lawyer review them.
 * `/warranty`: coverage, claim form (stored like any lead, `type: "claim"`) and a care guide per finish.

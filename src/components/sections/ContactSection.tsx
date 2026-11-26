@@ -67,6 +67,14 @@ export async function ContactSection() {
                 </li>
               ))}
             </ul>
+            <p className="mt-5 text-xs font-semibold tracking-wider text-ink-muted uppercase">{t("We also work in")}</p>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {["islamabad", "rawalpindi", "karachi"].map((c) => (
+                <li key={c}>
+                  <Link href={`/areas#${c}`} className="block rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-semibold text-ink-soft hover:border-brand-300 hover:text-brand-600">{t(c === "islamabad" ? "Islamabad" : c === "rawalpindi" ? "Rawalpindi" : "Karachi")}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

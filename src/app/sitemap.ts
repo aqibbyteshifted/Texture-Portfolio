@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     { url: `${site.url}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${site.url}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    ...["help", "wall-doctor", "finish-finder", "measure", "prepare"].map((p) => ({ url: `${site.url}/${p}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
+    ...["help", "house-estimator", "wall-doctor", "finish-finder", "measure", "prepare"].map((p) => ({ url: `${site.url}/${p}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
     ...areas.map((a) => ({ url: `${site.url}/areas/${a.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.8 })),
     ...allProjects.map((p) => ({ url: `${site.url}/projects/${p.slug}`, lastModified: now, changeFrequency: "yearly" as const, priority: 0.6 })),
     ...posts.map((p) => ({ url: `${site.url}/blog/${p.slug}`, lastModified: new Date(p.date), changeFrequency: "yearly" as const, priority: 0.6 })),

@@ -74,7 +74,7 @@ export function RapidEstimator() {
 
         <div>
           <label htmlFor={`${uid}-loc`} className="mb-1.5 block text-xs font-semibold text-ink-soft uppercase">
-            {t("Site Location in Lahore")}
+            {t("Site Location")}
           </label>
           <select id={`${uid}-loc`} value={location} onChange={(e) => setLocation(e.target.value)} className={select}>
             {locationOptions.map((l) => (

@@ -19,13 +19,13 @@ export async function Hero() {
       <div className="container-page grid gap-10 py-14 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-14 lg:py-24">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide backdrop-blur">
-            <span className="size-1.5 rounded-full bg-gold-500" /> {t("Lahore Premier Wall Crafters • PEC Registered")}
+            <span className="size-1.5 rounded-full bg-gold-500" /> {t("Premier Wall Crafters • PEC Registered")}
           </p>
           <h1 className="mt-5 text-[2.5rem] leading-[1.02] font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
             {t("Give Your Walls a Texture")} <span className="text-gold-500">{t("That Lasts")}</span>
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-            {t("Premium rockwall, authentic Italian travertine, refined stucco, microcement, limewash and epoxy finishes crafted for luxury residences across Lahore, DHA, Bahria Town, and Punjab.")}
+            {t("Premium rockwall, authentic Italian travertine, refined stucco, microcement, limewash and epoxy finishes crafted for luxury residences across Lahore, Islamabad, Rawalpindi and Karachi.")}
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

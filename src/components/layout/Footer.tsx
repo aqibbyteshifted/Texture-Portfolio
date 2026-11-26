@@ -3,7 +3,7 @@ import { CircleCheck, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 import { OpenStatus } from "@/components/ui/OpenStatus";
 import { ManageCookies } from "@/components/layout/Analytics";
-import { areas } from "@/data/areas";
+import { cities } from "@/data/cities";
 import { site } from "@/data/site";
 import { textures } from "@/data/textures";
 import { getI18n } from "@/i18n/server";
@@ -31,7 +31,7 @@ export async function Footer() {
         <div>
           <Logo size="lg" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-soft">
-            {t("Lahore's premier architectural surface finishing contractor specializing in rockwall textures, travertine plastering, microcement, limewash, terrazzo, epoxy flooring and exterior monolithic facades for luxury villas and commercial landmarks.")}
+            {t("Premier architectural surface finishing contractor serving Lahore, Islamabad, Rawalpindi and Karachi, specializing in rockwall textures, travertine plastering, microcement, limewash, terrazzo, epoxy flooring and exterior monolithic facades for luxury villas and commercial landmarks.")}
           </p>
           <ul className="mt-5 grid gap-2.5 text-sm text-ink-soft">
             <li className="flex gap-2.5">
@@ -67,13 +67,13 @@ export async function Footer() {
         </div>
 
         <div>
-          <h3 className="text-base font-bold">{t("Lahore Coverage")}</h3>
+          <h3 className="text-base font-bold">{t("Cities We Serve")}</h3>
           <ul className="mt-4 grid gap-2.5 text-sm text-ink-soft">
-            {areas.map((a) => (
-              <li key={a.slug} className="flex gap-2">
+            {cities.map((c) => (
+              <li key={c.id} className="flex gap-2">
                 <CircleCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-500" />
-                <Link href={`/areas/${a.slug}`} className="hover:text-brand-600">
-                  {t(a.name)}
+                <Link href={`/areas#${c.id}`} className="hover:text-brand-600">
+                  {t(c.name)}
                 </Link>
               </li>
             ))}

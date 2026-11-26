@@ -2,9 +2,9 @@ import { msg } from "@/i18n/config";
 export const site = {
   name: "Zain & Co",
   group: "Zain & Co Group",
-  tagline: "Architectural Finishes • Lahore",
+  tagline: "Architectural Finishes • Pakistan",
   description:
-    "Lahore's premier architectural surface finishing contractor: rockwall, travertine, stucco, microcement, limewash, terrazzo, epoxy flooring and exterior monolithic facades with a 3-year written warranty.",
+    "Premier architectural surface finishing contractor serving Lahore, Islamabad, Rawalpindi and Karachi: rockwall, travertine, stucco, microcement, limewash, terrazzo, epoxy flooring and exterior monolithic facades with a written warranty.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.zainandco.pk",
   phone: "+92 300 8472190",
   phoneRaw: "923008472190",
@@ -72,12 +72,20 @@ export const coverageAreas = [
 ] as const;
 
 export const locationOptions = [
-  { value: "dha", label: "DHA Lahore (Phase 1 to 9 & Prism)", surcharge: 0 },
-  { value: "bahria", label: "Bahria Town / Sector C, D, E", surcharge: 0 },
-  { value: "gulberg", label: "Gulberg & MM Alam Area", surcharge: 0 },
-  { value: "model", label: "Model Town / Garden Town", surcharge: 0 },
-  { value: "johar", label: "Johar Town / Lake City / WAPDA Town", surcharge: 0 },
-  { value: "punjab", label: "Other Punjab City (Islamabad/Faisalabad)", surcharge: 0.08 },
+  { value: "dha", city: "lahore", label: "DHA Lahore (Phase 1 to 9 & Prism)", surcharge: 0 },
+  { value: "bahria", city: "lahore", label: "Bahria Town Lahore / Sector C, D, E", surcharge: 0 },
+  { value: "gulberg", city: "lahore", label: "Gulberg & MM Alam Area, Lahore", surcharge: 0 },
+  { value: "model", city: "lahore", label: "Model Town / Garden Town, Lahore", surcharge: 0 },
+  { value: "johar", city: "lahore", label: "Johar Town / Lake City / WAPDA Town, Lahore", surcharge: 0 },
+  // Outstation logistics surcharges below are PLACEHOLDERS: set the real percentage for each city.
+  { value: "isb-sectors", city: "islamabad", label: "Islamabad: F, E, G, D & I Sectors", surcharge: 0.08 },
+  { value: "isb-societies", city: "islamabad", label: "Islamabad: DHA, Bahria Enclave, Gulberg Greens & Park Road", surcharge: 0.08 },
+  { value: "rwp-city", city: "rawalpindi", label: "Rawalpindi: Satellite Town, Chaklala & Saddar", surcharge: 0.08 },
+  { value: "rwp-societies", city: "rawalpindi", label: "Rawalpindi: Bahria Town, DHA & Gulraiz", surcharge: 0.08 },
+  { value: "khi-dha", city: "karachi", label: "Karachi: DHA & Clifton", surcharge: 0.12 },
+  { value: "khi-central", city: "karachi", label: "Karachi: Gulshan, Gulistan-e-Jauhar, PECHS & North Nazimabad", surcharge: 0.12 },
+  { value: "khi-bahria", city: "karachi", label: "Karachi: Bahria Town, Scheme 33 & Malir", surcharge: 0.12 },
+  { value: "punjab", city: "other", label: "Other Punjab City (Faisalabad, Multan, etc.)", surcharge: 0.08 },
 ] as const;
 
 export const processSteps = [

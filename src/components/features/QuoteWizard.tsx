@@ -66,6 +66,7 @@ export function QuoteWizard() {
       texture: texture?.slug ?? "",
       shade: texture && findShade(texture.slug, params.get("shade")) ? (params.get("shade") ?? "") : "",
       location: locationOptions.find((l) => l.value === params.get("loc"))?.value ?? locationOptions[0].value,
+      notes: (params.get("notes") ?? "").slice(0, 900),
     };
   }, [params]);
 
@@ -81,7 +82,7 @@ export function QuoteWizard() {
   const [scaffold, setScaffold] = useState(false);
   const [primer, setPrimer] = useState(false);
   const [stepError, setStepError] = useState<string>();
-  const [contact, setContact] = useState({ name: "", phone: "", email: "", date: "", window: windows[1], message: "", hp: "" });
+  const [contact, setContact] = useState({ name: "", phone: "", email: "", date: "", window: windows[1], message: initial.notes, hp: "" });
   const today = useMemo(() => toDateInput(new Date()), []);
   const [referral, setReferral] = useState("");
   useEffect(() => {

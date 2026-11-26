@@ -11,10 +11,14 @@ import { UNIT_TO_SQFT, type AreaUnit } from "@/lib/pricing";
 import { quoteHref } from "@/lib/quoteLink";
 import { whatsappLink } from "@/lib/whatsapp";
 
-const units: { id: AreaUnit; label: string }[] = [
+type Unit = AreaUnit | "sqyd";
+/** 1 unit in square feet. Karachi plots are sold in square yards (1 sq yd = 9 sq ft). */
+const FACTOR: Record<Unit, number> = { ...UNIT_TO_SQFT, sqyd: 9 };
+const units: { id: Unit; label: string }[] = [
   { id: "sqft", label: "Sq ft" },
   { id: "marla", label: "Marla" },
   { id: "sqm", label: "Sq m" },
+  { id: "sqyd", label: "Sq yd" },
 ];
 
 /** Wall-by-wall measurer plus a unit converter (sq ft, marla, sq m). */
@@ -22,9 +26,9 @@ export function MeasureTool() {
   const t = useT();
   const [sqft, setSqft] = useState(0);
   const [value, setValue] = useState("");
-  const [unit, setUnit] = useState<AreaUnit>("sqft");
+  const [unit, setUnit] = useState<Unit>("sqft");
 
-  const converted = (Number(value) || 0) * UNIT_TO_SQFT[unit];
+  const converted = (Number(value) || 0) * FACTOR[unit];
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
@@ -62,17 +66,17 @@ export function MeasureTool() {
             aria-label={t("Area")}
             className="h-11 min-w-0 flex-1 rounded-control border border-line-strong bg-surface px-3 text-sm font-semibold text-ink tnum focus:border-brand-500 focus:outline-none"
           />
-          <select value={unit} onChange={(e) => setUnit(e.target.value as AreaUnit)} aria-label={t("Unit")} className="h-11 rounded-control border border-line-strong bg-surface px-3 text-sm text-ink focus:border-brand-500 focus:outline-none">
+          <select value={unit} onChange={(e) => setUnit(e.target.value as Unit)} aria-label={t("Unit")} className="h-11 rounded-control border border-line-strong bg-surface px-3 text-sm text-ink focus:border-brand-500 focus:outline-none">
             {units.map((u) => (
               <option key={u.id} value={u.id}>{t(u.label)}</option>
             ))}
           </select>
         </div>
-        <dl className="mt-5 grid grid-cols-3 gap-3 text-center">
+        <dl className="mt-5 grid grid-cols-2 gap-3 text-center sm:grid-cols-4">
           {units.map((u) => (
             <div key={u.id} className="rounded-xl bg-sunken p-3">
               <dt className="text-[11px] font-semibold text-ink-muted uppercase">{t(u.label)}</dt>
-              <dd className="mt-1 text-base font-bold text-ink tnum">{converted > 0 ? (converted / UNIT_TO_SQFT[u.id]).toLocaleString("en-PK", { maximumFractionDigits: 1 }) : "0"}</dd>
+              <dd className="mt-1 text-base font-bold text-ink tnum">{converted > 0 ? (converted / FACTOR[u.id]).toLocaleString("en-PK", { maximumFractionDigits: 1 }) : "0"}</dd>
             </div>
           ))}
         </dl>

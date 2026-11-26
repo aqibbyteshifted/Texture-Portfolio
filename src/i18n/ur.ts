@@ -5,6 +5,8 @@ import { urPolicy } from "@/i18n/ur-policy";
 import { urRates } from "@/i18n/ur-rates";
 import { urLegal } from "@/i18n/ur-legal";
 import { urTools } from "@/i18n/ur-tools";
+import { urHouse } from "@/i18n/ur-house";
+import { urCities } from "@/i18n/ur-cities";
 import { urUi1 } from "@/i18n/ur-ui-1";
 import { urUi2 } from "@/i18n/ur-ui-2";
 
@@ -13,4 +15,4 @@ import { urUi2 } from "@/i18n/ur-ui-2";
  * Run `npm run i18n:check` to list English strings that still have no Urdu entry
  * (they simply fall back to English until added).
  */
-export const ur: Record<string, string> = { ...urUi1, ...urUi2, ...urData, ...urExtra, ...urMore, ...urPolicy, ...urRates, ...urLegal, ...urTools };
+export const ur: Record<string, string> = { ...urUi1, ...urUi2, ...urData, ...urExtra, ...urMore, ...urPolicy, ...urRates, ...urLegal, ...urTools, ...urHouse, ...urCities };

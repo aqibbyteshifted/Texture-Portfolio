@@ -1,6 +1,7 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { CostCalculator } from "@/components/features/CostCalculator";
+import { Button } from "@/components/ui/Button";
 import { getI18n } from "@/i18n/server";
 
 export async function CalculatorSection() {
@@ -17,6 +18,10 @@ export async function CalculatorSection() {
         <Reveal className="mt-10">
           <CostCalculator />
         </Reveal>
+        <div className="mt-8 flex flex-col items-center gap-3 text-center">
+          <p className="text-sm text-ink-soft">{t("Have a full house with upper floors, mumty and boundary walls?")}</p>
+          <Button href="/house-estimator" variant="secondary" size="lg">{t("Try the Whole-House Estimate")}</Button>
+        </div>
       </div>
     </section>
   );

@@ -28,13 +28,16 @@ const nastaliq = Noto_Nastaliq_Urdu({ subsets: ["arabic"], variable: "--font-nas
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Premium Wall Texture & Facade Finishes in Lahore`,
-    template: `%s | ${site.name} Lahore`,
+    default: `${site.name} | Premium Wall Texture & Facade Finishes in Lahore, Islamabad, Rawalpindi & Karachi`,
+    template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
   keywords: [
     "wall texture Lahore",
+    "wall texture Islamabad",
+    "wall texture Rawalpindi",
+    "wall texture Karachi",
     "rockwall texture Lahore",
     "Italian travertine plaster",
     "color crete microcement",
@@ -46,7 +49,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_PK",
     siteName: site.name,
-    title: `${site.name} | Premium Wall Texture & Facade Finishes in Lahore`,
+    title: `${site.name} | Premium Wall Texture & Facade Finishes in Lahore, Islamabad, Rawalpindi & Karachi`,
     description: site.description,
     images: [{ url: "/images/proj-dha-villa42.jpg", width: 1200, height: 630, alt: "Textured villa facade in DHA Lahore" }],
   },
@@ -86,7 +89,7 @@ const jsonLd = {
     closes: "19:00",
   },
   aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "120" },
-  areaServed: ["Lahore", "Islamabad", "Rawalpindi", "Faisalabad", "Multan"],
+  areaServed: ["Lahore", "Islamabad", "Rawalpindi", "Karachi", "Faisalabad", "Multan"],
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -97,7 +100,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       dir={dirOf(locale)}
       className={`${geist.variable} ${bricolage.variable} ${naskh.variable} ${nastaliq.variable}`}
     >
-      <body className="min-h-dvh">
+      <body className="min-h-dvh" suppressHydrationWarning>
         <LocaleProvider locale={locale}>
           <a
             href="#main"

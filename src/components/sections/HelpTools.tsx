@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ClipboardCheck, ListChecks, Route, Ruler, Sparkles, Stethoscope, type LucideIcon } from "lucide-react";
+import { ClipboardCheck, House, ListChecks, Route, Ruler, Sparkles, Stethoscope, type LucideIcon } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getI18n } from "@/i18n/server";
 import { msg } from "@/i18n/config";
 
 export const helpTools: { href: string; icon: LucideIcon; title: string; text: string }[] = [
+  { href: "/house-estimator", icon: House, title: msg("Whole-House Estimate"), text: msg("Front, sides, upper floors, mumty and boundary walls in one estimate.") },
   { href: "/wall-doctor", icon: Stethoscope, title: msg("Wall Doctor"), text: msg("Damp, cracks or peeling? Tick what you see and get a repair plan.") },
   { href: "/finish-finder", icon: Sparkles, title: msg("Finish Finder"), text: msg("Three questions, three finishes that fit your budget and taste.") },
   { href: "/measure", icon: Ruler, title: msg("Measure & Convert"), text: msg("Add up your walls and switch between sq ft, marla and sq m.") },
